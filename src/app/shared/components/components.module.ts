@@ -2,13 +2,22 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { NavigationComponent } from './navigation/navigation.component';
+import { AppMaterialModule } from '../../app-material';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
+export const COMPONENTS = [
+    NavigationComponent,
+];
 @NgModule({
   imports: [
-    CommonModule
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    FlexLayoutModule,
+    AppMaterialModule,
   ],
-  declarations: [
-    NavigationComponent
-  ]
+  declarations: COMPONENTS,
+  exports: COMPONENTS
 })
 export class ComponentsModule { }

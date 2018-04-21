@@ -1,0 +1,33 @@
+@import '../../../mixins.scss';
+.nav-container {
+    height: 100%;
+}
+
+.sidenav-container {}
+
+::ng-deep.nav-buttons {
+    .mat-button {
+        font-size: 0.8em;
+    }
+}
+
+.nav-logo {
+    margin: 0 15px;
+    text-decoration: none;
+    font-size: 1.1em;
+    font-weight: bold;
+    background: linear-gradient(to right, #dae2f8, #d6a4a4);
+    ;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.nav-logo:visited {
+    color: inherit;
+}
+
+// .nav-buttons {
+//   @include tablet {
+//       display: none;
+//   }
+// }
