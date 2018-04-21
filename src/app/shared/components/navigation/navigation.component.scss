@@ -1,12 +1,15 @@
 @import '../../../mixins.scss';
 .nav-container {
     height: 100%;
+    .active{
+      background-color: #00796B;
+      color: white;
+    }
 }
 
-.sidenav-container {}
-
 ::ng-deep.nav-buttons {
-    .mat-button {
+    .mat-button,
+    .mat-icon-button {
         font-size: 0.8em;
     }
 }
@@ -18,12 +21,37 @@
     font-weight: bold;
     background: linear-gradient(to right, #dae2f8, #d6a4a4);
     ;
+    background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
 
+::ng-deep.sidenav-container .mat-list-item-content {
+    padding: 0 24px !important;
+}
+
+::ng-deep.sidenav-container .mat-expansion-panel {
+    box-shadow: none !important;
+}
+
+::ng-deep.sidenav-container .mat-expansion-panel-body {
+  padding: 0px !important;
+}
+
+::ng-deep.sidenav-container .mat-expansion-panel-header {
+    font-size: 17px !important;
+
+}
+::ng-deep.sidenav-container .mat-expansion-panel-body .mat-list-item-content {
+  padding-left: 35px !important;
+}
+
 .nav-logo:visited {
     color: inherit;
+}
+
+::ng-deep.sidenav-list {
+    min-width: 200px;
 }
 
 // .nav-buttons {
