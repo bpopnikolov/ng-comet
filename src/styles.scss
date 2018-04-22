@@ -3,7 +3,7 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic');
 
 @import '~normalize.css/normalize.css';
-
+@import './app/mixins.scss';
 
 /* Breakpoint on responsive content
 ------------------------------------ */
@@ -11,4 +11,23 @@ body {
   font-family: Roboto, Arial, sans-serif;
   height: 100vh;
   font-size: 15px;
+}
+
+.spacer {
+  -webkit-box-flex: 1;
+  -ms-flex: 1 1 auto;
+  flex: 1 1 auto;
+}
+
+.forms-container {
+  padding-top: 200px;
+}
+
+.forms-card {
+  width: 20%;
+  min-width: 300px;
+
+  @include mobile {
+    min-width: 80%;
+  }
 }

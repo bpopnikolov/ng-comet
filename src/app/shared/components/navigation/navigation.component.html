@@ -1,16 +1,21 @@
 <div class="nav-container" fxLayout="column">
     <mat-toolbar fxFlex="56px" class="mat-elevation-z6" color="primary" fxLayout="row">
-        <button mat-icon-button fxHide fxShow.xs (click)="snav.toggle()"><mat-icon>menu</mat-icon></button>
+        <button mat-icon-button fxHide fxShow.xs fxShow.sm (click)="snav.toggle()"><mat-icon>menu</mat-icon></button>
         <a class="nav-logo" href="#">NG-COMET</a>
-        <div class="nav-buttons" fxHide.xs>
-            <button mat-button [routerLink]="['']" [routerLinkActive]="'active'" >Home</button>
+        <div class="nav-buttons" fxFlex="100%" fxHide.xs fxHide.sm>
+            <button mat-button [routerLink]="['home']" [routerLinkActive]="'active'">Home</button>
             <button mat-button>Careers</button>
             <button mat-button>Contacts</button>
-            <button mat-button [matMenuTriggerFor]="adminMenu" >
+            <button mat-button [matMenuTriggerFor]="adminMenu">
                 Admin
                 <mat-icon>arrow_drop_down</mat-icon>
               </button>
 
+        </div>
+        <div class="spacer" fxHide.xs></div>
+        <div class="nav-buttons" fxHide.xs fxHide.sm>
+            <button mat-button [routerLink]="['signin']" [routerLinkActive]="'active'">Sign in</button>
+            <button mat-button [routerLink]="['signup']" [routerLinkActive]="'active'">Sign up</button>
         </div>
     </mat-toolbar>
 
@@ -21,7 +26,7 @@
         <button mat-menu-item>Help</button>
         <button mat-menu-item>Settings</button>
         <button mat-menu-item>Help</button>
-      </mat-menu>
+    </mat-menu>
 
     <mat-sidenav-container fxFlex="100%" class="sidenav-container">
         <mat-sidenav #snav class="sidenav-list" [mode]="over" fixedTopGap="56">
@@ -31,15 +36,24 @@
                 <a mat-list-item routerLink=".">Contacts</a>
                 <mat-expansion-panel class="admin-expansion-panel">
                     <mat-expansion-panel-header>
-                      <mat-panel-title>
-                        Admin
-                      </mat-panel-title>
+                        <mat-panel-title>
+                            Admin
+                        </mat-panel-title>
                     </mat-expansion-panel-header>
                     <a mat-list-item routerLink=".">Home</a>
                     <a mat-list-item routerLink=".">Careers</a>
                     <a mat-list-item routerLink=".">Contacts</a>
                     <a mat-list-item routerLink=".">Admin</a>
-                  </mat-expansion-panel>
+                </mat-expansion-panel>
+                <mat-divider></mat-divider>
+                <a mat-list-item [routerLink]="['signin']" [routerLinkActive]="'active'">
+                    <mat-icon class="sidenav-link-icon" svgIcon="login"></mat-icon>
+                  Sign in
+                </a>
+                <a mat-list-item [routerLink]="['signup']" [routerLinkActive]="'active'">
+                    <!-- <i class="sidenav-link-icon mdi mdi-add-person mdi-24px"></i> -->
+                    <mat-icon class ="sidenav-link-icon" svgIcon="account-plus"></mat-icon>
+                  Sign up</a>
             </mat-nav-list>
         </mat-sidenav>
 
@@ -48,4 +62,3 @@
         </mat-sidenav-content>
     </mat-sidenav-container>
 </div>
-

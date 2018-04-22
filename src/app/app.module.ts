@@ -1,10 +1,12 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { AppRoutingModuleModule } from './app-routing.module';
+import { AppRoutingModule} from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ContainersModule } from './shared/containers';
 import { HomeModule } from './home';
+import { HttpClientModule } from '@angular/common/http';
+import { UserModule } from './user/user.module';
 
 @NgModule({
   declarations: [
@@ -13,9 +15,11 @@ import { HomeModule } from './home';
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    HttpClientModule,
     ContainersModule,
+    UserModule,
     HomeModule,
-    AppRoutingModuleModule,
+    AppRoutingModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
