@@ -1,0 +1,17 @@
+{
+  "api": {
+    "baseUrl": "/api"
+  },
+
+  "paths": {
+    "imagesRoot": "/assets/images/",
+    "userImageFolder": "/assets/images/users/"
+  },
+  "auth": {
+    "emailRequiredError": "Email is required",
+    "emailMaxLengthError": "Email must be maximum 1024 characters",
+    "passwordRequiredError": "Password is required",
+    "passwordNotValidError": "Password must be at least 8 characters, and contain at least one number, uppercase letter and special character",
+    "passwordMaxLengthError": "Password must be maximum 256 characters"
+  }
+}

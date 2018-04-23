@@ -1,31 +1,52 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
-import { FormErrorStateMatcher ,regExps, errorMessages } from '../../shared/utility';
-
+import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormErrorStateMatcher } from '../../shared/utility';
+import { UtilityService } from '../../shared/utility/utility.service';
+import { ValidationService } from '../../shared/utility/validation.service';
 
 @Component({
-  selector: 'app-user-signin',
-  templateUrl: './user-signin.component.html',
-  styleUrls: ['./user-signin.component.scss']
+    selector: 'app-user-signin',
+    templateUrl: './user-signin.component.html',
+    styleUrls: ['./user-signin.component.scss']
 })
 export class UserSigninComponent implements OnInit {
 
-  passRegex: RegExp;
-  signinForm: FormGroup;
+    signinForm: FormGroup;
+    public email: AbstractControl;
+    public password: AbstractControl;
 
-  constructor(private fb: FormBuilder, private fm: FormErrorStateMatcher) {
-    this.passRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{8,}/;
-   }
+    constructor(
+        private fb: FormBuilder,
+        private fm: FormErrorStateMatcher,
+        private validationService: ValidationService,
+        private utilityService: UtilityService
+    ) {
 
-  ngOnInit() {
-    this.signinForm = this.fb.group({
-      'email': ['', [Validators.required, Validators.email]],
-      'password': ['', [Validators.required, Validators.pattern(this.passRegex)]]
-    });
+    }
+
+    ngOnInit() {
+        this.initSigninForm();
+    }
+
+    initSigninForm() {
+        this.signinForm = this.fb.group({
+            'email': ['', [Validators.required, Validators.maxLength(1024), Validators.email]],
+            'password': ['', [Validators.required, Validators.maxLength(256), this.validationService.validatePassword]]
+        });
+
+        this.email = this.signinForm.controls['email'];
+        this.password = this.signinForm.controls['password'];
+    }
+
+    getEmailErrorMessage() {
+        return this.utilityService.getEmailErrorMessages(this.email);
+    }
+
+    getPasswordErrorMessage() {
+      return this.utilityService.getPasswordErrorMessages(this.password);
   }
-
-  submitForm() {
-    console.log(this.signinForm);
-  }
+    submitForm() {
+        console.log(this.signinForm);
+    }
 
 }

@@ -1,17 +1,17 @@
 <div class="forms-container" fxLayout="column" fxLayoutAlign="center center">
-    <mat-card class="forms-card" >
+    <mat-card class="forms-card">
         <form fxLayout="column" [formGroup]="signinForm" (ngSubmit)="submitForm()">
             <mat-form-field>
                 <input matInput placeholder="Email" type="email" required formControlName="email">
-                <mat-error>ERROR TEST</mat-error>
+                <mat-error *ngIf="email.invalid">{{ getEmailErrorMessage() }}</mat-error>
             </mat-form-field>
 
             <mat-form-field>
                 <input matInput placeholder="Password" type="password" required formControlName="password">
-                <mat-error>ERROR TEST</mat-error>
+                <mat-error *ngIf="password.invalid"> {{ getPasswordErrorMessage() }}</mat-error>
             </mat-form-field>
-            <div fxLayout="row" fxFlexAlign="end">
-                <button mat-raised-button color="primary" [disabled]="!signinForm.valid" type="submit">Sign in</button>
+            <div class="form-action-buttons" fxLayout="row" fxFlexAlign="end">
+                <button mat-raised-button color="primary" type="submit">Sign in</button>
             </div>
         </form>
     </mat-card>
