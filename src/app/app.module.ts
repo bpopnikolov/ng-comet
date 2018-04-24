@@ -10,9 +10,14 @@ import { ContainersModule } from './shared/containers';
 import { UtilityModule } from './shared/utility';
 import { UserModule } from './user/user.module';
 import { AppConfigService } from './app-config.service';
+import { JwtModule } from '@auth0/angular-jwt';
 
 export function configServiceFactory (config: AppConfigService) {
   return () => config.load()
+};
+
+export function tokenGetter() {
+  return localStorage.getItem('access_token');
 }
 @NgModule({
   declarations: [
@@ -22,6 +27,12 @@ export function configServiceFactory (config: AppConfigService) {
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: tokenGetter,
+        whitelistedDomains: ['localhost:3001'],
+      }
+    }),
     UtilityModule.forRoot(),
     ContainersModule,
     UserModule,

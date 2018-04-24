@@ -5,7 +5,7 @@ import { AppConfigService } from '../../app-config.service';
 @Injectable()
 export class UtilityService {
 
-    authConfig: any
+    authConfig: {[key: string]: string}
     constructor(private configService: AppConfigService) {
         this.authConfig = configService.get('auth');
     }
