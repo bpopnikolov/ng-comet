@@ -24,14 +24,23 @@ export class UtilityService {
 
 
     getPasswordErrorMessages(password: AbstractControl) {
-      if (password.hasError('required')) {
-          return this.authConfig.passwordRequiredError;
-      }
-      if (password.hasError('validatePassword')) {
-          return this.authConfig.passwordNotValidError;
-      }
-      if (password.hasError('maxlength')) {
-          return this.authConfig.passwordMaxLengthError;
-      }
-  }
+        if (password.hasError('required')) {
+            return this.authConfig.passwordRequiredError;
+        }
+        if (password.hasError('validatePassword')) {
+            return this.authConfig.passwordNotValidError;
+        }
+        if (password.hasError('maxlength')) {
+            return this.authConfig.passwordMaxLengthError;
+        }
+    }
+
+    getConfirmPasswordErrorMessages(confirmPassword: AbstractControl) {
+        if (confirmPassword.hasError('required')) {
+            return this.authConfig.confirmPasswordRequiredError;
+        }
+        if (confirmPassword.hasError('mismatch')) {
+            return this.authConfig.passwordsMismatchError;
+        }
+    }
 }

@@ -13,6 +13,8 @@
     "emailNotValidError": "Email must be a valid email",
     "passwordRequiredError": "Password is required",
     "passwordNotValidError": "Password must be at least 8 characters and contain at least 1 number, 1 uppercase letter and 1 special character",
-    "passwordMaxLengthError": "Password must be maximum 256 characters"
+    "passwordMaxLengthError": "Password must be maximum 256 characters",
+    "passwordsMismatchError": "Passwords don't match",
+    "confirmPasswordRequiredError": "Confirms Password is required"
   }
 }

@@ -1,21 +1,21 @@
 <div class="forms-container" fxLayout="column" fxLayoutAlign="center center">
     <mat-card class="forms-card">
-        <form fxLayout="column">
+        <form fxLayout="column" fxLayoutGap="10%" [formGroup]="signupForm" (ngSubmit)="onSubmit()">
             <mat-form-field>
-                <input matInput placeholder="Email">
-                <mat-error>ERROR TEST</mat-error>
+                <input matInput placeholder="Email" type="email" required formControlName="email">
+                <mat-error *ngIf="email.invalid">{{ getEmailErrorMessage() }}</mat-error>
             </mat-form-field>
 
             <mat-form-field>
-                <input matInput placeholder="Password">
-                <mat-error>ERROR TEST</mat-error>
+                <input matInput placeholder="Password" type="password" required formControlName="password">
+                <mat-error *ngIf="password.invalid"> {{ getPasswordErrorMessage() }}</mat-error>
             </mat-form-field>
             <mat-form-field>
-                <input matInput placeholder="Confirm Password">
-                <mat-error>ERROR TEST</mat-error>
+                <input matInput placeholder="Confirm Password" type="password" required formControlName="confirmPassword">
+                <mat-error *ngIf="confirmPassword.invalid">{{ getConfirmPasswordErrorMessage() }}</mat-error>
             </mat-form-field>
             <div class="form-action-buttons" fxLayout="row" fxFlexAlign="end">
-                <button mat-raised-button color="primary">Sign up</button>
+                <button mat-raised-button [disabled]="!signupForm.valid" color="primary">Sign up</button>
             </div>
         </form>
     </mat-card>
