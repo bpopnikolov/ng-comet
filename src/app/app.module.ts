@@ -1,3 +1,4 @@
+import { ContactsModule } from './contacts/contacts.module';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -19,6 +20,7 @@ import { UserModule } from './user/user.module';
     ContainersModule,
     UserModule,
     HomeModule,
+    ContactsModule,
     AppRoutingModule,
   ],
   providers: [],

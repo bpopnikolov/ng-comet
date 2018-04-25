@@ -1,0 +1,16 @@
+<div class="contacts-container" fxLayout="row wrap" fxLayoutAlign="start start" fxLayoutGap="50px">
+  <div>
+    <mat-card class="contact-details" fxLayout="column">
+      <mat-card-title>
+        <h3>CONTACTS</h3>
+      </mat-card-title>
+      <div *ngFor="let contact of contacts">
+      <app-contact-details [contact]="contact"></app-contact-details>
+    </div>
+    </mat-card>
+  </div>
+  <div class="contacts-map">
+      <mat-card-title>GOOGLE MAPS INTEGRATION</mat-card-title>
+      <app-contact-map></app-contact-map>
+  </div>
+</div>

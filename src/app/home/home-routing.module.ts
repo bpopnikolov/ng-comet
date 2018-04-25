@@ -12,7 +12,7 @@ import {
 const homeRoutes: Routes = [{
     path: 'home',
     component: HomeComponent
-}, ];
+},];
 
 @NgModule({
     imports: [
@@ -20,4 +20,4 @@ const homeRoutes: Routes = [{
     ],
     exports: [RouterModule]
 })
-export class HomeRoutingModule {}
+export class HomeRoutingModule { }
