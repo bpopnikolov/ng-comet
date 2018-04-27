@@ -1,6 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { MapsAPILoader, GoogleMapsAPIWrapper } from '@agm/core';
-import { ContactService } from '../../shared/services/contact/contact.service';
+import { MapsAPILoader, } from '@agm/core';
 
 @Component({
   selector: 'app-contact-map',
@@ -13,7 +12,7 @@ export class ContactMapComponent implements OnInit {
   latitude: number;
   @Input()
   longitude: number;
-  zoom: number = 13;
+  zoom: number = 15;
 
 
   constructor(private mapsAPILoader: MapsAPILoader) { }
