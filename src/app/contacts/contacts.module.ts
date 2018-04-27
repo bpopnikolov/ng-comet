@@ -1,4 +1,4 @@
-import { ContactService } from './shared/contact.service';
+import { ContactService } from './../shared/services/contact/contact.service';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { AppMaterialModule } from './../app-material/app-material.module';
 import { NgModule } from '@angular/core';
@@ -6,7 +6,7 @@ import { CommonModule } from '@angular/common';
 
 import { ContactsRoutingModule } from './contacts-routing.module';
 import { ContactsComponent } from './contacts.component';
-import { ContactDetailsComponent } from './contact-details/contact-details.component';
+import { ContactsListComponent } from './contacts-list/contacts-list.component';
 import { AgmCoreModule } from '@agm/core';
 import { ContactMapComponent } from './contact-map/contact-map.component'
 import { MapService } from './shared/map.service';
@@ -22,7 +22,7 @@ import { MapService } from './shared/map.service';
       libraries: ['places']
     }),
   ],
-  declarations: [ContactsComponent, ContactDetailsComponent, ContactMapComponent],
+  declarations: [ContactsComponent, ContactsListComponent, ContactMapComponent],
   providers: [ContactService, MapService]
 })
 export class ContactsModule { }

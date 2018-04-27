@@ -1,39 +1,43 @@
-import { GoogleMapsAPIWrapper, MapsAPILoader, AgmCoreModule } from '@agm/core';
-import { Injectable, NgZone } from '@angular/core';
-import { Observable, Observer } from 'rxjs';
-import { } from '@types/googlemaps'
+import { MapsAPILoader } from '@agm/core';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 
 
-let google: any;
+declare var google: any;
 
 @Injectable()
-export class MapService extends GoogleMapsAPIWrapper {
+export class MapService {
+  constructor(private __loader: MapsAPILoader) {
 
-  constructor(private __loader: MapsAPILoader, private __zone: NgZone) {
-    super(__loader, __zone);
   }
 
-  /**
-   * Gets the coordingates (lat,lng) from a string address using Google API 
-   * geocoding service.
-   * @param {string} [address] String representation of the address to be geocoded.
-   * @returns {Observable<any>} Location object which has coords attributes.
-   */
-  getGeoLocation(address: string): Observable<any> {
-    console.log('Getting address: ', address);
-    let geocoder = new google.maps.Geocode();
+  getGeocoding(address: string) {
     return Observable.create(observer => {
-      geocoder.geocode({
-        'address': address
-      }, (results, status) => {
-        if (status == google.maps.GeocoderStatus.OK) {
-          observer.next(results[0].geometry.location);
-          observer.complete();
-        } else {
-          console.log('Error: ', results, ' & Status: ', status);
-          observer.error();
-        }
-      });
+      try {
+        this.__loader.load().then(() => {
+          let geocoder = new google.maps.Geocoder();
+          geocoder.geocode({ address }, (results, status) => {
+
+            if (status === google.maps.GeocoderStatus.OK) {
+              const place = results[0].geometry.location;
+              observer.next(place);
+              observer.complete();
+            } else {
+              console.error('Error - ', results, ' & Status - ', status);
+              if (status === google.maps.GeocoderStatus.ZERO_RESULTS) {
+                observer.error('Address not found!');
+              } else {
+                observer.error(status);
+              }
+
+              observer.complete();
+            }
+          });
+        });
+      } catch (error) {
+        observer.error('error getGeocoding' + error);
+        observer.complete();
+      }
     });
   }
 }

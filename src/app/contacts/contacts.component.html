@@ -4,13 +4,10 @@
       <mat-card-title>
         <h3>CONTACTS</h3>
       </mat-card-title>
-      <div *ngFor="let contact of contacts">
-      <app-contact-details [contact]="contact"></app-contact-details>
-    </div>
+      <app-contacts-list [contacts]="contacts"></app-contacts-list>
     </mat-card>
   </div>
   <div class="contacts-map">
-      <mat-card-title>GOOGLE MAPS INTEGRATION</mat-card-title>
-      <app-contact-map></app-contact-map>
+      <app-contact-map [latitude]="latitude" [longitude]="longitude"></app-contact-map>
   </div>
 </div>

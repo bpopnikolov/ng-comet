@@ -1,7 +1,6 @@
-import { MapService } from './../shared/map.service';
 import { Component, OnInit, Input } from '@angular/core';
 import { MapsAPILoader, GoogleMapsAPIWrapper } from '@agm/core';
-import { ContactService } from '../shared/contact.service';
+import { ContactService } from '../../shared/services/contact/contact.service';
 
 @Component({
   selector: 'app-contact-map',
@@ -10,24 +9,15 @@ import { ContactService } from '../shared/contact.service';
 })
 export class ContactMapComponent implements OnInit {
 
+  @Input()
   latitude: number;
+  @Input()
   longitude: number;
-  zoom: number;
-  address: string;
+  zoom: number = 13;
 
-  constructor(
-    private mapsAPILoader: MapsAPILoader,
-    private contactService: ContactService,
-    private mapService: MapService
-  ) { }
+
+  constructor(private mapsAPILoader: MapsAPILoader) { }
 
   ngOnInit() {
-    this.zoom = 13;
-    this.latitude = 42.6977;
-    this.longitude = 23.3219;
-
-    this.address = this.contactService.getPrimaryAddress();
-
-    this.mapService.getGeoLocation(this.address);
   }
 }
