@@ -10,7 +10,8 @@ export class UserComponent implements OnInit {
 
   authType: String;
 
-  constructor(private route: ActivatedRoute,) { }
+  constructor(private route: ActivatedRoute) { }
+
 
   ngOnInit() {
     this.route.url.subscribe(data => {
