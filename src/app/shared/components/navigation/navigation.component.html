@@ -1,7 +1,7 @@
 <div class="nav-container" fxLayout="column">
     <mat-toolbar fxFlex="56px" [ngClass.xs]="{'toolbar-mobile': true}" [ngClass.sm]="{'toolbar-mobile': true}" class="mat-elevation-z6" color="primary" fxLayout="row">
         <button class="sidenav-menu" mat-icon-button fxHide fxShow.xs fxShow.sm (click)="snav.toggle()"><mat-icon>menu</mat-icon></button>
-        <div class="logo-container" [ngStyle.sm]="{'margin-left.px': 54}">
+        <div class="logo-container" [ngStyle.sm]="{'margin-left.px': 54}" [ngStyle.gt-sm]="{'margin-left.px': 16}">
             <img class="logo" src="/assets/comet-logo.svg" alt="">
             <a class="nav-logo-title" href="#">NG-COMET</a>
         </div>

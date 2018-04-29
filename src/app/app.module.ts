@@ -13,6 +13,7 @@ import { AppConfigService } from './app-config.service';
 import { JwtModule } from '@auth0/angular-jwt';
 import { AuthModule } from './shared/services/auth/auth.module';
 
+
 export function configServiceFactory(config: AppConfigService) {
     return () => config.load()
 };

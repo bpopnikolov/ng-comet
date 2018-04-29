@@ -1,0 +1,25 @@
+.hero-image {
+    /* The image used */
+
+    /* Set a specific height */
+
+    /* Position and center the image to scale nicely on all screens */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+    min-height: 50%;
+    padding: 10px 0px;
+}
+
+.hero-text {
+    color: white;
+    text-align: center;
+}
+.hero-container {
+    text-align: center;
+}
+
+.hero-container .mat-raised-button{
+    margin: 4px 2px !important;
+}

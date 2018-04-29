@@ -10,12 +10,18 @@ import {
 import {
     HomeRoutingModule
 } from './home-routing.module';
+import { ComponentsModule } from '../shared/components';
+
+
 
 @NgModule({
     imports: [
         CommonModule,
         HomeRoutingModule,
+        ComponentsModule
     ],
-    declarations: [HomeComponent]
+    declarations: [
+        HomeComponent,
+    ]
 })
-export class HomeModule {}
+export class HomeModule { }
