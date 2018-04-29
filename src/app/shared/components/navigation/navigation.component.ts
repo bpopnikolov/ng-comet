@@ -1,16 +1,31 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { User } from '../../../user/shared';
 
 
 @Component({
-  selector: 'app-navigation',
-  templateUrl: './navigation.component.html',
-  styleUrls: ['./navigation.component.scss']
+    selector: 'app-navigation',
+    templateUrl: './navigation.component.html',
+    styleUrls: ['./navigation.component.scss']
 })
 export class NavigationComponent implements OnInit {
 
-  constructor() { }
+    @Input() user: User = null;
+    @Input() isAdmin: boolean = false;
+    @Input() isAuthenticated: boolean = false;
+    @Output() signedOut = new EventEmitter();
 
-  ngOnInit() {
-  }
+
+    constructor() { }
+
+    ngOnInit() {
+    }
+
+    test() {
+        console.log(this.user);
+    }
+    onSignout() {
+        console.log('object');
+        this.signedOut.emit();
+    }
 
 }

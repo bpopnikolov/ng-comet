@@ -1,2 +1,2 @@
-<app-user-signin *ngIf="authType === 'signin'"></app-user-signin>
-<app-user-signup *ngIf="authType === 'signup'"></app-user-signup>
+<app-user-signin (signinSubmited)="onSigninFormSubmit($event)" *ngIf="authType === 'signin'"></app-user-signin>
+<app-user-signup (signupSubmited)="onSignupFormSubmit($event)" *ngIf="authType === 'signup'"></app-user-signup>

@@ -15,7 +15,7 @@
                 <mat-error *ngIf="confirmPassword.invalid">{{ getConfirmPasswordErrorMessage() }}</mat-error>
             </mat-form-field>
             <div class="form-action-buttons" fxLayout="row" fxFlexAlign="end">
-                <button mat-raised-button [disabled]="signupForm.valid" color="primary">Sign up</button>
+                <button mat-raised-button [disabled]="!signupForm.valid" color="primary">Sign up</button>
             </div>
         </form>
     </mat-card>

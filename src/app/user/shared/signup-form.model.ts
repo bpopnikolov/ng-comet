@@ -1,4 +1,4 @@
-export class RegisterForm {
+export class SignupForm {
     public email: string;
     public password: string;
     public confirmPassword: string;

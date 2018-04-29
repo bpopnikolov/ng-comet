@@ -1,6 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, Input } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FormErrorStateMatcher, UtilityService, ValidationService } from '../../shared/utility';
+import { SignupForm } from '../shared';
+import { ResponseError } from '../../shared/models';
+import { Subject } from 'rxjs/Subject';
+
 
 @Component({
     selector: 'app-user-signup',
@@ -8,6 +12,8 @@ import { FormErrorStateMatcher, UtilityService, ValidationService } from '../../
     styleUrls: ['./user-signup.component.scss']
 })
 export class UserSignupComponent implements OnInit {
+
+    @Output() signupSubmited = new EventEmitter<SignupForm>();
 
     signupForm: FormGroup;
     public email: AbstractControl;
@@ -20,7 +26,6 @@ export class UserSignupComponent implements OnInit {
         private validationService: ValidationService,
         private utilityService: UtilityService
     ) {
-
     }
 
     ngOnInit() {
@@ -33,8 +38,8 @@ export class UserSignupComponent implements OnInit {
             'password': ['', [Validators.required, Validators.maxLength(256), this.validationService.validatePassword]],
             'confirmPassword': ['', Validators.required],
         }, {
-            validator: this.validationService.matchingPasswords('password', 'confirmPassword')
-        });
+                validator: this.validationService.matchingPasswords('password', 'confirmPassword')
+            });
 
         this.email = this.signupForm.controls['email'];
         this.password = this.signupForm.controls['password'];
@@ -48,11 +53,21 @@ export class UserSignupComponent implements OnInit {
     getPasswordErrorMessage() {
         return this.utilityService.getPasswordErrorMessages(this.password);
     }
+
     getConfirmPasswordErrorMessage() {
         return this.utilityService.getConfirmPasswordErrorMessages(this.confirmPassword);
     }
+
     onSubmit() {
-        console.log(this.signupForm);
+        const form = {
+            email: this.email.value,
+            password: this.password.value,
+            confirmPassword: this.confirmPassword.value,
+        };
+
+        if (this.signupForm.valid) {
+            this.signupSubmited.emit(form);
+        }
     }
 
 }

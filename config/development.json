@@ -1,6 +1,6 @@
 {
   "api": {
-    "baseUrl": "/api"
+    "baseUrl": "http://localhost:3001/api/"
   },
 
   "paths": {

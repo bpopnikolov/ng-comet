@@ -1,6 +1,6 @@
 <div class="forms-container" fxLayout="column" fxLayoutAlign="center center">
     <mat-card class="forms-card">
-        <form fxLayout="column" fxLayoutGap="10%" [formGroup]="signinForm" (ngSubmit)="submitForm()">
+        <form fxLayout="column" fxLayoutGap="10%" [formGroup]="signinForm" (ngSubmit)="onSubmit()">
             <mat-form-field>
                 <input matInput placeholder="Email" type="email" required formControlName="email">
                 <mat-error *ngIf="email.invalid">{{ getEmailErrorMessage() }}</mat-error>

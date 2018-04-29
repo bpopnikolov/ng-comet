@@ -1,21 +1,30 @@
 <div class="nav-container" fxLayout="column">
-    <mat-toolbar fxFlex="56px" class="mat-elevation-z6" color="primary" fxLayout="row">
-        <button mat-icon-button fxHide fxShow.xs fxShow.sm (click)="snav.toggle()"><mat-icon>menu</mat-icon></button>
-        <a class="nav-logo" href="#">NG-COMET</a>
+    <mat-toolbar fxFlex="56px" [ngClass.xs]="{'toolbar-mobile': true}" [ngClass.sm]="{'toolbar-mobile': true}" class="mat-elevation-z6" color="primary" fxLayout="row">
+        <button class="sidenav-menu" mat-icon-button fxHide fxShow.xs fxShow.sm (click)="snav.toggle()"><mat-icon>menu</mat-icon></button>
+        <div class="logo-container" [ngStyle.sm]="{'margin-left.px': 54}">
+            <img class="logo" src="/assets/comet-logo.svg" alt="">
+            <a class="nav-logo-title" href="#">NG-COMET</a>
+        </div>
         <div class="nav-buttons" fxFlex="100%" fxHide.xs fxHide.sm>
             <button mat-button [routerLink]="['home']" [routerLinkActive]="'active'">Home</button>
             <button mat-button>Careers</button>
             <button mat-button>Contacts</button>
-            <button mat-button [matMenuTriggerFor]="adminMenu">
+            <button mat-button *ngIf="isAdmin" [matMenuTriggerFor]="adminMenu">
                 Admin
                 <mat-icon>arrow_drop_down</mat-icon>
               </button>
-
         </div>
         <div class="spacer" fxHide.xs></div>
         <div class="nav-buttons" fxHide.xs fxHide.sm>
-            <button mat-button [routerLink]="['signin']" [routerLinkActive]="'active'">Sign in</button>
-            <button mat-button [routerLink]="['signup']" [routerLinkActive]="'active'">Sign up</button>
+            <ng-template [ngIf]="user">
+                <span *ngIf="user">Welcome, {{user?.email}}</span>
+                <button mat-button (click)="onSignout()">Sign out</button>
+            </ng-template>
+            <ng-template [ngIf]="!user">
+                <button mat-button [routerLink]="['signin']" [routerLinkActive]="'active'">Sign in</button>
+                <button mat-button [routerLink]="['signup']" [routerLinkActive]="'active'">Sign up</button>
+            </ng-template>
+
         </div>
     </mat-toolbar>
 
@@ -34,7 +43,7 @@
                 <a mat-list-item routerLink="/home" routerLinkActive="active" active>Home</a>
                 <a mat-list-item routerLink=".">Careers</a>
                 <a mat-list-item routerLink=".">Contacts</a>
-                <mat-expansion-panel class="admin-expansion-panel">
+                <mat-expansion-panel *ngIf="isAdmin" class="admin-expansion-panel">
                     <mat-expansion-panel-header>
                         <mat-panel-title>
                             Admin
@@ -46,14 +55,20 @@
                     <a mat-list-item routerLink=".">Admin</a>
                 </mat-expansion-panel>
                 <mat-divider></mat-divider>
-                <a mat-list-item [routerLink]="['signin']" [routerLinkActive]="'active'">
-                    <mat-icon class="sidenav-link-icon" svgIcon="login"></mat-icon>
-                  Sign in
+                <a mat-list-item *ngIf="user" (click)="onSignout()">
+                    <mat-icon class="sidenav-link-icon" svgIcon="logout"></mat-icon>
+                    Sign out
                 </a>
-                <a mat-list-item [routerLink]="['signup']" [routerLinkActive]="'active'">
-                    <!-- <i class="sidenav-link-icon mdi mdi-add-person mdi-24px"></i> -->
-                    <mat-icon class ="sidenav-link-icon" svgIcon="account-plus"></mat-icon>
-                  Sign up</a>
+                <ng-template [ngIf]="!user">
+                    <a mat-list-item [routerLink]="['signin']" [routerLinkActive]="'active'">
+                        <mat-icon class="sidenav-link-icon" svgIcon="login"></mat-icon>
+                        Sign in
+                    </a>
+                    <a mat-list-item [routerLink]="['signup']" [routerLinkActive]="'active'">
+                        <!-- <i class="sidenav-link-icon mdi mdi-add-person mdi-24px"></i> -->
+                        <mat-icon class="sidenav-link-icon" svgIcon="account-plus"></mat-icon>
+                        Sign up</a>
+                </ng-template>
             </mat-nav-list>
         </mat-sidenav>
 
