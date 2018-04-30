@@ -1,33 +1,28 @@
 import { Contact } from './../../../contacts/shared/contact';
 import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { AppConfigService } from '../../../app-config.service';
 
 @Injectable()
 export class ContactService {
 
-  contacts: Contact[] = [
-    {
-      name: 'Address',
-      value: '10 Aleksandar Malinov boulevard, Sofia',
-      isPrimary: true,
-    },
-        {
-      name: 'email',
-      value: 'contactus@cometgroup.org',
-      isPrimary: false,
-    },
-    {
-      name: 'phone',
-      value: '+44 720 435 798',
-      isPrimary: false,
-    },
-    {
-      name: 'Address',
-      value: '150 Botevgradsko Shose boulevard, Sofia',
-      isPrimary: true,
-    },
-  ];
+    appApi: {[key: string]: any};
 
-  getAll(): Contact[] {
-    return this.contacts;
-  }
+    constructor(
+        private httpClient: HttpClient,
+        private configService: AppConfigService
+    ) {
+        this.appApi = this.configService.get('api');
+    }
+
+    getContacts() {
+        const headers = new HttpHeaders({
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        });
+
+        return this.httpClient.get<Contact[]>(this.appApi.baseUrl + 'contacts', {
+            headers
+        });
+    }
 }

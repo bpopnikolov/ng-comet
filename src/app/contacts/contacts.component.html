@@ -1,13 +1,7 @@
-<div class="contacts-container" fxLayout="row wrap" fxLayoutAlign="start start" fxLayoutGap="50px">
-  <div>
-    <mat-card class="contact-details" fxLayout="column">
-      <mat-card-title>
-        <h3>CONTACTS</h3>
-      </mat-card-title>
-      <app-contacts-list [contacts]="contacts"></app-contacts-list>
-    </mat-card>
-  </div>
-  <div class="contacts-map">
-      <app-contact-map [latitude]="latitude" [longitude]="longitude"></app-contact-map>
-  </div>
+<app-google-maps [latitude]="latitude" [longitude]="longitude"></app-google-maps>
+<div class="contacts-container" fxLayout="column">
+
+    <div class="contacts-list" fxFlex="55%" fxLayout="row" fxLayoutAlign="center center">
+        <app-contacts-list fxFlex="60%" fxFlex.sm="60%" fxFlex.xs="90%" fxLayout.xs="column"   fxLayout.sm="column" fxLayout="row wrap" [contacts]="contacts" (contactSelected)="updateMapContact($event)" ></app-contacts-list>
+    </div>
 </div>

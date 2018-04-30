@@ -1,4 +1,3 @@
-
 import { HttpClientModule } from '@angular/common/http';
 import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -15,6 +14,7 @@ import { UtilityModule } from './shared/utility';
 import { UserModule } from './user/user.module';
 import { LinkModule } from './shared/services/link';
 import { ContactsModule } from './contacts';
+import { ContactService } from './shared/services/contact';
 
 
 
@@ -51,6 +51,7 @@ export function tokenGetter() {
     ],
     providers: [
         AppConfigService,
+        ContactService,
         {
             provide: APP_INITIALIZER,
             useFactory: configServiceFactory,

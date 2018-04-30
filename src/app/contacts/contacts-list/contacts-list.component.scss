@@ -1,0 +1,9 @@
+::ng-deep.contact-item {
+    margin: 10px 20px !important;
+    border: 2px solid transparent !important;
+    cursor: pointer;
+}
+
+::ng-deep.active {
+    border: 2px solid #009688 !important;
+}

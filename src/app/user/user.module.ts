@@ -19,7 +19,14 @@ import { UserComponent } from './user.component';
         AppMaterialModule,
         UserRoutingModule
     ],
-    declarations: [UserComponent, UserSigninComponent, UserSignupComponent],
-    providers: [UserService, FormErrorStateMatcher]
+    declarations: [
+        UserComponent,
+        UserSigninComponent,
+        UserSignupComponent
+    ],
+    providers: [
+        UserService,
+        FormErrorStateMatcher
+    ]
 })
 export class UserModule {}

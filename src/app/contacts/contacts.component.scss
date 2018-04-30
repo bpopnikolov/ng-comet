@@ -1,10 +1,11 @@
 .contacts-container {
-    padding-top: 50px;
-    padding-left: 50px;
-    height: 100%;
+    min-height: 50%;
 }
 
 .contacts-map {
-    height: 300px;
-    width: 600px;
+    z-index: 5;
+}
+
+app-contacts-list {
+    justify-content: center;
 }

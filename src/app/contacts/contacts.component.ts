@@ -1,41 +1,63 @@
 import { ContactService } from '../shared/services/contact/contact.service';
-import { MapService } from './shared/map.service';
 import { Contact } from './shared/contact';
 import { Component, OnInit, Input } from '@angular/core';
+import { GoogleMapsService } from '../google-maps';
 
 @Component({
-  selector: 'app-contacts',
-  templateUrl: './contacts.component.html',
-  styleUrls: ['./contacts.component.scss']
+    selector: 'app-contacts',
+    templateUrl: './contacts.component.html',
+    styleUrls: ['./contacts.component.scss']
 })
 export class ContactsComponent implements OnInit {
-  @Input()
-  contacts: Contact[];
-  @Input()
-  latitude: number;
-  @Input()
-  longitude: number;
 
-  primaryContact: Contact;
+    contacts: Contact[] = [];
 
-  constructor(
-    private contactService: ContactService,
-    private mapService: MapService) {
-  }
+    latitude: number = 0;
 
-  ngOnInit(): void {
-    this.contacts = this.contactService.getAll();
-    this.primaryContact = this.contacts.find(contact => contact.isPrimary === true);
-    if (this.primaryContact) {
-      this.mapService.getGeocoding(this.primaryContact.value)
-        .subscribe((coordinates) => {
-          this.latitude = coordinates.lat()
-          this.longitude = coordinates.lng()
+    longitude: number = 0;
+
+    primaryContact: Contact = null;
+
+    constructor(
+        private contactService: ContactService,
+        private googleMapsService: GoogleMapsService
+    ) { }
+
+    ngOnInit(): void {
+        this.contactService.getContacts().subscribe((contacts) => {
+            console.log(contacts);
+            this.contacts = contacts;
+
+            this.primaryContact = this.contacts.find(contact => contact.isPrimary === true);
+
+            this.initGoogleMap();
+
         });
-    } else {
-      this.latitude = 42.6977;
-      this.longitude = 23.3219;
-    }
-  }
 
+
+    }
+
+    initGoogleMap() {
+        if (this.primaryContact) {
+            this.googleMapsService.getGeocoding(this.primaryContact.value)
+                .subscribe((coordinates) => {
+                    this.latitude = coordinates.lat()
+                    this.longitude = coordinates.lng()
+                });
+        } else if (this.contacts.length > 0) {
+            this.googleMapsService.getGeocoding(this.contacts[0].value)
+                .subscribe((coordinates) => {
+                    this.latitude = coordinates.lat()
+                    this.longitude = coordinates.lng()
+                });
+        }
+    }
+
+    updateMapContact(contact) {
+        this.googleMapsService.getGeocoding(contact.value)
+        .subscribe((coordinates) => {
+            this.latitude = coordinates.lat()
+            this.longitude = coordinates.lng()
+        });
+    }
 }
