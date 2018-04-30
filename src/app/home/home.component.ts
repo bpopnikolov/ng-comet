@@ -11,15 +11,14 @@ import { ActivatedRoute } from '@angular/router';
 export class HomeComponent implements OnInit {
 
     actionLinks: ActionLinks[] = [];
-    socialLinks: ActionLinks[] = [];
+
     constructor(private route: ActivatedRoute) { }
 
     ngOnInit() {
         this.route.data.subscribe(
             (data: { links: ActionLinks[] }) => {
-                console.log(data);
+                // console.log(data);
                 this.actionLinks = data.links.filter((link) => link.type === 'action')
-                this.socialLinks = data.links.filter((link) => link.type === 'social')
             });
     }
 }

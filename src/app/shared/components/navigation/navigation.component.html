@@ -17,7 +17,7 @@
         <div class="spacer" fxHide.xs></div>
         <div class="nav-buttons" fxHide.xs fxHide.sm>
             <ng-template [ngIf]="user">
-                <span *ngIf="user">Welcome, {{user?.email}}</span>
+                <span class="user-text" *ngIf="user">Welcome, {{user?.email.split('@')[0]}}</span>
                 <button mat-button (click)="onSignout()">Sign out</button>
             </ng-template>
             <ng-template [ngIf]="!user">
@@ -74,7 +74,6 @@
 
         <mat-sidenav-content>
             <ng-content></ng-content>
-            <app-footer></app-footer>
         </mat-sidenav-content>
     </mat-sidenav-container>
 </div>

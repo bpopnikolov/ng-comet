@@ -5,9 +5,9 @@
             <a class="footer-logo-title" href="#">NG-COMET</a>
         </div>
         <div class="social-icons-footer">
-            <img class="social-icon" src="/assets/facebook-logo.svg" alt="">
-            <img class="social-icon" src="/assets/google-logo.svg" alt="">
-            <img class="social-icon" src="/assets/twitter-logo.svg" alt="">
+            <a [href]="link.target" *ngFor="let link of socialLinks" >
+                <img class="social-icon" [src]="link.icon" alt="">
+            </a>
         </div>
     </div>
 </div>
