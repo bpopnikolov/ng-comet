@@ -18,7 +18,7 @@ export class UserService {
         private httpClient: HttpClient,
         private authService: AuthService,
         private configService: AppConfigService) {
-        this.appApi = configService.get('api');
+        this.appApi = this.configService.get('api');
     }
 
     public signin(form: SigninForm) {

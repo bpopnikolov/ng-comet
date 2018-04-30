@@ -7,25 +7,31 @@ import { AppMaterialModule } from '../../app-material';
 import { BackgroundImageDirective } from '../directives/background-image.directive';
 import { HeroImageComponent } from './hero-image/hero-image.component';
 import { NavigationComponent } from './navigation/navigation.component';
-import { SocialPanelComponent } from './social-panel/social-panel.component';
+import { SocialFeedComponent } from './social-feed/social-feed.component';
+import { TextSectionComponent } from './text-section/text-section.component';
+import { FooterComponent } from './footer/footer.component';
+import { FacebookModule } from 'ngx-facebook';
 
 
 export const COMPONENTS = [
     NavigationComponent,
     HeroImageComponent,
-    SocialPanelComponent,
     BackgroundImageDirective,
+    SocialFeedComponent,
+    TextSectionComponent,
+    FooterComponent,
 ];
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    ReactiveFormsModule,
-    FlexLayoutModule,
-    AppMaterialModule,
-    RouterModule,
-  ],
-  declarations: COMPONENTS,
-  exports: COMPONENTS
+    imports: [
+        CommonModule,
+        FormsModule,
+        FacebookModule,
+        ReactiveFormsModule,
+        FlexLayoutModule,
+        AppMaterialModule,
+        RouterModule,
+    ],
+    declarations: COMPONENTS,
+    exports: COMPONENTS
 })
 export class ComponentsModule { }

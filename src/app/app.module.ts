@@ -1,17 +1,19 @@
 import { HttpClientModule } from '@angular/common/http';
-import { NgModule, APP_INITIALIZER } from '@angular/core';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
+import { JwtModule } from '@auth0/angular-jwt';
+import { FacebookModule } from 'ngx-facebook';
+import { AppConfigService } from './app-config.service';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeModule } from './home';
 import { ContainersModule } from './shared/containers';
+import { AuthModule } from './shared/services/auth/auth.module';
 import { UtilityModule } from './shared/utility';
 import { UserModule } from './user/user.module';
-import { AppConfigService } from './app-config.service';
-import { JwtModule } from '@auth0/angular-jwt';
-import { AuthModule } from './shared/services/auth/auth.module';
+import { LinkModule } from './shared/services/link';
+
 
 
 export function configServiceFactory(config: AppConfigService) {
@@ -36,8 +38,10 @@ export function tokenGetter() {
             }
         }),
         UtilityModule.forRoot(),
+        FacebookModule.forRoot(),
         ContainersModule,
         AuthModule,
+        LinkModule,
         UserModule,
         HomeModule,
         AppRoutingModule,

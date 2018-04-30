@@ -1,2 +1,9 @@
-<app-hero-image></app-hero-image>
-<app-social-panel></app-social-panel>
+<app-hero-image [links]="actionLinks"></app-hero-image>
+<div class="feed-section" fxLayout="row" >
+    <div fxFlex="50%" fxLayout="row" fxLayoutAlign="center center" class="feed-section-text">
+        <app-text-section fxFlex.xs="90%"fxFlex.sm="80%" fxFlex="50%"></app-text-section>
+    </div>
+    <div fxFlex="50%" fxLayout="row" fxLayoutAlign="center center" class="social-feed">
+        <app-social-feed fxFlex.xs="90%" fxFlex.sm="80%" fxFlex="50%"></app-social-feed>
+    </div>
+</div>

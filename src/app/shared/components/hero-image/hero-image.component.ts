@@ -12,7 +12,6 @@ export class HeroImageComponent implements OnInit {
     constructor() { }
 
     ngOnInit() {
-        console.log(this.heroImgUrl);
     }
 
 }

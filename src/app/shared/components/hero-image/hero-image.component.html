@@ -6,16 +6,7 @@
     </div>
     <div fxFlex="50%" class="hero-container" fxLayout="row" fxLayoutAlign="center center">
         <div fxFlex="50%" fxFlexAlign="center" fxFlex.xs="100%">
-            <a mat-raised-button color="primary">TEST BUTTON</a>
-            <a mat-raised-button color="primary">TEST BUTTON</a>
-            <a mat-raised-button color="primary">TEST BUTTON</a>
-            <a mat-raised-button color="primary">TEST BUTTON</a>
-            <a mat-raised-button color="primary">TEST BUTTON</a>
-            <a mat-raised-button color="primary">TEST BUTTON</a>
-            <a mat-raised-button color="primary">TEST BUTTON</a>
-            <a mat-raised-button color="primary">TEST BUTTON</a>
-            <a mat-raised-button color="primary">TEST BUTTON</a>
-            <a mat-raised-button color="primary">TEST BUTTON</a>
+            <a *ngFor="let link of links" mat-raised-button color="primary">{{link.name}}</a>
         </div>
     </div>
 </div>
