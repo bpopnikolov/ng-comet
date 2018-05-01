@@ -15,6 +15,10 @@ import { UserModule } from './user/user.module';
 import { LinkModule } from './shared/services/link';
 import { ContactsModule } from './contacts';
 import { ContactService } from './shared/services/contact';
+import { JobadsService } from './shared/services/jobads/jobads.service';
+import { JobAdsResolver } from './shared/services/jobads/jobads.resolver';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { AppMaterialModule } from './app-material';
 
 
 
@@ -41,6 +45,8 @@ export function tokenGetter() {
         }),
         UtilityModule.forRoot(),
         FacebookModule.forRoot(),
+        FlexLayoutModule,
+        AppMaterialModule,
         ContainersModule,
         AuthModule,
         LinkModule,
@@ -52,6 +58,8 @@ export function tokenGetter() {
     providers: [
         AppConfigService,
         ContactService,
+        JobadsService,
+        JobAdsResolver,
         {
             provide: APP_INITIALIZER,
             useFactory: configServiceFactory,

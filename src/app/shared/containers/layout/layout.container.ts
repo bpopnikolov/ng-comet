@@ -23,7 +23,9 @@ export class LayoutContainer implements OnInit {
             console.log(data, 'is logged in');
             this.isAuthenticated = data;
             this.isAdmin = this.authService.isCurrentUserAdmin();
+            console.log(this.isAdmin);
             this.user = this.authService.getCurrentUser();
+            console.log(this.user);
         });
         this.getFooterLinks();
     }

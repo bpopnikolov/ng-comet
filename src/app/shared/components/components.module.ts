@@ -11,6 +11,7 @@ import { SocialFeedComponent } from './social-feed/social-feed.component';
 import { TextSectionComponent } from './text-section/text-section.component';
 import { FooterComponent } from './footer/footer.component';
 import { FacebookModule } from 'ngx-facebook';
+import { TableWithSortingComponent } from './table-with-sorting/table-with-sorting.component';
 
 
 export const COMPONENTS = [
@@ -20,6 +21,7 @@ export const COMPONENTS = [
     SocialFeedComponent,
     TextSectionComponent,
     FooterComponent,
+    TableWithSortingComponent,
 ];
 @NgModule({
     imports: [

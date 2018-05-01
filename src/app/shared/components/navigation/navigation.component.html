@@ -1,41 +1,40 @@
 <div class="nav-container" fxLayout="column">
     <mat-toolbar fxFlex="56px" [ngClass.xs]="{'toolbar-mobile': true}" [ngClass.sm]="{'toolbar-mobile': true}" class="mat-elevation-z6" color="primary" fxLayout="row">
-        <button class="sidenav-menu" mat-icon-button fxHide fxShow.xs fxShow.sm (click)="snav.toggle()"><mat-icon>menu</mat-icon></button>
+        <a class="sidenav-menu" mat-icon-button fxHide fxShow.xs fxShow.sm (click)="snav.toggle()"><mat-icon>menu</mat-icon></a>
         <div class="logo-container" [ngStyle.sm]="{'margin-left.px': 54}" [ngStyle.gt-sm]="{'margin-left.px': 16}">
             <img class="logo" src="/assets/comet-logo.svg" alt="">
             <a class="nav-logo-title" href="#">NG-COMET</a>
         </div>
         <div class="nav-buttons" fxFlex="100%" fxHide.xs fxHide.sm>
-            <button mat-button [routerLink]="['home']" [routerLinkActive]="'active'">Home</button>
-            <button mat-button>Careers</button>
+            <a mat-button [routerLink]="['home']" [routerLinkActive]="'active'">Home</a>
+            <a mat-button>Careers</a>
 
-            <button mat-button [routerLink]="['contacts']">Contacts</button>
-            <button mat-button *ngIf="isAdmin" [matMenuTriggerFor]="adminMenu">
+            <a mat-button [routerLink]="['contacts']">Contacts</a>
+            <a mat-button *ngIf="isAdmin" [matMenuTriggerFor]="adminMenu">
                 Admin
                 <mat-icon>arrow_drop_down</mat-icon>
-              </button>
+              </a>
         </div>
         <div class="spacer" fxHide.xs></div>
         <div class="nav-buttons" fxHide.xs fxHide.sm>
             <ng-template [ngIf]="user">
                 <span class="user-text" *ngIf="user">Welcome, {{user?.email.split('@')[0]}}</span>
-                <button mat-button (click)="onSignout()">Sign out</button>
+                <a mat-button (click)="onSignout()">Sign out</a>
             </ng-template>
             <ng-template [ngIf]="!user">
-                <button mat-button [routerLink]="['signin']" [routerLinkActive]="'active'">Sign in</button>
-                <button mat-button [routerLink]="['signup']" [routerLinkActive]="'active'">Sign up</button>
+                <a mat-button [routerLink]="['signin']" [routerLinkActive]="'active'">Sign in</a>
+                <a mat-button [routerLink]="['signup']" [routerLinkActive]="'active'">Sign up</a>
             </ng-template>
 
         </div>
     </mat-toolbar>
 
     <mat-menu #adminMenu="matMenu">
-        <button mat-menu-item>Settings</button>
-        <button mat-menu-item>Help</button>
-        <button mat-menu-item>Settings</button>
-        <button mat-menu-item>Help</button>
-        <button mat-menu-item>Settings</button>
-        <button mat-menu-item>Help</button>
+        <a mat-menu-item [routerLink]="['admin']">Users</a>
+        <a mat-menu-item [routerLink]="['admin','jobads']">Job Ads</a>
+        <a mat-menu-item [routerLink]="['admin']">Job Applications</a>
+        <a mat-menu-item [routerLink]="['admin']">Links</a>
+        <a mat-menu-item [routerLink]="['admin']">Contact Details</a>
     </mat-menu>
 
     <mat-sidenav-container fxFlex="100%" class="sidenav-container">
@@ -50,10 +49,11 @@
                             Admin
                         </mat-panel-title>
                     </mat-expansion-panel-header>
-                    <a mat-list-item routerLink=".">Home</a>
-                    <a mat-list-item routerLink=".">Careers</a>
-                    <a mat-list-item routerLink=".">Contacts</a>
-                    <a mat-list-item routerLink=".">Admin</a>
+                    <a mat-list-item [routerLink]="['admin']">Users</a>
+                    <a mat-list-item [routerLink]="['admin','jobads']">Job Ads</a>
+                    <a mat-list-item [routerLink]="['admin']">Job Applications</a>
+                    <a mat-list-item [routerLink]="['admin']">Links</a>
+                    <a mat-list-item [routerLink]="['admin']">Contact Details</a>
                 </mat-expansion-panel>
                 <mat-divider></mat-divider>
                 <a mat-list-item *ngIf="user" (click)="onSignout()">

@@ -19,7 +19,13 @@ export class AuthService {
     constructor(private jwtService: JwtHelperService) {
         // console.log(this.jwtService.decodeToken(this.jwtService.tokenGetter()).user);
         const token = this.jwtService.decodeToken(this.jwtService.tokenGetter());
+
         token ? this.currentUserSubject.next(token.user) : this.currentUserSubject.next(null);
+
+        token.user ? this.isAuthenticatedSubject.next(true) : this.isAuthenticatedSubject.next(false);
+
+        token.user.role === 'admin' ? this.isAdminSubject.next(true) : this.isAdminSubject.next(false);
+
     }
 
     setAuth(token: any): void {
