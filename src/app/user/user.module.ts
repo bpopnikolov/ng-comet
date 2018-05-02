@@ -13,7 +13,6 @@ import { UserComponent } from './user.component';
 @NgModule({
     imports: [
         CommonModule,
-        FormsModule,
         ReactiveFormsModule,
         FlexLayoutModule,
         AppMaterialModule,

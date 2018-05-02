@@ -13,6 +13,6 @@ export class JobAdsResolver implements Resolve<JobAd> {
 
     resolve(route: ActivatedRouteSnapshot): Observable<any> {
 
-        return this.jobadsService.getJobAds().pipe(catchError((err) => Observable.empty()));
+        return this.jobadsService.getJobAds().first().pipe(catchError((err) => Observable.empty()));
     }
 }
