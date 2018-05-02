@@ -1,4 +1,4 @@
-import { Contact } from './../shared/contact';
+import { Contact } from './../shared';
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 
 

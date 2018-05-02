@@ -9,6 +9,7 @@ import { UserRoutingModule } from './user-routing.module';
 import { UserSigninComponent } from './user-signin/user-signin.component';
 import { UserSignupComponent } from './user-signup/user-signup.component';
 import { UserComponent } from './user.component';
+import { UsersResolver } from './shared';
 
 @NgModule({
     imports: [
@@ -25,6 +26,7 @@ import { UserComponent } from './user.component';
     ],
     providers: [
         UserService,
+        UsersResolver,
         FormErrorStateMatcher
     ]
 })

@@ -2,6 +2,11 @@
     min-height: 100%;
 }
 
-// ::ng-deep.admin-panel-title {
-//     padding: 0 16px;
-// }
+::ng-deep.admin-sorted-table {
+    margin: 16px !important;
+}
+
+::ng-deep.sorted-table-container {
+    padding: 12px;
+    overflow-x: auto;
+}

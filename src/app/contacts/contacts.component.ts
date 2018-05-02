@@ -1,7 +1,7 @@
-import { ContactService } from '../shared/services/contact/contact.service';
-import { Contact } from './shared/contact';
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { GoogleMapsService } from '../google-maps';
+import { ContactsService } from '../shared/services/contacts';
+import { Contact } from './shared';
 
 @Component({
     selector: 'app-contacts',
@@ -19,12 +19,12 @@ export class ContactsComponent implements OnInit {
     primaryContact: Contact = null;
 
     constructor(
-        private contactService: ContactService,
+        private contactsService: ContactsService,
         private googleMapsService: GoogleMapsService
     ) { }
 
     ngOnInit(): void {
-        this.contactService.getContacts().subscribe((contacts) => {
+        this.contactsService.getContacts().subscribe((contacts) => {
             console.log(contacts);
             this.contacts = contacts;
 

@@ -22,9 +22,11 @@ export class AuthService {
 
         token ? this.currentUserSubject.next(token.user) : this.currentUserSubject.next(null);
 
-        token.user ? this.isAuthenticatedSubject.next(true) : this.isAuthenticatedSubject.next(false);
+        token ? this.isAuthenticatedSubject.next(true) : this.isAuthenticatedSubject.next(false);
 
-        token.user.role === 'admin' ? this.isAdminSubject.next(true) : this.isAdminSubject.next(false);
+        if (token) {
+            token.user.role === 'admin' ? this.isAdminSubject.next(true) : this.isAdminSubject.next(false);
+        }
 
     }
 
@@ -34,6 +36,7 @@ export class AuthService {
         const user: User = this.jwtService.decodeToken(token).user;
 
         this.currentUserSubject.next(user);
+        user.role === 'admin' ? this.isAdminSubject.next(true) : this.isAdminSubject.next(false);
         this.isAuthenticatedSubject.next(true);
     }
 
@@ -42,6 +45,7 @@ export class AuthService {
         localStorage.removeItem('access-token');
         // Set current user to an empty object
         this.currentUserSubject.next(null);
+        this.isAdminSubject.next(false);
         // Set auth status to false
         this.isAuthenticatedSubject.next(false);
     }

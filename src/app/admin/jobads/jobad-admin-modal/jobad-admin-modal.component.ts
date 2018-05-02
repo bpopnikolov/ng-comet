@@ -54,7 +54,7 @@ export class JobadAdminModalComponent implements OnInit {
         this.modalForm = this.fb.group({
             'title': [jobAd? jobAd.title: '', [Validators.required, Validators.maxLength(256), Validators.minLength(4)]],
             'desc': [jobAd? jobAd.desc: '', [Validators.required, Validators.maxLength(16384), Validators.minLength(4)],],
-            'category': [jobAd? jobAd.category: '', [Validators.required]],
+            'category': [jobAd? jobAd.category.name: '', [Validators.required]],
             'status': [jobAd? jobAd.status: '', [Validators.required]],
         });
 

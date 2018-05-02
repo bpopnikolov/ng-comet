@@ -40,6 +40,14 @@ export class TableWithSortingComponent implements OnInit {
      * Set the sort after the view init since this component will
      * be able to query its view for the initialized sort.
      */
+    isDateCol(column) {
+        return column === 'createdAt' ? true : false;
+    }
+
+    isIdCol(column) {
+        return column === '_id' ? true : false;
+    }
+
     ngAfterViewInit() {
         this.dataSource.sort = this.sort;
         this.dataSource.paginator = this.paginator;

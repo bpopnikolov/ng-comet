@@ -28,6 +28,7 @@ export class JobadsAdminComponent implements OnInit {
     },
     ];
     jobAds;
+
     constructor(
         private jobadsService: JobadsService,
         private route: ActivatedRoute,

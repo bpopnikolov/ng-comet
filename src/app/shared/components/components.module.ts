@@ -12,12 +12,14 @@ import { TextSectionComponent } from './text-section/text-section.component';
 import { FooterComponent } from './footer/footer.component';
 import { FacebookModule } from 'ngx-facebook';
 import { TableWithSortingComponent } from './table-with-sorting/table-with-sorting.component';
+import { TruncatePipe } from '../pipes/truncate.pipe';
 
 
 export const COMPONENTS = [
     NavigationComponent,
     HeroImageComponent,
     BackgroundImageDirective,
+    TruncatePipe,
     SocialFeedComponent,
     TextSectionComponent,
     FooterComponent,
