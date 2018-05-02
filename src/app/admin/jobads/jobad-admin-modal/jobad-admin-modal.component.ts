@@ -68,13 +68,11 @@ export class JobadAdminModalComponent implements OnInit {
     }
 
     onActionClick() {
-        // console.log(this.modalForm);
-        this.dialogRef.close(this.modalForm);
+        this.data.subject.next({action: this.modalActionButton, formValue: this.modalForm.value, modalData: this.data });
     }
 
     onCancelClick() {
         this.dialogRef.close();
-
     }
 
 }

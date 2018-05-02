@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { AppConfigService } from '../../../app-config.service';
 import { JobAd, ResponseError } from '../../models';
+import { catchError } from 'rxjs/operators';
+import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class JobadsService {
@@ -16,7 +18,7 @@ export class JobadsService {
         this.appApi = this.configService.get('api');
     }
 
-    getJobAds() {
+    getJobAds(): Observable<JobAd[]> {
         const headers = new HttpHeaders({
             'Accept': 'application/json',
             'Content-Type': 'application/json'
@@ -24,7 +26,7 @@ export class JobadsService {
 
         return this.httpClient.get<JobAd[]>(this.appApi.baseUrl + 'jobads', {
             headers
-        });
+        }).pipe(catchError((res: ResponseError) => Observable.throw(res)));
     }
 
     createJobAd(jobAd) {
@@ -35,9 +37,9 @@ export class JobadsService {
 
         const body = jobAd;
 
-        return this.httpClient.post<ResponseError>(this.appApi.baseUrl + 'jobads', body, {
+        return this.httpClient.post<JobAd>(this.appApi.baseUrl + 'jobads', body, {
             headers
-        });
+        }).pipe(catchError((res: ResponseError) => Observable.throw(res)));;
     }
 
     editJobAd(jobAd) {
@@ -48,12 +50,12 @@ export class JobadsService {
 
         const body = jobAd;
 
-        return this.httpClient.post<ResponseError>(this.appApi.baseUrl + 'jobads/update/' + `${jobAd._id}`, body, {
+        return this.httpClient.post(this.appApi.baseUrl + 'jobads/update/' + `${jobAd._id}`, body, {
             headers
-        });
+        }).pipe(catchError((res: ResponseError) => Observable.throw(res)));;
     }
 
-    deleteJobAd(id) {
+    deleteJobAd(id: string) {
         const headers = new HttpHeaders({
             'Accept': 'application/json',
             'Content-Type': 'application/json'
@@ -61,6 +63,6 @@ export class JobadsService {
 
         return this.httpClient.delete(this.appApi.baseUrl + 'jobads/delete/' + id, {
             headers
-        });
+        }).pipe(catchError((res: ResponseError) => Observable.throw(res)));;
     }
 }

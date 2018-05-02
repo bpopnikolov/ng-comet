@@ -5,14 +5,14 @@ import { Observable } from 'rxjs/Rx';
 import { of } from 'rxjs/observable/of';
 import { JobAd } from '../../models/jobad.model';
 import { JobadsService } from '.';
+import { ResponseError } from '../../models';
 
 @Injectable()
 export class JobAdsResolver implements Resolve<JobAd> {
 
     constructor(private jobadsService: JobadsService) { }
 
-    resolve(route: ActivatedRouteSnapshot): Observable<any> {
-
-        return this.jobadsService.getJobAds().first().pipe(catchError((err) => Observable.empty()));
+    resolve(route: ActivatedRouteSnapshot) {
+        return this.jobadsService.getJobAds().first().pipe(catchError((res: ResponseError) => Observable.throw(res)));
     }
 }
