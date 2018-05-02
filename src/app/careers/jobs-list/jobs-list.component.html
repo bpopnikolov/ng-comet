@@ -1,0 +1,10 @@
+<div>
+       <mat-card-header><h2>Open Positions</h2></mat-card-header>
+   <mat-card class="listing-container"
+    *ngFor="let listing of filteredListings">
+        <mat-card-content>
+            <a [routerLink]="['/careers', listing.id]">{{listing.title}}</a>
+        </mat-card-content>
+    </mat-card>
+<mat-paginator (page)="onChangePage($event)" [length]="length" [pageSize]="pageSize" [pageSizeOptions]="[10]"></mat-paginator>
+</div>

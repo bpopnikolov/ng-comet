@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FormErrorStateMatcher } from '../../shared/utility';
 import { UtilityService } from '../../shared/utility/utility.service';
@@ -8,7 +8,7 @@ import { SigninForm } from '../shared';
 @Component({
     selector: 'app-user-signin',
     templateUrl: './user-signin.component.html',
-    styleUrls: ['./user-signin.component.scss']
+    styleUrls: ['./user-signin.component.scss'],
 })
 export class UserSigninComponent implements OnInit {
 
