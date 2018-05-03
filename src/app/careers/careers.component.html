@@ -1,4 +1,5 @@
 <div class="careers-container" fxLayout="row" fxLayoutAlign="space-around center" >
-    <app-jobs-list  fxFlex="45%" [listings]="listings"></app-jobs-list>
-    <app-search-box  fxFlex="30%" [categories]="categories"></app-search-box>
+    <app-jobs-list  fxFlex="45%" [(listings)]="listings"></app-jobs-list>
+    <app-search-box (searchSubmit)="onSearchFormSubmit($event)" (searchReset)="onSearchFormReset($event)"
+    fxFlex="30%" [categories]="categories"></app-search-box>
 </div>

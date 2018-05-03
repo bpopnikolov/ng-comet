@@ -34,8 +34,7 @@ export class SearchBoxComponent implements OnInit {
     // this.searchForm.value.search = '';
     // this.searchForm.value.category = '';
     // this.searchForm.value.date = '';
-
-    console.log(this.searchForm.value);
+    this.searchForm.reset();
     this.searchReset.emit(this.searchForm.value);
   }
   private initSearchForm(): void {

@@ -409,8 +409,7 @@ export class CareerService {
     return this.jobs;
   }
 
-  public getCareers(pageIndex: number, page: nunmber): JobAd[] {
-    return this.jobs;
-  }
-}
+//   public getCareers(pageIndex: number, page: number): JobAd[] {
+//     return this.jobs;
+//   }
 }

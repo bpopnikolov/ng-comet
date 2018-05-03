@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { JobAd } from '../../shared/models/careers/jobAd.model';
 import { PageEvent } from '@angular/material';
+import { JobAd } from '../../shared/models/careers/jobAd.model';
 
 @Component({
   selector: 'app-jobs-list',
@@ -16,7 +16,7 @@ export class JobsListComponent implements OnInit {
 
   public filteredListings: JobAd[];
 
-  constructor() { }
+  constructor() {}
 
   public ngOnInit(): void {
     this.length = this.listings.length;

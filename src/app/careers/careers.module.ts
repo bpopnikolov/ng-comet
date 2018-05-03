@@ -12,6 +12,7 @@ import { JobsListComponent } from './jobs-list/jobs-list.component';
 import { SearchBoxComponent } from './search-box/search-box.component';
 import { SearchService } from './shared/search.service';
 import { MatPaginatorIntl } from '@angular/material';
+import { JobViewComponent } from './job-view/job-view.component';
 
 @NgModule({
   imports: [
@@ -23,7 +24,7 @@ import { MatPaginatorIntl } from '@angular/material';
     FlexLayoutModule,
     NgxPaginationModule,
   ],
-  declarations: [CareersComponent, SearchBoxComponent, JobsListComponent],
+  declarations: [CareersComponent, SearchBoxComponent, JobsListComponent, JobViewComponent],
   providers: [CareerService, SearchService],
 })
 export class CareersModule { }
