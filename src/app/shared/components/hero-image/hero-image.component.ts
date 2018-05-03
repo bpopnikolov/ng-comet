@@ -7,7 +7,7 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class HeroImageComponent implements OnInit {
 
-    @Input() heroImgUrl: string = 'https://images.pexels.com/photos/358513/pexels-photo-358513.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260'
+    @Input() heroImgUrl: string = '';
     @Input() links: any[] = [];
     constructor() { }
 

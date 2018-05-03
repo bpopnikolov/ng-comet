@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ActionLinks } from '../shared/services/link/link.model';
+import { ActionLink } from '../shared/services/link/link.model';
 import { ActivatedRoute } from '@angular/router';
+import { AppConfigService } from '../app-config.service';
 
 
 @Component({
@@ -10,13 +11,16 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class HomeComponent implements OnInit {
 
-    actionLinks: ActionLinks[] = [];
+    actionLinks: ActionLink[] = [];
+    heroImgUrl;
 
-    constructor(private route: ActivatedRoute) { }
+    constructor(private route: ActivatedRoute, private appConfigService: AppConfigService) { }
 
     ngOnInit() {
+        this.heroImgUrl = this.appConfigService.get('homeHero');
+
         this.route.data.subscribe(
-            (data: { links: ActionLinks[] }) => {
+            (data: { links: ActionLink[] }) => {
                 // console.log(data);
                 this.actionLinks = data.links.filter((link) => link.type === 'action')
             });

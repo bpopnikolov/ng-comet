@@ -18,14 +18,12 @@ export class ContactsAdminComponent implements OnInit {
     displayedColumns = ['_id', 'name', 'value', 'email', 'phone', 'createdAt', ];
     buttonColumns = ['edit', 'delete'];
     buttonDef = [{
-            action: 'edit',
-            color: 'primary'
-        },
-        {
-            action: 'delete',
-            color: 'warn'
-        },
-    ];
+        action: 'edit',
+        color: 'primary'
+    }, {
+        action: 'delete',
+        color: 'warn'
+    }];
     contacts;
 
     contactsModalSubject = new Subject();

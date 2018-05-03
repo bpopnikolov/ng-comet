@@ -6,6 +6,7 @@ const routes: Routes = [{
     path: '', component: AdminComponent, children: [
         {path:'jobads', loadChildren: './jobads/jobads-admin.module#JobadsAdminModule'},
         {path:'users', loadChildren: './users/users-admin.module#UsersAdminModule'},
+        {path:'links', loadChildren: './links/links-admin.module#LinksAdminModule'},
         {path:'contacts', loadChildren: './contacts/contacts-admin.module#ContactsAdminModule'},
     ],
 },];

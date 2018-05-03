@@ -1,11 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home.component';
-import { HomeResolver } from './shared/home-resolver.service';
+import { LinksResolver } from '../shared/services/link';
+
 
 const homeRoutes: Routes = [{
     path: 'home',
-    resolve: { links: HomeResolver },
+    resolve: { links: LinksResolver },
     component: HomeComponent
 },];
 

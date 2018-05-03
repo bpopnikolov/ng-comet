@@ -13,12 +13,14 @@ import { FooterComponent } from './footer/footer.component';
 import { FacebookModule } from 'ngx-facebook';
 import { TableWithSortingComponent } from './table-with-sorting/table-with-sorting.component';
 import { TruncatePipe } from '../pipes/truncate.pipe';
+import { Parallax } from '../directives/parallax.directive';
 
 
 export const COMPONENTS = [
     NavigationComponent,
     HeroImageComponent,
     BackgroundImageDirective,
+    Parallax,
     TruncatePipe,
     SocialFeedComponent,
     TextSectionComponent,

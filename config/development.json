@@ -1,20 +1,16 @@
 {
-  "api": {
-    "baseUrl": "http://localhost:3001/api/"
-  },
-
-  "paths": {
-    "imagesRoot": "/assets/images/",
-    "userImageFolder": "/assets/images/users/"
-  },
-  "auth": {
-    "emailRequiredError": "Email is required",
-    "emailMaxLengthError": "Email must be maximum 1024 characters",
-    "emailNotValidError": "Email must be a valid email",
-    "passwordRequiredError": "Password is required",
-    "passwordNotValidError": "Password must be at least 8 characters and contain at least 1 number, 1 uppercase letter and 1 special character",
-    "passwordMaxLengthError": "Password must be maximum 256 characters",
-    "passwordsMismatchError": "Passwords don't match",
-    "confirmPasswordRequiredError": "Confirms Password is required"
-  }
+    "api": {
+        "baseUrl": "http://localhost:3001/api/"
+    },
+    "homeHero": "/assets/home2.jpeg",
+    "auth": {
+        "emailRequiredError": "Email is required",
+        "emailMaxLengthError": "Email must be maximum 1024 characters",
+        "emailNotValidError": "Email must be a valid email",
+        "passwordRequiredError": "Password is required",
+        "passwordNotValidError": "Password must be at least 8 characters and contain at least 1 number, 1 uppercase letter and 1 special character",
+        "passwordMaxLengthError": "Password must be maximum 256 characters",
+        "passwordsMismatchError": "Passwords don't match",
+        "confirmPasswordRequiredError": "Confirms Password is required"
+    }
 }

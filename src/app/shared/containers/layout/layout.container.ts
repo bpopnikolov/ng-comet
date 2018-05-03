@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth/auth.service';
 import { User } from '../../../user/shared';
-import { ActionLinks } from '../../services/link';
+import { ActionLink } from '../../services/link';
 import { LinkService } from '../../services/link/link.service';
 
 @Component({
@@ -14,7 +14,7 @@ export class LayoutContainer implements OnInit {
     user: User = null;
     isAuthenticated: boolean = false;
     isAdmin: boolean = false;
-    socialLinks: ActionLinks[] = [];
+    socialLinks: ActionLink[] = [];
 
   constructor(private authService: AuthService, private linkService: LinkService ) { }
 
