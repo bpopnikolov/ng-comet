@@ -409,6 +409,10 @@ export class CareerService {
     return this.jobs;
   }
 
+  public getJobById(id): JobAd {
+    return this.jobs.filter((job) => job.id === id)[0];
+  }
+
 //   public getCareers(pageIndex: number, page: number): JobAd[] {
 //     return this.jobs;
 //   }
