@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog, MatDialogRef, MatTableDataSource } from '@angular/material';
 import { ActivatedRoute } from '@angular/router';
 import { Subject } from 'rxjs/Subject';
@@ -12,7 +12,7 @@ import { LinksAdminModalComponent } from './links-admin-modal';
     styleUrls: ['./links-admin.component.scss'],
 })
 
-export class LinksAdminComponent implements OnInit {
+export class LinksAdminComponent implements OnInit, OnDestroy {
 
     public displayedColumns = ['_id', 'name', 'target', 'icon', 'type', 'createdAt'];
     public buttonColumns = ['view', 'edit', 'delete'];

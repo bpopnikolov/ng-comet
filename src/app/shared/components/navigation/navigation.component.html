@@ -5,7 +5,7 @@
         </a>
         <div class="logo-container" [ngStyle.sm]="{'margin-left.px': 54}" [ngStyle.gt-sm]="{'margin-left.px': 16}">
             <img class="logo" src="/assets/comet-logo.svg" alt="">
-            <a class="nav-logo-title" href="#">NG-COMET</a>
+            <a class="nav-logo-title" [routerLink]="['']">NG-COMET</a>
         </div>
         <div class="nav-buttons" fxFlex="100%" fxHide.xs fxHide.sm>
             <a mat-button [routerLink]="['home']" [routerLinkActive]="'active'">Home</a>

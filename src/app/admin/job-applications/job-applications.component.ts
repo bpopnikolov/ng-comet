@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material';
 import { ActivatedRoute } from '@angular/router';
 import { Subject } from 'rxjs/Subject';
-import { Subscription } from 'rxjs/Subscription';
 import { JobApplication } from '../../shared/models';
 import { JobApplicationsService } from '../../shared/services/job-applications';
 
@@ -13,16 +12,16 @@ import { JobApplicationsService } from '../../shared/services/job-applications';
 })
 
 export class JobApplicationsComponent implements OnInit {
-    public displayedColumns = ['_id', 'name', 'comment', 'createdAt'];
-    public buttonColumns = ['CV', 'CW'];
+    public displayedColumns = ['_id', 'firstname', 'lastname', 'comment', 'createdAt'];
+    public buttonColumns = ['cv', 'cl'];
     public truncCols = new Set(['_id', 'comment']);
     public buttonDef = [
         {
-            action: 'download_cv',
+            action: 'Download CV',
             color: 'primary',
         },
         {
-            action: 'download_cw',
+            action: 'Download CL',
             color: 'primary',
         },
         {
@@ -32,7 +31,6 @@ export class JobApplicationsComponent implements OnInit {
     public jobApplications;
 
     public contactsModalSubject = new Subject();
-    private subscription: Subscription;
 
     constructor(
         private jobApplicationsService: JobApplicationsService,
@@ -44,7 +42,8 @@ export class JobApplicationsComponent implements OnInit {
             (data: {
                 jobApplications: JobApplication[];
             }) => {
-                this.jobApplications = new MatTableDataSource( []);
+                console.log(data.jobApplications);
+                this.jobApplications = new MatTableDataSource(data.jobApplications);
             });
 
     }
@@ -69,9 +68,4 @@ export class JobApplicationsComponent implements OnInit {
     //     });
     // }
 
-    public ngOnDestroy(): void {
-        // Called once, before the instance is destroyed.
-        // Add 'implements OnDestroy' to the class.
-        this.subscription.unsubscribe();
-    }
 }

@@ -1,19 +1,18 @@
 import { Injectable } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import { BehaviorSubject, ReplaySubject } from 'rxjs';
-import { User } from '../../../user/shared';
+import { BehaviorSubject } from 'rxjs';
 import { distinctUntilChanged } from 'rxjs/operators';
+import { User } from '../../../user/shared';
 
 @Injectable()
 export class AuthService {
 
     private currentUserSubject = new BehaviorSubject<User>(null);
-    public currentUser = this.currentUserSubject.asObservable().pipe(distinctUntilChanged());
-
     private isAuthenticatedSubject = new BehaviorSubject<boolean>(false);
-    public isAuthenticated = this.isAuthenticatedSubject.asObservable();
-
     private isAdminSubject = new BehaviorSubject<boolean>(false);
+
+    public currentUser = this.currentUserSubject.asObservable().pipe(distinctUntilChanged());
+    public isAuthenticated = this.isAuthenticatedSubject.asObservable();
     public isAdmin = this.isAdminSubject.asObservable().pipe(distinctUntilChanged());
 
     constructor(private jwtService: JwtHelperService) {
@@ -30,7 +29,7 @@ export class AuthService {
 
     }
 
-    setAuth(token: any): void {
+    public setAuth(token: any): void {
 
         localStorage.setItem('access-token', token);
         const user: User = this.jwtService.decodeToken(token).user;
@@ -40,7 +39,7 @@ export class AuthService {
         this.isAuthenticatedSubject.next(true);
     }
 
-    purgeAuth(): void {
+    public purgeAuth(): void {
         // Remove JWT from localstorage
         localStorage.removeItem('access-token');
         // Set current user to an empty object
@@ -50,11 +49,15 @@ export class AuthService {
         this.isAuthenticatedSubject.next(false);
     }
 
-    getCurrentUser(): User {
+    public getCurrentUser(): User {
         return this.currentUserSubject.value;
     }
 
-    isCurrentUserAdmin(): boolean {
+    public isLoggedIn(): boolean {
+        return this.isAuthenticatedSubject.value;
+    }
+
+    public isCurrentUserAdmin(): boolean {
         return this.isAdminSubject.value;
     }
 }

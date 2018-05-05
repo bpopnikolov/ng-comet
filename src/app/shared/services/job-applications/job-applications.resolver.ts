@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, Resolve } from '@angular/router';
-import { catchError } from 'rxjs/operators';
 import { Observable } from 'rxjs/Rx';
-import { ResponseError } from '../../models';
+import { catchError } from 'rxjs/operators';
+import { JobApplication, ResponseError } from '../../models';
 import { JobApplicationsService } from './job-applications.service';
 
 @Injectable()
-export class JobAdsResolver implements Resolve<any> {
+export class JobApplicationsResolver implements Resolve<JobApplication> {
 
     constructor(private jobApplicationsService: JobApplicationsService) { }
 

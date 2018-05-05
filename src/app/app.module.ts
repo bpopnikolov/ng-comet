@@ -26,7 +26,7 @@ export const configServiceFactory = (config: AppConfigService) => {
 
 export const tokenGetter = () => {
     return localStorage.getItem('access-token');
-}
+};
 @NgModule({
     declarations: [
         AppComponent,

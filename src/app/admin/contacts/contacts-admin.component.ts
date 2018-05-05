@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog, MatDialogRef, MatTableDataSource } from '@angular/material';
 import { ActivatedRoute } from '@angular/router';
 import { Subject } from 'rxjs/Subject';
@@ -12,7 +12,7 @@ import { ContactsAdminModalComponent } from './contacts-admin-modal/contacts-adm
     templateUrl: './contacts-admin.component.html',
     styleUrls: ['./contacts-admin.component.scss'],
 })
-export class ContactsAdminComponent implements OnInit {
+export class ContactsAdminComponent implements OnInit, OnDestroy {
     public displayedColumns = ['_id', 'name', 'value', 'email', 'phone', 'createdAt'];
     public buttonColumns = ['view', 'edit', 'delete'];
     public truncCols = new Set(['_id', 'value']);

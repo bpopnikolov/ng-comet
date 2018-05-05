@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { JobApplicationsResolver } from './job-applications.resolver';
 import { JobApplicationsService } from './job-applications.service';
 
 @NgModule({
@@ -7,6 +8,6 @@ import { JobApplicationsService } from './job-applications.service';
         CommonModule,
     ],
     declarations: [],
-    providers: [JobApplicationsService],
+    providers: [JobApplicationsService, JobApplicationsResolver],
 })
 export class JobApplicationsModule { }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog, MatDialogRef, MatTableDataSource } from '@angular/material';
 import { ActivatedRoute } from '@angular/router';
 import { Subject } from 'rxjs/Subject';
@@ -13,7 +13,7 @@ import { JobadAdminModalComponent } from './jobad-admin-modal';
     styleUrls: ['./jobads-admin.component.scss'],
 })
 
-export class JobadsAdminComponent implements OnInit {
+export class JobadsAdminComponent implements OnInit, OnDestroy {
 
     public displayedColumns = ['_id', 'title', 'createdAt'];
     public buttonColumns = ['view', 'edit', 'delete'];
@@ -121,7 +121,7 @@ export class JobadsAdminComponent implements OnInit {
     public onEdit(jobAd: JobAd, updatedInfo: any): void {
 
         // deep copy current jobAd
-        const newJobAd = { ...JobAd };
+        const newJobAd = { ...jobAd };
 
         // mutate the new jobAd
         Object.keys(updatedInfo).forEach((key) => {

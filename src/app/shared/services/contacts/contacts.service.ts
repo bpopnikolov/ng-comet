@@ -1,69 +1,69 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { AppConfigService } from '../../../app-config.service';
-import { Contact } from './../../../contacts/shared';
-import { catchError } from 'rxjs/operators';
-import { ResponseError } from '../../models';
 import { Observable } from 'rxjs/Observable';
+import { catchError } from 'rxjs/operators';
+import { AppConfigService } from '../../../app-config.service';
+import { ResponseError } from '../../models';
+import { Contact } from './../../../contacts/shared';
 
 @Injectable()
 export class ContactsService {
 
-    appApi: { [key: string]: any };
+    private appApi: { [key: string]: any };
 
     constructor(
         private httpClient: HttpClient,
-        private configService: AppConfigService
+        private configService: AppConfigService,
     ) {
         this.appApi = this.configService.get('api');
     }
 
-    getContacts() {
+    public getContacts(): Observable<Contact[]> {
         const headers = new HttpHeaders({
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
         });
 
-        return this.httpClient.get<Contact[]>(this.appApi.baseUrl + 'contacts', {
-            headers
+        return this.httpClient.get<Contact[]>(`${this.appApi.baseUrl}contacts`, {
+            headers,
         });
     }
 
-    createContact(contact) {
+    public createContact(contact: any): Observable<Contact> {
         const headers = new HttpHeaders({
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
         });
 
         const body = contact;
 
-        return this.httpClient.post<Contact>(this.appApi.baseUrl + 'contacts', body, {
-            headers
-        }).pipe(catchError((res: ResponseError) => Observable.throw(res)));;
+        return this.httpClient.post<Contact>(`${this.appApi.baseUrl}contacts`, body, {
+            headers,
+        }).pipe(catchError((res: ResponseError) => Observable.throw(res)));
     }
 
-    editContact(contact: Contact) {
+    public editContact(contact: Contact): Observable<Contact> {
         const headers = new HttpHeaders({
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
         });
 
         const body = contact;
 
-        return this.httpClient.post(this.appApi.baseUrl + 'contacts/update/' + `${contact._id}`, body, {
-            headers
-        }).pipe(catchError((res: ResponseError) => Observable.throw(res)));;
+        return this.httpClient.post(`${this.appApi.baseUrl}contacts/update/${contact._id}`, body, {
+            headers,
+        }).pipe(catchError((res: ResponseError) => Observable.throw(res)));
     }
 
-    deleteContact(id: string) {
+    public deleteContact(id: string): Observable<boolean> {
         const headers = new HttpHeaders({
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
         });
 
-        return this.httpClient.delete(this.appApi.baseUrl + 'contacts/delete/' + id, {
-            headers
-        }).pipe(catchError((res: ResponseError) => Observable.throw(res)));;
+        return this.httpClient.delete(`${this.appApi.baseUrl}contacts/delete/${id}`, {
+            headers,
+        }).pipe(catchError((res: ResponseError) => Observable.throw(res)));
     }
 
 }

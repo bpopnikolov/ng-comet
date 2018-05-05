@@ -1,5 +1,9 @@
-.admin-container{
+.admin-container {
     min-height: 100%;
+}
+
+::ng-deep.admin-panel-title {
+    padding: 16px 0;
 }
 
 ::ng-deep.admin-sorted-table {
