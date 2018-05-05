@@ -82,10 +82,10 @@ import { DomSanitizer } from '@angular/platform-browser';
     MatTabsModule,
     MatToolbarModule,
     MatTooltipModule,
-  ]
+  ],
 })
 export class AppMaterialModule {
   constructor(matIconRegistry: MatIconRegistry, domSanitizer: DomSanitizer) {
-    matIconRegistry.addSvgIconSet(domSanitizer.bypassSecurityTrustResourceUrl('./assets/mdi.svg'))
+    matIconRegistry.addSvgIconSet(domSanitizer.bypassSecurityTrustResourceUrl('./assets/mdi.svg'));
   }
 }

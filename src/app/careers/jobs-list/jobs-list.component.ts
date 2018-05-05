@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { PageEvent } from '@angular/material';
-import { JobAd } from '../../shared/models/careers/jobAd.model';
+import { JobAd } from '../../shared/models/jobad.model';
 
 @Component({
   selector: 'app-jobs-list',

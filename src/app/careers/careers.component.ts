@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Category } from '../shared/models/careers/category.model';
-import { JobAd } from '../shared/models/careers/jobAd.model';
-import { CareerService } from '../shared/services/career/career.service';
+import { Category } from '../shared/models/category.model';
+import { JobAd } from '../shared/models/jobad.model';
+import { CategoryService } from '../shared/services/category/category.service';
+import { JobadsService } from '../shared/services/jobads/jobads.service';
 import { SearchForm } from './shared/search-form.model';
-import { SearchService } from './shared/search.service';
 
 @Component({
   selector: 'app-careers',
@@ -16,13 +16,45 @@ export class CareersComponent implements OnInit {
   public allJobs: JobAd[];
 
   constructor(
-    private careerService: CareerService,
-    private searchService: SearchService,
+    private jobadsService: JobadsService,
   ) { }
 
   public ngOnInit(): void {
-    this.categories = this.careerService.getCategories();
-    this.allJobs = this.careerService.getCareers();
+    // this.categoryService.getCategories().subscribe((categories) => {
+    //   console.log(categories);
+    //   this.categories = categories;
+    // });
+
+    this.categories = [
+      {
+        _id: '23411aedfsa',
+        name: 'IT',
+      },
+      {
+        _id: '23411aedfsa',
+        name: 'Marketing',
+
+      },
+      {
+        _id: '23411aedfsa',
+        name: 'Sales',
+
+      },
+      {
+        _id: '23411aedfsa',
+        name: 'Operations',
+      },
+      {
+        _id: '23411aedfsa',
+        name: 'Other',
+      }];
+
+    console.log(this.categories);
+    this.jobadsService.getJobAds().subscribe((jobs) => {
+      this.allJobs = jobs;
+      console.log(this.allJobs)
+    });
+
     this.listings = this.allJobs;
   }
 

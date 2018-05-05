@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { Category } from '../../shared/models/careers/category.model';
+import { Category } from '../../shared/models/category.model';
 import { SearchForm } from '../shared/search-form.model';
 
 @Component({
