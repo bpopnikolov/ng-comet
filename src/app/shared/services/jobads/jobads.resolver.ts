@@ -1,18 +1,17 @@
 import { Injectable } from '@angular/core';
-import { Resolve, ActivatedRouteSnapshot } from '@angular/router';
-import { catchError, map } from 'rxjs/operators';
+import { ActivatedRouteSnapshot, Resolve } from '@angular/router';
+import { catchError } from 'rxjs/operators';
 import { Observable } from 'rxjs/Rx';
-import { of } from 'rxjs/observable/of';
-import { JobAd } from '../../models/jobad.model';
 import { JobadsService } from '.';
 import { ResponseError } from '../../models';
+import { JobAd } from '../../models/jobad.model';
 
 @Injectable()
 export class JobAdsResolver implements Resolve<JobAd> {
 
     constructor(private jobadsService: JobadsService) { }
 
-    resolve(route: ActivatedRouteSnapshot) {
+    public resolve(route: ActivatedRouteSnapshot): Observable<any> {
         return this.jobadsService.getJobAds().first().pipe(catchError((res: ResponseError) => Observable.throw(res)));
     }
 }

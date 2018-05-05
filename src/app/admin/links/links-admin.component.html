@@ -7,6 +7,6 @@
     </div>
     <div fxFlex="100%" fxLayout="row" fxLayoutAlign="center center">
         <div fxFlex="95%" [ngClass.xs]="{'sorted-table-container': true}">
-            <app-table-with-sorting class="admin-sorted-table" [data]="links" [displayedColumns]="displayedColumns" [buttonColumns]="buttonColumns" [buttonDef]="buttonDef" (actionButtonClicked)="onAction($event)"></app-table-with-sorting>
+            <app-table-with-sorting class="admin-sorted-table" [data]="links" [displayedColumns]="displayedColumns" [buttonColumns]="buttonColumns" [buttonDef]="buttonDef" [truncCols]="truncCols" (actionButtonClicked)="onAction($event)"></app-table-with-sorting>
         </div>
     </div>

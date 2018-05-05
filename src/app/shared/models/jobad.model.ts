@@ -4,6 +4,6 @@ export class JobAd {
         public title: string,
         public desc: string,
         public category: string,
-        public status: string
+        public status: string,
     ) { }
 }

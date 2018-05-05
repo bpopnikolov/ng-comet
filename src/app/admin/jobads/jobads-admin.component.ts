@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialog, MatTableDataSource } from '@angular/material';
+import { MatDialog, MatDialogRef, MatTableDataSource } from '@angular/material';
 import { ActivatedRoute } from '@angular/router';
-import { Subscription } from 'rxjs';
 import { Subject } from 'rxjs/Subject';
+import { Subscription } from 'rxjs/Subscription';
 import { JobAd } from '../../shared/models';
 import { JobadsService } from '../../shared/services/jobads';
 import { JobadAdminModalComponent } from './jobad-admin-modal';
@@ -10,76 +10,77 @@ import { JobadAdminModalComponent } from './jobad-admin-modal';
 @Component({
     selector: 'app-jobads-admin',
     templateUrl: './jobads-admin.component.html',
-    styleUrls: ['./jobads-admin.component.scss']
+    styleUrls: ['./jobads-admin.component.scss'],
 })
+
 export class JobadsAdminComponent implements OnInit {
 
-    displayedColumns = ['_id', 'title', 'createdAt', ];
-    buttonColumns = ['view', 'edit', 'delete'];
-    buttonDef = [{
+    public displayedColumns = ['_id', 'title', 'createdAt'];
+    public buttonColumns = ['view', 'edit', 'delete'];
+    public truncCols = new Set(['_id']);
+    public buttonDef = [
+        {
             action: 'view',
-            color: 'primary'
+            color: 'primary',
         },
         {
             action: 'edit',
-            color: 'primary'
+            color: 'primary',
         },
         {
             action: 'delete',
-            color: 'warn'
+            color: 'warn',
         },
     ];
-    jobAds;
-    jobAdsModalSubject = new Subject();
-    subscription: Subscription;
+    public jobAds;
+    public jobAdsModalSubject = new Subject();
+    public subscription: Subscription;
 
     constructor(
         private jobadsService: JobadsService,
         private route: ActivatedRoute,
-        public modalService: MatDialog
-    ) {
+        public modalService: MatDialog,
+    ) { }
 
-    }
-
-    ngOnInit() {
+    public ngOnInit(): void {
         this.route.data.subscribe(
             (data: {
-                jobAds: JobAd[]
+                jobAds: JobAd[];
             }) => {
                 this.jobAds = new MatTableDataSource(data.jobAds);
             });
 
         this.subscription = this.jobAdsModalSubject.subscribe((event: {
-            action: string,
-            formValue: any,
-            modalData: any
+            action: string;
+            formValue: any;
+            modalData: any;
         }) => {
 
             if (event.action === 'Create') {
                 this.onCreate(event.formValue);
             } else if (event.action === 'Edit') {
-                this.onEdit(event.modalData.jobAd, event.formValue, );
+                this.onEdit(event.modalData.jobAd, event.formValue);
             }
         });
     }
 
-    onAction(event) {
-        const jobAd = this.jobAds.data.find(x => x._id === event.id);
+    public onAction(event: any): void {
+        const jobAd = this.jobAds.data.find((x) => x._id === event.id);
 
         if (event.action === 'view') {
             this.openModal({
                 modalTitle: 'Preview JobAd',
                 modalActionButton: 'Preview',
-                jobAd: jobAd,
-                subject: this.jobAdsModalSubject
+                jobAd,
+                subject: this.jobAdsModalSubject,
             });
         }
         if (event.action === 'edit') {
             this.openModal({
                 modalTitle: 'Edit a JobAd',
                 modalActionButton: 'Edit',
-                jobAd: jobAd,
-                subject: this.jobAdsModalSubject
+                jobAd,
+                subject: this.jobAdsModalSubject,
             });
 
         }
@@ -88,64 +89,67 @@ export class JobadsAdminComponent implements OnInit {
         }
     }
 
-    openModal(data) {
+    public openModal(data: any): MatDialogRef<JobadAdminModalComponent> {
         const dialogRef = this.modalService.open(JobadAdminModalComponent, {
             minWidth: '300px',
             width: '30%',
-            data: data
+            data,
         });
 
         return dialogRef;
     }
 
-    onOpenCreate() {
+    public onOpenCreate(): void {
         this.openModal({
             modalTitle: 'Create a JobAd',
             modalActionButton: 'Create',
-            subject: this.jobAdsModalSubject
+            subject: this.jobAdsModalSubject,
         });
     }
 
-    onCreate(jobAd) {
-        this.jobadsService.createJobAd(jobAd).subscribe((data) => {
-            this.jobAds.data = [...this.jobAds.data, data];
-            this.modalService.closeAll();
-        }, (err) => {
-            alert(err);
-        });
+    public onCreate(jobAd: any): void {
+        this.jobadsService.createJobAd(jobAd).subscribe(
+            (data) => {
+                this.jobAds.data = [...this.jobAds.data, data];
+                this.modalService.closeAll();
+            },
+            (err) => {
+                alert(err);
+            });
     }
 
-    onEdit(jobAd, updatedInfo) {
+    public onEdit(jobAd: JobAd, updatedInfo: any): void {
 
         // deep copy current jobAd
-        const newJobAd = Object.assign({}, jobAd);
+        const newJobAd = { ...JobAd };
 
         // mutate the new jobAd
         Object.keys(updatedInfo).forEach((key) => {
             newJobAd[key] = updatedInfo[key];
         });
 
-        this.jobadsService.editJobAd(newJobAd).subscribe((data) => {
-            // mutate old jobad to match the updated one
-            Object.keys(data).forEach((key) => {
-                jobAd[key] = data[key];
-                this.modalService.closeAll();
+        this.jobadsService.editJobAd(newJobAd).subscribe(
+            (data) => {
+                // mutate old jobad to match the updated one
+                Object.keys(data).forEach((key) => {
+                    jobAd[key] = data[key];
+                    this.modalService.closeAll();
+                });
+            },
+            (err) => {
+                alert(err);
             });
-        }, (err) => {
-            alert(err);
-        });
     }
 
-    onDelete(jobAd) {
+    public onDelete(jobAd: JobAd): void {
         this.jobadsService.deleteJobAd(jobAd._id).subscribe((res) => {
-            this.jobAds.data = this.jobAds.data.filter(x => x._id !== jobAd._id);
+            this.jobAds.data = this.jobAds.data.filter((x) => x._id !== jobAd._id);
         });
     }
 
-    ngOnDestroy(): void {
-        //Called once, before the instance is destroyed.
-        //Add 'implements OnDestroy' to the class.
+    public ngOnDestroy(): void {
+        // Called once, before the instance is destroyed.
+        // Add 'implements OnDestroy' to the class.
         this.subscription.unsubscribe();
     }
-
 }

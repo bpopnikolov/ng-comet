@@ -4,7 +4,7 @@
         <ng-container *ngFor="let column of displayedColumns" matColumnDef="{{column}}">
             <mat-header-cell *matHeaderCellDef mat-sort-header> {{column}} </mat-header-cell>
             <mat-cell *matCellDef="let el" [matTooltip]="isDateCol(column)? (el[column] | date: 'short') : el[column] ">
-                {{ isIdCol(column)? (el[column] | trunc:[5, '...']) :
+                {{ truncCols.has(column)? (el[column] | trunc:[5, '...']) :
                   (isDateCol(column))? (el[column] | date: 'short') : (el[column])}} </mat-cell>
         </ng-container>
 

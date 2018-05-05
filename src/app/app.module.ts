@@ -13,19 +13,18 @@ import { HomeModule } from './home';
 import { ContainersModule } from './shared/containers';
 import { AuthModule } from './shared/services/auth/auth.module';
 import { ContactsResolver, ContactsService } from './shared/services/contacts';
+import { JobApplicationsModule } from './shared/services/job-applications';
 import { JobAdsResolver } from './shared/services/jobads/jobads.resolver';
 import { JobadsService } from './shared/services/jobads/jobads.service';
 import { LinkModule } from './shared/services/link';
 import { UtilityModule } from './shared/utility';
 import { UserModule } from './user/user.module';
 
-
-
-export function configServiceFactory(config: AppConfigService) {
-    return () => config.load()
+export const configServiceFactory = (config: AppConfigService) => {
+    return () => config.load();
 };
 
-export function tokenGetter() {
+export const tokenGetter = () => {
     return localStorage.getItem('access-token');
 }
 @NgModule({
@@ -38,15 +37,16 @@ export function tokenGetter() {
         HttpClientModule,
         JwtModule.forRoot({
             config: {
-                tokenGetter: tokenGetter,
+                tokenGetter,
                 whitelistedDomains: ['localhost:3001'],
-            }
+            },
         }),
         UtilityModule.forRoot(),
         FacebookModule.forRoot(),
         FlexLayoutModule,
         AppMaterialModule,
         ContainersModule,
+        JobApplicationsModule,
         AuthModule,
         LinkModule,
         UserModule,
@@ -63,10 +63,10 @@ export function tokenGetter() {
             provide: APP_INITIALIZER,
             useFactory: configServiceFactory,
             deps: [AppConfigService],
-            multi: true
-        }
+            multi: true,
+        },
     ],
-    bootstrap: [AppComponent]
+    bootstrap: [AppComponent],
 
 })
 export class AppModule { }

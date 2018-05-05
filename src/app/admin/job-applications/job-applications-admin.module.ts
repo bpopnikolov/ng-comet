@@ -4,20 +4,18 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AppMaterialModule } from '../../app-material';
 import { ComponentsModule } from '../../shared/components';
-import { ContactsAdminModalComponent } from './contacts-admin-modal/contacts-admin-modal.component';
-import { ContactsAdminRoutingModule } from './contacts-admin-routing.module';
-import { ContactsAdminComponent } from './contacts-admin.component';
+import { JobApplicationsAdminRoutingModule } from './job-applications-admin-routing.module';
+import { JobApplicationsComponent } from './job-applications.component';
 
 @NgModule({
     imports: [
         CommonModule,
-        ContactsAdminRoutingModule,
+        JobApplicationsAdminRoutingModule,
         ReactiveFormsModule,
         ComponentsModule,
         FlexLayoutModule,
         AppMaterialModule,
     ],
-    entryComponents: [ContactsAdminModalComponent],
-    declarations: [ContactsAdminComponent, ContactsAdminModalComponent],
+    declarations: [JobApplicationsComponent],
 })
-export class ContactsAdminModule { }
+export class JobApplicationsAdminModule { }

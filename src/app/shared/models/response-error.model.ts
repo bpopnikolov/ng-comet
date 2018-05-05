@@ -1,6 +1,6 @@
 export class ResponseError {
     constructor(
-        public err,
-        public msg
+        public err: string,
+        public msg: string,
     ) { }
 }
