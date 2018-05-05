@@ -3,6 +3,7 @@ import { MatDialog, MatDialogRef, MatTableDataSource } from '@angular/material';
 import { ActivatedRoute } from '@angular/router';
 import { Subject } from 'rxjs/Subject';
 import { Subscription } from 'rxjs/Subscription';
+import { ConfirmActionModalComponent } from '../../shared/components';
 import { ActionLink, LinkService } from '../../shared/services/link';
 import { LinksAdminModalComponent } from './links-admin-modal';
 
@@ -34,7 +35,8 @@ export class LinksAdminComponent implements OnInit, OnDestroy {
     public links;
 
     public linksModalSubject = new Subject();
-    public subscription: Subscription;
+    public confirmModalSubject = new Subject();
+    public subscriptions: Subscription[] = [];
 
     constructor(
         private linksService: LinkService,
@@ -51,7 +53,7 @@ export class LinksAdminComponent implements OnInit, OnDestroy {
                 this.links = new MatTableDataSource(data.links);
             });
 
-        this.subscription = this.linksModalSubject.subscribe((event: {
+        const linksModalSubscription = this.linksModalSubject.subscribe((event: {
             action: string;
             formValue: any;
             modalData: any;
@@ -62,34 +64,57 @@ export class LinksAdminComponent implements OnInit, OnDestroy {
                 this.onEdit(event.modalData.link, event.formValue);
             }
         });
+
+        const confirmModalSubscription = this.confirmModalSubject.subscribe((event: {
+            actionToConfirm: string;
+            modalData: any;
+        }) => {
+            if (event.actionToConfirm === 'Delete') {
+                this.onDelete(event.modalData.link);
+            }
+        });
+
+        this.subscriptions.push(linksModalSubscription);
+        this.subscriptions.push(confirmModalSubscription);
     }
 
     public onAction(event: any): void {
         const link = this.links.data.find((x) => x._id === event.id);
 
         if (event.action === 'view') {
-            this.openModal({
-                modalTitle: 'Preview Link Details',
-                modalActionButton: 'Preview',
-                link,
-                subject: this.linksModalSubject,
-            });
+            this.openModal(
+                {
+                    modalTitle: 'Preview Link Details',
+                    modalActionButton: 'Preview',
+                    link,
+                    subject: this.linksModalSubject,
+                },
+                LinksAdminModalComponent);
         }
         if (event.action === 'edit') {
-            this.openModal({
-                modalTitle: 'Edit a Link Details',
-                modalActionButton: 'Edit',
-                link,
-                subject: this.linksModalSubject,
-            });
+            this.openModal(
+                {
+                    modalTitle: 'Edit a Link Details',
+                    modalActionButton: 'Edit',
+                    link,
+                    subject: this.linksModalSubject,
+                },
+                LinksAdminModalComponent);
         }
         if (event.action === 'delete') {
-            this.onDelete(link);
+            this.openModal(
+                {
+                    modalMsg: 'Are you sure?',
+                    actionToConfirm: 'Delete',
+                    subject: this.confirmModalSubject,
+                    link,
+                },
+                ConfirmActionModalComponent);
         }
     }
 
-    public openModal(data: any): MatDialogRef<LinksAdminModalComponent> {
-        const dialogRef = this.modalService.open(LinksAdminModalComponent, {
+    public openModal(data: any, modalComponent: any): MatDialogRef<any> {
+        const dialogRef = this.modalService.open(modalComponent, {
             minWidth: '300px',
             width: '25%',
             data,
@@ -99,11 +124,13 @@ export class LinksAdminComponent implements OnInit, OnDestroy {
     }
 
     public onOpenCreate(): void {
-        this.openModal({
-            modalTitle: 'Create a Link',
-            modalActionButton: 'Create',
-            subject: this.linksModalSubject,
-        });
+        this.openModal(
+            {
+                modalTitle: 'Create a Link',
+                modalActionButton: 'Create',
+                subject: this.linksModalSubject,
+            },
+            LinksAdminModalComponent);
     }
 
     public onCreate(link: any): void {
@@ -144,12 +171,13 @@ export class LinksAdminComponent implements OnInit, OnDestroy {
     public onDelete(link: ActionLink): void {
         this.linksService.deleteLink(link._id).subscribe((res) => {
             this.links.data = this.links.data.filter((x) => x._id !== link._id);
+            this.modalService.closeAll();
         });
     }
 
     public ngOnDestroy(): void {
         // Called once, before the instance is destroyed.
         // Add 'implements OnDestroy' to the class.
-        this.subscription.unsubscribe();
+        this.subscriptions.forEach((sub) => sub.unsubscribe());
     }
 }

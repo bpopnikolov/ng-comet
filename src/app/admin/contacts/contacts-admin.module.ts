@@ -4,6 +4,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AppMaterialModule } from '../../app-material';
 import { ComponentsModule } from '../../shared/components';
+import { ConfirmActionModalComponent } from '../../shared/components/confirm-action-modal/confirm-action-modal.component';
 import { ContactsAdminModalComponent } from './contacts-admin-modal/contacts-admin-modal.component';
 import { ContactsAdminRoutingModule } from './contacts-admin-routing.module';
 import { ContactsAdminComponent } from './contacts-admin.component';
@@ -17,7 +18,7 @@ import { ContactsAdminComponent } from './contacts-admin.component';
         FlexLayoutModule,
         AppMaterialModule,
     ],
-    entryComponents: [ContactsAdminModalComponent],
+    entryComponents: [ContactsAdminModalComponent, ConfirmActionModalComponent],
     declarations: [ContactsAdminComponent, ContactsAdminModalComponent],
 })
 export class ContactsAdminModule { }

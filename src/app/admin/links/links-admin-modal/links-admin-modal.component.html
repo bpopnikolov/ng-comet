@@ -11,18 +11,18 @@
             <mat-error *ngIf="">test error</mat-error>
         </mat-form-field>
         <mat-form-field>
-                <input matInput placeholder="Icon Link" type="text" required formControlName="icon">
-                <mat-error *ngIf="">test error</mat-error>
-            </mat-form-field>
-            <mat-form-field>
-                    <mat-select placeholder="Type" [(value)]="type.value" [formControl]="type" required>
-                        <mat-option *ngFor="let type of types" [value]="type.name">
-                            {{type.name}}
-                        </mat-option>
-                    </mat-select>
-                    <mat-error *ngIf="">Please choose a type</mat-error>
-                    <mat-hint>Select a type</mat-hint>
-                </mat-form-field>
+            <input matInput placeholder="Icon" type="text" required formControlName="icon">
+            <mat-error *ngIf="">test error</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-select placeholder="Type" [(value)]="type.value" [formControl]="type" required>
+                <mat-option *ngFor="let type of types" [value]="type.name">
+                    {{type.name}}
+                </mat-option>
+            </mat-select>
+            <mat-error *ngIf="">Please choose a type</mat-error>
+            <mat-hint>Select a type</mat-hint>
+        </mat-form-field>
         <div fxFlex>
             <mat-checkbox formControlName="isHidden">Is Hidden?</mat-checkbox>
         </div>

@@ -1,15 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-text-section',
-  templateUrl: './text-section.component.html',
-  styleUrls: ['./text-section.component.scss']
+    selector: 'app-text-section',
+    templateUrl: './text-section.component.html',
+    styleUrls: ['./text-section.component.scss'],
 })
 export class TextSectionComponent implements OnInit {
 
-  constructor() { }
+    @Input() public text: string = '';
+    constructor() { }
 
-  ngOnInit() {
-  }
+    ngOnInit() {
+    }
 
 }

@@ -3,6 +3,7 @@ import { MatDialog, MatDialogRef, MatTableDataSource } from '@angular/material';
 import { ActivatedRoute } from '@angular/router';
 import { Subject } from 'rxjs/Subject';
 import { Subscription } from 'rxjs/Subscription';
+import { ConfirmActionModalComponent } from '../../shared/components/';
 import { JobAd } from '../../shared/models';
 import { JobadsService } from '../../shared/services/jobads';
 import { JobadAdminModalComponent } from './jobad-admin-modal';
@@ -34,7 +35,8 @@ export class JobadsAdminComponent implements OnInit, OnDestroy {
     ];
     public jobAds;
     public jobAdsModalSubject = new Subject();
-    public subscription: Subscription;
+    public confirmModalSubject = new Subject();
+    public subscriptions: Subscription[] = [];
 
     constructor(
         private jobadsService: JobadsService,
@@ -50,7 +52,7 @@ export class JobadsAdminComponent implements OnInit, OnDestroy {
                 this.jobAds = new MatTableDataSource(data.jobAds);
             });
 
-        this.subscription = this.jobAdsModalSubject.subscribe((event: {
+        const jobAdsModalsubscription = this.jobAdsModalSubject.subscribe((event: {
             action: string;
             formValue: any;
             modalData: any;
@@ -62,35 +64,58 @@ export class JobadsAdminComponent implements OnInit, OnDestroy {
                 this.onEdit(event.modalData.jobAd, event.formValue);
             }
         });
+
+        const confirmModalSubscription = this.confirmModalSubject.subscribe((event: {
+            actionToConfirm: string;
+            modalData: any;
+        }) => {
+            if (event.actionToConfirm === 'Delete') {
+                this.onDelete(event.modalData.jobAd);
+            }
+        });
+
+        this.subscriptions.push(jobAdsModalsubscription);
+        this.subscriptions.push(confirmModalSubscription);
     }
 
     public onAction(event: any): void {
         const jobAd = this.jobAds.data.find((x) => x._id === event.id);
 
         if (event.action === 'view') {
-            this.openModal({
-                modalTitle: 'Preview JobAd',
-                modalActionButton: 'Preview',
-                jobAd,
-                subject: this.jobAdsModalSubject,
-            });
+            this.openModal(
+                {
+                    modalTitle: 'Preview JobAd',
+                    modalActionButton: 'Preview',
+                    jobAd,
+                    subject: this.jobAdsModalSubject,
+                },
+                JobadAdminModalComponent);
         }
         if (event.action === 'edit') {
-            this.openModal({
-                modalTitle: 'Edit a JobAd',
-                modalActionButton: 'Edit',
-                jobAd,
-                subject: this.jobAdsModalSubject,
-            });
+            this.openModal(
+                {
+                    modalTitle: 'Edit a JobAd',
+                    modalActionButton: 'Edit',
+                    jobAd,
+                    subject: this.jobAdsModalSubject,
+                },
+                JobadAdminModalComponent);
 
         }
         if (event.action === 'delete') {
-            this.onDelete(jobAd);
+            this.openModal(
+                {
+                    modalMsg: 'Are you sure?',
+                    actionToConfirm: 'Delete',
+                    subject: this.confirmModalSubject,
+                    jobAd,
+                },
+                ConfirmActionModalComponent);
         }
     }
 
-    public openModal(data: any): MatDialogRef<JobadAdminModalComponent> {
-        const dialogRef = this.modalService.open(JobadAdminModalComponent, {
+    public openModal(data: any, modalComponent: any): MatDialogRef<any> {
+        const dialogRef = this.modalService.open(modalComponent, {
             minWidth: '300px',
             width: '30%',
             data,
@@ -100,11 +125,13 @@ export class JobadsAdminComponent implements OnInit, OnDestroy {
     }
 
     public onOpenCreate(): void {
-        this.openModal({
-            modalTitle: 'Create a JobAd',
-            modalActionButton: 'Create',
-            subject: this.jobAdsModalSubject,
-        });
+        this.openModal(
+            {
+                modalTitle: 'Create a JobAd',
+                modalActionButton: 'Create',
+                subject: this.jobAdsModalSubject,
+            },
+            JobadAdminModalComponent);
     }
 
     public onCreate(jobAd: any): void {
@@ -144,12 +171,13 @@ export class JobadsAdminComponent implements OnInit, OnDestroy {
     public onDelete(jobAd: JobAd): void {
         this.jobadsService.deleteJobAd(jobAd._id).subscribe((res) => {
             this.jobAds.data = this.jobAds.data.filter((x) => x._id !== jobAd._id);
+            this.modalService.closeAll();
         });
     }
 
     public ngOnDestroy(): void {
         // Called once, before the instance is destroyed.
         // Add 'implements OnDestroy' to the class.
-        this.subscription.unsubscribe();
+        this.subscriptions.forEach((sub) => sub.unsubscribe());
     }
 }

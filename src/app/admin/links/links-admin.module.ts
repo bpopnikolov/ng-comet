@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AppMaterialModule } from '../../app-material';
-import { ComponentsModule } from '../../shared/components';
+import { ComponentsModule, ConfirmActionModalComponent } from '../../shared/components';
 import { LinksAdminModalComponent } from './links-admin-modal/links-admin-modal.component';
 import { LinksAdminRoutingModule } from './links-admin-routing.module';
 import { LinksAdminComponent } from './links-admin.component';
@@ -17,7 +17,7 @@ import { LinksAdminComponent } from './links-admin.component';
         FlexLayoutModule,
         AppMaterialModule,
     ],
-    entryComponents: [LinksAdminModalComponent],
-    declarations: [LinksAdminComponent, LinksAdminModalComponent]
+    entryComponents: [LinksAdminModalComponent, ConfirmActionModalComponent],
+    declarations: [LinksAdminComponent, LinksAdminModalComponent],
 })
 export class LinksAdminModule { }
