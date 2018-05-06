@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { PageEvent } from '@angular/material';
 import { JobAd } from '../../shared/models/jobad.model';
 
@@ -7,27 +7,21 @@ import { JobAd } from '../../shared/models/jobad.model';
   templateUrl: './jobs-list.component.html',
   styleUrls: ['./jobs-list.component.scss'],
 })
-export class JobsListComponent implements OnInit {
-
+export class JobsListComponent {
+  @Input() public pageIndex: number;
   @Input() public listings: JobAd[];
   @Input() public length: number;
+  @Output() public pageChange: EventEmitter<PageEvent> = new EventEmitter<PageEvent>();
+
   public pageSize: number = 10;
   public pageSizeOptions;
 
   public filteredListings: JobAd[];
-
-  constructor() {}
-
-  public ngOnInit(): void {
-    this.filteredListings = this.listings.slice(0, this.pageSize)
-  }
-
   public onChangePage(event: PageEvent): void {
     this.pageSize = event.pageSize;
-
     const start = event.pageIndex * this.pageSize;
     const end = (event.pageIndex + 1) * this.pageSize;
-    this.filteredListings = this.listings.slice(start, end);
+    this.pageChange.emit(event);
   }
 
 }

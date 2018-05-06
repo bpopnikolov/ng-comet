@@ -1,9 +1,9 @@
-import { CategoryService } from './../shared/services/category/category.service';
-import { CommonModule } from '@angular/common';
+import { CommonModule, SlicePipe } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppMaterialModule } from '../app-material/app-material.module';
+import { CategoryService } from '../shared/services/category/category.service';
 import { JobadsService } from '../shared/services/jobads/jobads.service';
 import { CareersRoutingModule } from './careers-routing.module';
 import { CareersComponent } from './careers.component';
@@ -21,6 +21,6 @@ import { SearchBoxComponent } from './search-box/search-box.component';
     FlexLayoutModule,
   ],
   declarations: [CareersComponent, SearchBoxComponent, JobsListComponent, JobViewComponent],
-  providers: [JobadsService, CategoryService],
+  providers: [JobadsService, CategoryService, SlicePipe],
 })
 export class CareersModule { }

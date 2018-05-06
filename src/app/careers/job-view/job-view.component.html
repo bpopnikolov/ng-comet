@@ -1,16 +1,16 @@
-<mat-card fxFlex=40% fxFlexOffset=30% fxLayoutGap="20px" >
+<mat-card fxFlex=40% fxFlexOffset=30% fxLayoutGap="20px">
 
     <mat-card-title>
-        <h2>{{ listing.title }}</h2>
+        {{ listing.title }}
     </mat-card-title>
 
     <mat-card-subtitle>{{ listing.createdAt | slice:0:10 }}</mat-card-subtitle>
 
-    <mat-card fxFlex=70% >
+    <mat-card fxFlex=70%>
         <mat-card-content> {{ listing.desc }}</mat-card-content>
     </mat-card>
 
     <mat-card-actions>
-        <button  mat-raised-button color="primary" type="submit">Apply</button>
+        <button mat-raised-button color="primary" type="submit">Apply</button>
     </mat-card-actions>
 </mat-card>
