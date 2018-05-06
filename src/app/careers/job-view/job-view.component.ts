@@ -20,8 +20,8 @@ export class JobViewComponent implements OnInit {
   public ngOnInit(): void {
     this.route.params.subscribe((param: Params) => {
       this.jobadsService.getById(param.id).subscribe((data) => {
+        console.log(data);
         this.listing = data;
-        console.log(this.listing);
       });
     });
   }
