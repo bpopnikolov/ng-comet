@@ -1,0 +1,14 @@
+<mat-card-header>
+    <h2>Open Positions</h2>
+</mat-card-header>
+<mat-card *ngIf="!listings.length">
+    <mat-card-header>
+        <h2>There are no open positions - please try later.</h2>
+    </mat-card-header>
+</mat-card>
+<mat-card class="listing-container" *ngFor="let listing of filteredListings">
+    <mat-card-content>
+        <a [routerLink]="['/careers', listing?._id]">{{listing?.title}}</a>
+    </mat-card-content>
+</mat-card>
+<mat-paginator *ngIf="length" class="mat-elevation-z8" (page)="onChangePage($event)" [length]="length" [pageSize]="pageSize" [pageSizeOptions]="[10]"></mat-paginator>

@@ -1,0 +1,29 @@
+<div>
+        <mat-card class="forms-card">
+            <mat-card-title>
+                <h3>Search Listings</h3>
+            </mat-card-title>
+            <form fxLayout="column" fxLayoutGap="10%" [formGroup]="searchForm" (ngSubmit)="onSearch()">
+            <mat-form-field>
+                <input matInput placeholder="Search" formControlName="search">
+            </mat-form-field>
+    
+            <mat-form-field>
+                <mat-select placeholder="Select Category" formControlName="category">
+                    <mat-option *ngFor="let category of categories" [value]="category.name">{{category.name}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+    
+            <mat-form-field>
+                <input matInput [matDatepicker]="picker" placeholder="Pick a date" formControlName="date">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+            <div>
+                <button mat-raised-button color="primary" type="submit"> Search</button>
+                <button mat-raised-button type="reset" (click)="onReset()">Reset</button>
+            </div>
+        </form>
+        </mat-card>
+       
+    </div>

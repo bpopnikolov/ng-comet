@@ -5,8 +5,9 @@ import { RoleGuardService } from './shared/services/auth/role-guard.service';
 
 const appRoutes: Routes = [
     { path: '', redirectTo: '/home', pathMatch: 'full' },
-    { path: 'admin', loadChildren: './admin/admin.module#AdminModule', canLoad: [RoleGuardService] },
+    { path: 'careers', loadChildren: './careers/careers.module#CareersModule' },
     { path: 'contacts', loadChildren: './contacts/contacts.module#ContactsModule' },
+    { path: 'admin', loadChildren: './admin/admin.module#AdminModule', canLoad: [RoleGuardService] },
     { path: 'page-not-found', component: PageNotFoundComponent },
     { path: '**', redirectTo: '/page-not-found' },
 ];
@@ -15,5 +16,6 @@ const appRoutes: Routes = [
         RouterModule.forRoot(appRoutes),
     ],
     exports: [RouterModule],
+
 })
 export class AppRoutingModule { }

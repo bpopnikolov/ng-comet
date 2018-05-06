@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, Resolve } from '@angular/router';
-import { catchError } from 'rxjs/operators';
 import { Observable } from 'rxjs/Rx';
-import { JobadsService } from '.';
+import { catchError } from 'rxjs/operators';
 import { ResponseError } from '../../models';
 import { JobAd } from '../../models/jobad.model';
+import { JobadsService } from './jobads.service';
 
 @Injectable()
 export class JobAdsResolver implements Resolve<JobAd> {

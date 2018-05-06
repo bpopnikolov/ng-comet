@@ -40,6 +40,16 @@ body {
     }
 }
 
+.success-snackbar {
+    background-color: #009688 !important;
+    font-weight: bold;
+}
+
+.error-snackbar {
+    background-color: #f44336 !important;
+    font-weight: bold;
+}
+
 // .form-action-buttons {
 //   margin-top: 25px;
 // }

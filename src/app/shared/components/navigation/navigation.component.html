@@ -10,8 +10,8 @@
         <div class="nav-buttons" fxFlex="100%" fxHide.xs fxHide.sm>
             <a mat-button [routerLink]="['home']" [routerLinkActive]="'active'">Home</a>
             <a mat-button>Careers</a>
-
-            <a mat-button [routerLink]="['contacts']">Contacts</a>
+            <a mat-button [routerLink]="['careers']" [routerLinkActive]="'active'">Careers</a>
+            <a mat-button [routerLink]="['contacts']" [routerLinkActive]="'active'">Contacts</a>
             <a mat-button *ngIf="isAdmin" [matMenuTriggerFor]="adminMenu">
                 Admin
                 <mat-icon>arrow_drop_down</mat-icon>
@@ -43,7 +43,7 @@
         <mat-sidenav #snav class="sidenav-list" [mode]="over" fixedTopGap="56">
             <mat-nav-list>
                 <a mat-list-item routerLink="/home" routerLinkActive="active" active>Home</a>
-                <a mat-list-item routerLink=".">Careers</a>
+                <a mat-list-item routerLink="/careers" routerLinkActive="active">Careers</a>
                 <a mat-list-item routerLink=".">Contacts</a>
                 <mat-expansion-panel *ngIf="isAdmin" class="admin-expansion-panel">
                     <mat-expansion-panel-header>

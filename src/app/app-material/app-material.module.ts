@@ -3,11 +3,11 @@ import { NgModule } from '@angular/core';
 import {
     MatAutocompleteModule, MatButtonModule, MatButtonToggleModule, MatCardModule, MatCheckboxModule,
     MatChipsModule, MatDatepickerModule, MatDialogModule, MatDividerModule, MatExpansionModule,
-    MatGridListModule, MatIconModule, MatIconRegistry, MatInputModule, MatListModule, MatMenuModule,
-    MatNativeDateModule, MatPaginatorModule, MatProgressBarModule, MatProgressSpinnerModule,
-    MatRadioModule, MatRippleModule, MatSelectModule, MatSidenavModule, MatSliderModule,
-    MatSlideToggleModule, MatSnackBarModule, MatSortModule, MatStepperModule, MatTableModule,
-    MatTabsModule, MatToolbarModule, MatTooltipModule, MatFormFieldModule,
+    MatFormFieldModule, MatGridListModule, MatIconModule, MatIconRegistry, MatInputModule,
+    MatListModule, MatMenuModule, MatNativeDateModule, MatPaginatorModule, MatProgressBarModule,
+    MatProgressSpinnerModule, MatRadioModule, MatRippleModule, MatSelectModule, MatSidenavModule,
+    MatSliderModule, MatSlideToggleModule, MatSnackBarModule, MatSortModule, MatStepperModule,
+    MatTableModule, MatTabsModule, MatToolbarModule, MatTooltipModule,
 } from '@angular/material';
 import { DomSanitizer } from '@angular/platform-browser';
 
@@ -82,10 +82,10 @@ import { DomSanitizer } from '@angular/platform-browser';
     MatTabsModule,
     MatToolbarModule,
     MatTooltipModule,
-  ]
+  ],
 })
 export class AppMaterialModule {
   constructor(matIconRegistry: MatIconRegistry, domSanitizer: DomSanitizer) {
-    matIconRegistry.addSvgIconSet(domSanitizer.bypassSecurityTrustResourceUrl('./assets/mdi.svg'))
+    matIconRegistry.addSvgIconSet(domSanitizer.bypassSecurityTrustResourceUrl('./assets/mdi.svg'));
   }
 }

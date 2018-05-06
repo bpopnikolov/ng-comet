@@ -60,7 +60,18 @@ export class JobadsService {
             'Content-Type': 'application/json',
         });
 
-        return this.httpClient.delete(`${this.appApi.baseUrl}jobads/delete/${id}`, {
+        return this.httpClient.delete<Observable<boolean>>(`${this.appApi.baseUrl}jobads/delete/${id}`, {
+            headers,
+        }).pipe(catchError((res: ResponseError) => Observable.throw(res)));
+    }
+
+    public getById(id: string): Observable<JobAd> {
+        const headers = new HttpHeaders({
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+        });
+
+        return this.httpClient.get<JobAd>(`${this.appApi.baseUrl}jobads/${id}`, {
             headers,
         }).pipe(catchError((res: ResponseError) => Observable.throw(res)));
     }

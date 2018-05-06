@@ -10,6 +10,7 @@ import { AppConfigService } from './app-config.service';
 import { AppMaterialModule } from './app-material';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { CareersModule } from './careers/careers.module';
 import { HomeModule } from './home';
 import { ContainersModule } from './shared/containers';
 import { AuthModule } from './shared/services/auth/auth.module';
@@ -55,6 +56,7 @@ export const tokenGetter = () => {
         UserModule,
         HomeModule,
         AppRoutingModule,
+        CareersModule,
     ],
     providers: [
         AppConfigService,
@@ -70,6 +72,5 @@ export const tokenGetter = () => {
         },
     ],
     bootstrap: [AppComponent],
-
 })
 export class AppModule { }

@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { MatDialog, MatDialogRef, MatTableDataSource } from '@angular/material';
+import { MatDialog, MatDialogRef, MatSnackBar, MatTableDataSource } from '@angular/material';
 import { ActivatedRoute } from '@angular/router';
 import { Subject } from 'rxjs/Subject';
 import { Subscription } from 'rxjs/Subscription';
@@ -42,6 +42,7 @@ export class LinksAdminComponent implements OnInit, OnDestroy {
         private linksService: LinkService,
         private modalService: MatDialog,
         private route: ActivatedRoute,
+        private snackBar: MatSnackBar,
     ) { }
 
     public ngOnInit(): void {
@@ -138,9 +139,11 @@ export class LinksAdminComponent implements OnInit, OnDestroy {
             (data) => {
                 this.links.data = [...this.links.data, data];
                 this.modalService.closeAll();
+                this.snackBar.open('Created', '', { duration: 2000, panelClass: 'success-snackbar' });
             },
-            (err) => {
-                alert(err);
+            (res) => {
+                console.log(res.error);
+                this.snackBar.open(res.error, '', { duration: 2000, panelClass: 'error-snackbar' });
             });
     }
 
@@ -163,16 +166,21 @@ export class LinksAdminComponent implements OnInit, OnDestroy {
                 this.modalService.closeAll();
 
             },
-            (err) => {
-                alert(err);
+            (res) => {
+                console.log(res.error);
             });
     }
 
     public onDelete(link: ActionLink): void {
-        this.linksService.deleteLink(link._id).subscribe((res) => {
-            this.links.data = this.links.data.filter((x) => x._id !== link._id);
-            this.modalService.closeAll();
-        });
+        this.linksService.deleteLink(link._id).subscribe(
+            (res) => {
+                this.links.data = this.links.data.filter((x) => x._id !== link._id);
+                this.modalService.closeAll();
+            },
+            (res) => {
+                console.log(res.error);
+            },
+        );
     }
 
     public ngOnDestroy(): void {
