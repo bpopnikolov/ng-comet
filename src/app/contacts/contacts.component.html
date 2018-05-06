@@ -1,0 +1,7 @@
+<app-google-maps [latitude]="latitude" [longitude]="longitude"></app-google-maps>
+<div class="contacts-container" fxLayout="column">
+
+    <div class="contacts-list" fxFlex="55%" fxLayout="row" fxLayoutAlign="center center">
+        <app-contacts-list fxFlex="60%" fxFlex.sm="60%" fxFlex.xs="90%" fxLayout.xs="column"   fxLayout.sm="column" fxLayout="row wrap" [contacts]="contacts" (contactSelected)="updateMapContact($event)" ></app-contacts-list>
+    </div>
+</div>

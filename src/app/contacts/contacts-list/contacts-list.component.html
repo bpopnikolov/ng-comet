@@ -1,0 +1,8 @@
+<mat-card fxFlex.xs="90%" class="contact-item" fxFlex.sm="50%" fxFlex.md="40%" fxFlex="20%" [ngClass]="{'active': selectedContact === i}"
+*ngFor="let contact of contacts; let i = index" (click)="onContactSelected(contact, i)">
+    <mat-card-content>
+        <p>Address: {{contact.value}}</p>
+        <p>Phone: {{contact?.phone}}</p>
+        <p>Email: {{contact?.email}}</p>
+    </mat-card-content>
+</mat-card>

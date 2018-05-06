@@ -1,0 +1,40 @@
+<h2 mat-dialog-title>{{ modalTitle }}</h2>
+<mat-dialog-content>
+    <form fxLayout="column" fxLayoutGap="5%" [formGroup]="modalForm">
+        <mat-form-field>
+            <input matInput placeholder="Title" type="text" required formControlName="title">
+            <mat-error *ngIf="">test error</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+            <textarea [froalaEditor] matInput placeholder="Description" type="text" matTextareaAutosize required formControlName="desc">
+                        </textarea>
+            <mat-error *ngIf=""> test error</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-select placeholder="Category" [(value)]="category.value" [formControl]="category" required>
+                <mat-option>--</mat-option>
+                <mat-option *ngFor="let cat of categories" [value]="cat.name">
+                    {{cat.name}}
+                </mat-option>
+            </mat-select>
+            <mat-error *ngIf="">Please choose a category</mat-error>
+            <mat-hint>Select a category</mat-hint>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-select placeholder="Status" [(value)]="status.value" [formControl]="status" required>
+                <mat-option>--</mat-option>
+                <mat-option *ngFor="let stat of statuses" [value]="stat.name">
+                    {{stat.name}}
+                </mat-option>
+            </mat-select>
+            <mat-error *ngIf="">Please choose a status</mat-error>
+            <mat-hint>Select a status</mat-hint>
+        </mat-form-field>
+    </form>
+</mat-dialog-content>
+<mat-dialog-actions>
+    <button *ngIf="modalActionButton && modalActionButton !== 'Preview'" mat-raised-button color="primary" (click)="onActionClick()" [disabled]="!modalForm.valid || modalForm.pristine">{{ modalActionButton }}</button>
+    <button mat-raised-button color="warn" (click)="onCancelClick()" cdkFocusInitial>Cancel</button>
+</mat-dialog-actions>

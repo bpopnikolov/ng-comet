@@ -14,13 +14,13 @@
     }
 }
 
-.logo-container{
+.logo-container {
     display: inline-block;
     padding-right: 16px;
 }
 
-.logo{
-    width:50px;
+.logo {
+    width: 50px;
     height: auto;
     display: inline-block;
     vertical-align: middle;
@@ -34,20 +34,26 @@
     display: inline-block;
     vertical-align: middle;
 }
-.nav-container .mat-toolbar {
-  z-index: 6;
-//   justify-content: center !important;
+
+.user-text {
+    font-size: 0.8em;
 }
-.toolbar-mobile{
+
+.nav-container .mat-toolbar {
+    z-index: 6;
+    //   justify-content: center !important;
+}
+
+.toolbar-mobile {
     justify-content: center;
     flex-direction: column;
-
 }
 
 .sidenav-menu {
     position: absolute;
     left: 16px;
 }
+
 ::ng-deep.sidenav-container .mat-list-item-content {
     padding: 0 24px !important;
 }

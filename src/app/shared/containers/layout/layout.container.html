@@ -1,5 +1,6 @@
-<div class="container" fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="0.5%" fxLayoutAlign="center">
+<div class="layout-container" fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="0.5%" fxLayoutAlign="center">
     <app-navigation (signedOut)="onSignout()" [user]="user" [isAdmin]="isAdmin" [isAuthenticated]="isAuthenticated" fxFlex="100%">
-      <ng-content></ng-content>
+        <ng-content></ng-content>
+        <app-footer [socialLinks]="socialLinks"></app-footer>
     </app-navigation>
 </div>

@@ -19,9 +19,6 @@ export class NavigationComponent implements OnInit {
     ngOnInit() {
     }
 
-    test() {
-        console.log(this.user);
-    }
     onSignout() {
         console.log('object');
         this.signedOut.emit();

@@ -5,6 +5,7 @@ import { ResponseError } from '../../shared/models/response-error.model';
 import { SigninForm } from './signin-form.model';
 import { SignupForm } from './signup-form.model';
 import { AuthService } from '../../shared/services/auth';
+import { User } from './user.model';
 
 
 @Injectable()
@@ -42,11 +43,22 @@ export class UserService {
         const headers = new HttpHeaders({
             'Accept': 'application/json',
             'Content-Type': 'application/json'
-        })
+        });
 
         const body = form;
 
         return this.httpClient.post<ResponseError>(this.appApi.baseUrl + 'auth/register', body, {
+            headers
+        });
+    }
+
+    getUsers() {
+        const headers = new HttpHeaders({
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        });
+
+        return this.httpClient.get<User[]>(this.appApi.baseUrl + 'users', {
             headers
         });
     }

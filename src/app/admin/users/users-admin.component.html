@@ -1,0 +1,11 @@
+<div class="admin-panel-title" fxFlex="100%" fxLayout="row" fxLayoutAlign="center center">
+    <div fxFlex="90%">
+        <h1>Users Admin Panel</h1>
+    </div>
+</div>
+<div fxFlex="100%" fxLayout="row" fxLayoutAlign="center center">
+    <div fxFlex="95%" class="sorted-table-container">
+        <app-table-with-sorting class="sorted-table" [data]="users" [displayedColumns]="displayedColumns" [truncCols]="truncCols"></app-table-with-sorting>
+    </div>
+</div>
+<router-outlet></router-outlet>

@@ -8,9 +8,7 @@ import { Category, ResponseError } from '../../models/';
 
 @Injectable()
 export class CategoryService {
-
-
-  appApi: { [key: string]: any };
+  private appApi: { [key: string]: any };
 
   constructor(
     private httpClient: HttpClient,
@@ -21,7 +19,7 @@ export class CategoryService {
 
   public getCategories(): Observable<Category[]> {
     const headers = new HttpHeaders({
-      'Accept': 'application/json',
+      Accept: 'application/json',
       'Content-Type': 'application/json',
     });
 
@@ -29,6 +27,4 @@ export class CategoryService {
       headers,
     }).pipe(catchError((res: ResponseError) => Observable.throw(res)));
   }
-
-
 }

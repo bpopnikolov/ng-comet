@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FacebookService, LoginResponse, LoginOptions } from 'ngx-facebook';
+import { FacebookService } from 'ngx-facebook';
+import { AppConfigService } from '../../../app-config.service';
 
 @Component({
     selector: 'app-social-feed',
@@ -8,15 +9,29 @@ import { FacebookService, LoginResponse, LoginOptions } from 'ngx-facebook';
 })
 export class SocialFeedComponent implements OnInit {
 
-    constructor(private fb: FacebookService) {
+    public userToken: string;
+    constructor(private fb: FacebookService, private appConfigService: AppConfigService) {
+
+        console.log('Initializing Facebook');
+        this.userToken = this.appConfigService.get('facebook').token;
+
         fb.init({
             appId: `724057947942782`,
-            version: 'v2.12'
+            version: 'v2.12',
         });
     }
 
-    ngOnInit() {
-
+    public ngOnInit(): void {
+        this.getFeed();
     }
 
+    public getFeed(): void {
+        this.fb.api('/1890857230927298', 'get', { access_token: this.userToken })
+            .then((res: any) => {
+                console.log(res);
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    }
 }

@@ -1,13 +1,13 @@
 <div class="footer" fxLayout="row" fxLayoutAlign="center center">
-    <div fxFlex="50%">
+    <div fxFlex="50%" fxFlex.xs="100%">
         <div class="footer-logo">
             <img class="logo" src="/assets/comet-logo.svg" alt="">
-            <a class="footer-logo-title" href="#">NG-COMET</a>
+            <a class="footer-logo-title" [routerLink]="['']">NG-COMET</a>
         </div>
         <div class="social-icons-footer">
-            <img class="social-icon" src="/assets/facebook-logo.svg" alt="">
-            <img class="social-icon" src="/assets/google-logo.svg" alt="">
-            <img class="social-icon" src="/assets/twitter-logo.svg" alt="">
+            <a [href]="link.target" mat-fab color="primary" class="footer-social-link" *ngFor="let link of socialLinks">
+                <img class="social-icon" [src]="link.icon" alt="">
+            </a>
         </div>
     </div>
 </div>

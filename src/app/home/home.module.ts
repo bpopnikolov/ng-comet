@@ -13,7 +13,6 @@ import {
 import { ComponentsModule } from '../shared/components';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { AppMaterialModule } from '../app-material/app-material.module';
-import { HomeResolver } from './shared/home-resolver.service';
 
 
 
@@ -28,6 +27,6 @@ import { HomeResolver } from './shared/home-resolver.service';
     declarations: [
         HomeComponent,
     ],
-    providers: [HomeResolver]
+    providers: []
 })
 export class HomeModule { }

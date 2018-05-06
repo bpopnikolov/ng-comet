@@ -1,4 +1,5 @@
 import { Category } from './category.model';
+
 export class JobAd {
     constructor(
         public _id: string,

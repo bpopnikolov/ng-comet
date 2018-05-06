@@ -1,9 +1,11 @@
-<app-hero-image [links]="actionLinks"></app-hero-image>
-<div class="feed-section" fxLayout="row" >
-    <div fxFlex="50%" fxLayout="row" fxLayoutAlign="center center" class="feed-section-text">
-        <app-text-section fxFlex.xs="90%"fxFlex.sm="80%" fxFlex="50%"></app-text-section>
+<app-hero-image [links]="actionLinks" [heroImgUrl]="heroImgUrl"></app-hero-image>
+<div class="feed-section" fxLayout="row" fxLayout.xs="column">
+    <div fxFlex="50%" fxFlex.xs="100%" fxLayout="row" fxLayoutAlign="center center" class="feed-section-text">
+        <app-text-section [text]="textSection" fxFlex.xs="90%" fxFlex.sm="80%" fxFlex="50%"></app-text-section>
     </div>
-    <div fxFlex="50%" fxLayout="row" fxLayoutAlign="center center" class="social-feed">
+    <div fxFlex="50%" fxFlex.xs="100%" fxLayout="crow" fxLayoutAlign="center center" class="social-feed">
+        <!-- <iframe fxFlexAlign="center" src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2FNg-Comet-1890857230927298%2F&tabs=timeline&width=340&height=394&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true&appId=724057947942782"
+            width="400" height="500" style="border:none;overflow:hidden" scrolling="yes" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe> -->
         <app-social-feed fxFlex.xs="90%" fxFlex.sm="80%" fxFlex="50%"></app-social-feed>
     </div>
 </div>

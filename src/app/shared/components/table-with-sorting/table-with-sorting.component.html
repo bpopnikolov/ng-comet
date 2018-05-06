@@ -1,0 +1,24 @@
+<div class="mat-elevation-z8" [ngClass.xs]="{'sorted-table': true}">
+    <mat-table #table [dataSource]="dataSource" matSort>
+
+        <ng-container *ngFor="let column of displayedColumns" matColumnDef="{{column}}">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> {{column}} </mat-header-cell>
+            <mat-cell *matCellDef="let el" [matTooltip]="isDateCol(column)? (el[column] | date: 'short') : el[column] ">
+                {{ truncCols.has(column)? (el[column] | trunc:[5, '...']) :
+                  (isDateCol(column))? (el[column] | date: 'short') : (el[column])}} </mat-cell>
+        </ng-container>
+
+        <ng-container *ngFor="let column of buttonColumns; let i = index" matColumnDef="{{column}}">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> {{column}} </mat-header-cell>
+            <mat-cell *matCellDef="let element">
+                <a mat-raised-button [color]="buttonDef[i].color" (click)="onActionButtonClick(buttonDef[i].action, element._id)">{{buttonDef[i].action}}</a> </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="allColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: allColumns;"></mat-row>
+
+    </mat-table>
+
+    <mat-paginator #paginator [pageSize]="10" [pageSizeOptions]="[5, 10, 20]" [showFirstLastButtons]="true">
+    </mat-paginator>
+</div>

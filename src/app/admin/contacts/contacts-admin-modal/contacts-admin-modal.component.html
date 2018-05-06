@@ -1,0 +1,21 @@
+<h2 mat-dialog-title>{{ modalTitle }}</h2>
+<mat-dialog-content fxLayout="row">
+    <form fxLayout="column" fxFlex="100%" fxLayoutGap="5%" [formGroup]="modalForm">
+        <mat-form-field>
+            <input matInput placeholder="Name" type="text" required formControlName="name">
+            <mat-error *ngIf="">test error</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+            <input matInput placeholder="Value" type="text" required formControlName="value">
+            <mat-error *ngIf="">test error</mat-error>
+        </mat-form-field>
+        <div fxFlex>
+            <mat-checkbox formControlName="isPrimary">Is primary address?</mat-checkbox>
+        </div>
+    </form>
+</mat-dialog-content>
+<mat-dialog-actions>
+    <button *ngIf="modalActionButton && modalActionButton !== 'Preview'" mat-raised-button color="primary" (click)="onActionClick()" [disabled]="!modalForm.valid || modalForm.pristine">{{ modalActionButton }}</button>
+    <button mat-raised-button color="warn" (click)="onCancelClick()" cdkFocusInitial>Cancel</button>
+</mat-dialog-actions>

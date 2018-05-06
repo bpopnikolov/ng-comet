@@ -1,36 +1,55 @@
 /* You can add global styles to this file, and also import other style files */
+
 @import url('https://fonts.googleapis.com/icon?family=Material+Icons');
 @import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic');
-
 @import '~normalize.css/normalize.css';
+@import '~froala-editor/css/froala_editor.pkgd.min.css';
+@import '~froala-editor/css/froala_style.min.css';
+@import '~font-awesome/css/font-awesome.css';
 @import './app/mixins.scss';
-
 /* Breakpoint on responsive content
 ------------------------------------ */
+
 body {
-  font-family: Roboto, Arial, sans-serif;
-  height: 100vh;
-  font-size: 15px;
+    font-family: Roboto, Arial, sans-serif;
+    height: 100vh;
+    font-size: 15px;
+}
+
+.container {
+    max-width: 100%;
+    width: 1280px;
+    margin: 0 auto;
 }
 
 .spacer {
-  -webkit-box-flex: 1;
-  -ms-flex: 1 1 auto;
-  flex: 1 1 auto;
+    -webkit-box-flex: 1;
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
 }
 
 .forms-container {
-  height: 100%;
+    height: 100%;
 }
 
 .forms-card {
-  width: 20%;
-  min-width: 300px;
-
-  @include mobile {
-    min-width: 80%;
-  }
+    width: 20%;
+    min-width: 300px;
+    @include mobile {
+        min-width: 80%;
+    }
 }
+
+.success-snackbar {
+    background-color: #009688 !important;
+    font-weight: bold;
+}
+
+.error-snackbar {
+    background-color: #f44336 !important;
+    font-weight: bold;
+}
+
 // .form-action-buttons {
 //   margin-top: 25px;
 // }

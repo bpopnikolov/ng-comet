@@ -1,18 +1,18 @@
 import { Injectable } from '@angular/core';
 import { Resolve, ActivatedRouteSnapshot } from '@angular/router';
-import { LinkService } from '../../shared/services/link';
 import { catchError, map } from 'rxjs/operators';
 import { Observable } from 'rxjs/Rx';
-import { ActionLinks } from '../../shared/services/link';
 import { of } from 'rxjs/observable/of';
+import { User } from './user.model';
+import { UserService } from './user.service';
 
 @Injectable()
-export class HomeResolver implements Resolve<ActionLinks> {
+export class UsersResolver implements Resolve<User[]> {
 
-    constructor(private linkService: LinkService) { }
+    constructor(private userService: UserService) { }
 
     resolve(route: ActivatedRouteSnapshot): Observable<any> {
 
-        return this.linkService.getLinks().pipe(catchError((err) => Observable.empty()));
+        return this.userService.getUsers().first().pipe(catchError((err) => Observable.empty()));
     }
 }

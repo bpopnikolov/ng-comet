@@ -1,0 +1,7 @@
+<h2 mat-dialog-title>{{ modalMsg }}</h2>
+<mat-dialog-content fxLayout="row">
+</mat-dialog-content>
+<mat-dialog-actions>
+    <button mat-raised-button color="primary" (click)="onActionClick()">Confirm</button>
+    <button mat-raised-button color="warn" (click)="onCancelClick()" cdkFocusInitial>Cancel</button>
+</mat-dialog-actions>
