@@ -1,24 +1,34 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
+import { Category } from '../../../shared/models';
 import { FormErrorStateMatcher, UtilityService, ValidationService } from '../../../shared/utility';
 
+const options = ['bold', 'italic', 'underline', 'fontSize', 'color', 'align', 'insertLink', 'paragraphFormat', 'alert'];
 @Component({
     selector: 'app-jobad-admin-modal',
     templateUrl: './jobad-admin-modal.component.html',
-    styleUrls: ['./jobad-admin-modal.component.scss']
+    styleUrls: ['./jobad-admin-modal.component.scss'],
 })
 export class JobadAdminModalComponent implements OnInit {
 
-    modalTitle: string;
-    modalActionButton: string;
-    modalForm: FormGroup;
-    desc: AbstractControl;
-    title: AbstractControl;
-    category: AbstractControl;
-    status: AbstractControl;
-    categories = [];
-    statuses = []
+    public modalTitle: string;
+    public modalActionButton: string;
+    public modalForm: FormGroup;
+    public desc: AbstractControl;
+    public title: AbstractControl;
+    public category: AbstractControl;
+    public status: AbstractControl;
+    public categories: Category[] = [];
+    public statuses = [];
+    public editorOptions: { [key: string]: any } = {
+        placeholderText: 'Description',
+        charCounterCount: true,
+        toolbarButtons: options,
+        toolbarButtonsXS: options,
+        toolbarButtonsSM: options,
+        toolbarButtonsMD: options,
+    };
 
     constructor(
         public dialogRef: MatDialogRef<JobadAdminModalComponent>,
@@ -26,20 +36,16 @@ export class JobadAdminModalComponent implements OnInit {
         private fb: FormBuilder,
         private fm: FormErrorStateMatcher,
         private validationService: ValidationService,
-        private utilityService: UtilityService
+        private utilityService: UtilityService,
     ) { }
 
-    ngOnInit() {
+    public ngOnInit(): void {
         this.modalTitle = this.data.modalTitle;
         this.modalActionButton = this.data.modalActionButton;
 
-        this.categories = [
-            { name: 'IT' },
-            { name: 'Marketing' },
-            { name: 'Sales' },
-            { name: 'Operations' },
-            { name: 'Other' },
-        ];
+        if (this.data.jobCategories) {
+            this.categories = this.data.jobCategories;
+        }
 
         this.statuses = [
             { name: 'active' },
@@ -49,29 +55,41 @@ export class JobadAdminModalComponent implements OnInit {
         this.initModalForm();
     }
 
-    initModalForm() {
+    public initModalForm(): void {
         const jobAd = this.data.jobAd;
         this.modalForm = this.fb.group({
-            'title': [jobAd? jobAd.title: '', [Validators.required, Validators.maxLength(256), Validators.minLength(4)]],
-            'desc': [jobAd? jobAd.desc: '', [Validators.required, Validators.maxLength(16384), Validators.minLength(4)],],
-            'category': [jobAd? jobAd.category.name: '', [Validators.required]],
-            'status': [jobAd? jobAd.status: '', [Validators.required]],
+            title: [jobAd ? jobAd.title : '', [Validators.required, Validators.maxLength(256), Validators.minLength(4)]],
+            desc: [jobAd ? jobAd.desc : '', [Validators.required, Validators.maxLength(16384), Validators.minLength(4)]],
+            category: [jobAd ? jobAd.category.name : '', [Validators.required]],
+            status: [jobAd ? jobAd.status : '', [Validators.required]],
         });
 
-        this.data.modalActionButton === 'Preview' ? this.modalForm.disable() : false;
+        this.data.modalActionButton === 'Preview' ? this.modalForm.disable() : this.modalForm.enable();
 
-        this.title = this.modalForm.controls['title'];
-        this.desc = this.modalForm.controls['desc'];
-        this.category = this.modalForm.controls['category'];
-        this.status = this.modalForm.controls['status'];
+        this.title = this.modalForm.controls.title;
+        this.desc = this.modalForm.controls.desc;
+        this.category = this.modalForm.controls.category;
+        this.status = this.modalForm.controls.status;
 
     }
 
-    onActionClick() {
-        this.data.subject.next({action: this.modalActionButton, formValue: this.modalForm.value, modalData: this.data });
+    public getTitleErrorMsg(): string {
+        return this.utilityService.getJobTitleErrorMessages(this.title);
     }
 
-    onCancelClick() {
+    public getDescErrorMsg(): string {
+        return this.utilityService.getJobDescErrorMessages(this.desc);
+    }
+
+    public getFieldRequiredErrorMsg(control: AbstractControl): string {
+        return this.utilityService.getFieldIsRequiredErrorMessage(control);
+    }
+
+    public onActionClick(): void {
+        this.data.subject.next({ action: this.modalActionButton, formValue: this.modalForm.value, modalData: this.data });
+    }
+
+    public onCancelClick(): void {
         this.dialogRef.close();
     }
 

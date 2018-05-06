@@ -3,12 +3,12 @@
     <form fxLayout="column" fxFlex="100%" fxLayoutGap="5%" [formGroup]="modalForm">
         <mat-form-field>
             <input matInput placeholder="Name" type="text" required formControlName="name">
-            <mat-error *ngIf="">test error</mat-error>
+            <mat-error *ngIf="name.invalid">{{ getContactNameErrorMsg() }}</mat-error>
         </mat-form-field>
 
         <mat-form-field>
             <input matInput placeholder="Value" type="text" required formControlName="value">
-            <mat-error *ngIf="">test error</mat-error>
+            <mat-error *ngIf="value.invalid">{{ getContactValueErrorMsg() }}</mat-error>
         </mat-form-field>
         <div fxFlex>
             <mat-checkbox formControlName="isPrimary">Is primary address?</mat-checkbox>

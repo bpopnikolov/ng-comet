@@ -3,16 +3,16 @@
     <form fxLayout="column" fxFlex="100%" fxLayoutGap="5%" [formGroup]="modalForm">
         <mat-form-field>
             <input matInput placeholder="Name" type="text" required formControlName="name">
-            <mat-error *ngIf="">test error</mat-error>
+            <mat-error *ngIf="name.invalid">{{ getLinkNameErrorMsg() }}</mat-error>
         </mat-form-field>
 
         <mat-form-field>
             <input matInput placeholder="Link Target" type="text" required formControlName="target">
-            <mat-error *ngIf="">test error</mat-error>
+            <mat-error *ngIf="target.invalid"> {{ getLinkTargetErrorMsg() }}</mat-error>
         </mat-form-field>
         <mat-form-field>
             <input matInput placeholder="Icon" type="text" required formControlName="icon">
-            <mat-error *ngIf="">test error</mat-error>
+            <mat-error *ngIf="icon.invalid">{{ getRequiredFieldErrorMsg(icon) }}</mat-error>
         </mat-form-field>
         <mat-form-field>
             <mat-select placeholder="Type" [(value)]="type.value" [formControl]="type" required>
@@ -20,7 +20,7 @@
                     {{type.name}}
                 </mat-option>
             </mat-select>
-            <mat-error *ngIf="">Please choose a type</mat-error>
+            <mat-error *ngIf="type.invalid">{{ getRequiredFieldErrorMsg(type) }}</mat-error>
             <mat-hint>Select a type</mat-hint>
         </mat-form-field>
         <div fxFlex>

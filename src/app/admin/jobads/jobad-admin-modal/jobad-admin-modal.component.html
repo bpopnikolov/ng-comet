@@ -3,13 +3,13 @@
     <form fxLayout="column" fxLayoutGap="5%" [formGroup]="modalForm">
         <mat-form-field>
             <input matInput placeholder="Title" type="text" required formControlName="title">
-            <mat-error *ngIf="">test error</mat-error>
+            <mat-error *ngIf="title.invalid">{{ getTitleErrorMsg() }}</mat-error>
         </mat-form-field>
 
         <mat-form-field>
-            <textarea [froalaEditor] matInput placeholder="Description" type="text" matTextareaAutosize required formControlName="desc">
+            <textarea [froalaEditor]="editorOptions" matInput placeholder="Description" type="text" matTextareaAutosize required formControlName="desc">
                         </textarea>
-            <mat-error *ngIf=""> test error</mat-error>
+            <mat-error *ngIf="desc.invalid"> {{ getDescErrorMsg() }}r</mat-error>
         </mat-form-field>
         <mat-form-field>
             <mat-select placeholder="Category" [(value)]="category.value" [formControl]="category" required>
@@ -18,7 +18,7 @@
                     {{cat.name}}
                 </mat-option>
             </mat-select>
-            <mat-error *ngIf="">Please choose a category</mat-error>
+            <mat-error *ngIf="category.invalid">{{ getFieldRequiredErrorMsg(category) }}</mat-error>
             <mat-hint>Select a category</mat-hint>
         </mat-form-field>
 
@@ -29,7 +29,7 @@
                     {{stat.name}}
                 </mat-option>
             </mat-select>
-            <mat-error *ngIf="">Please choose a status</mat-error>
+            <mat-error *ngIf="status.invalid">{{ getFieldRequiredErrorMsg(category) }}</mat-error>
             <mat-hint>Select a status</mat-hint>
         </mat-form-field>
     </form>

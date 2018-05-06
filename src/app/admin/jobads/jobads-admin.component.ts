@@ -4,7 +4,8 @@ import { ActivatedRoute } from '@angular/router';
 import { Subject } from 'rxjs/Subject';
 import { Subscription } from 'rxjs/Subscription';
 import { ConfirmActionModalComponent } from '../../shared/components/';
-import { JobAd } from '../../shared/models';
+import { JobAd, Category } from '../../shared/models';
+import { CategoryService } from '../../shared/services/category/category.service';
 import { JobadsService } from '../../shared/services/jobads';
 import { JobadAdminModalComponent } from './jobad-admin-modal';
 
@@ -37,14 +38,21 @@ export class JobadsAdminComponent implements OnInit, OnDestroy {
     public jobAdsModalSubject = new Subject();
     public confirmModalSubject = new Subject();
     public subscriptions: Subscription[] = [];
+    public jobCategories: Category[] = [];
 
     constructor(
         private jobadsService: JobadsService,
+        private categoryService: CategoryService,
         private route: ActivatedRoute,
         public modalService: MatDialog,
     ) { }
 
     public ngOnInit(): void {
+
+        this.categoryService.getCategories().subscribe((data) => {
+            this.jobCategories = data;
+        });
+
         this.route.data.subscribe(
             (data: {
                 jobAds: JobAd[];
@@ -84,9 +92,10 @@ export class JobadsAdminComponent implements OnInit, OnDestroy {
         if (event.action === 'view') {
             this.openModal(
                 {
+                    jobAd,
                     modalTitle: 'Preview JobAd',
                     modalActionButton: 'Preview',
-                    jobAd,
+                    jobCategories: this.jobCategories,
                     subject: this.jobAdsModalSubject,
                 },
                 JobadAdminModalComponent);
@@ -94,9 +103,10 @@ export class JobadsAdminComponent implements OnInit, OnDestroy {
         if (event.action === 'edit') {
             this.openModal(
                 {
+                    jobAd,
                     modalTitle: 'Edit a JobAd',
                     modalActionButton: 'Edit',
-                    jobAd,
+                    jobCategories: this.jobCategories,
                     subject: this.jobAdsModalSubject,
                 },
                 JobadAdminModalComponent);
@@ -105,10 +115,10 @@ export class JobadsAdminComponent implements OnInit, OnDestroy {
         if (event.action === 'delete') {
             this.openModal(
                 {
+                    jobAd,
                     modalMsg: 'Are you sure?',
                     actionToConfirm: 'Delete',
                     subject: this.confirmModalSubject,
-                    jobAd,
                 },
                 ConfirmActionModalComponent);
         }
@@ -129,6 +139,7 @@ export class JobadsAdminComponent implements OnInit, OnDestroy {
             {
                 modalTitle: 'Create a JobAd',
                 modalActionButton: 'Create',
+                jobCategories: this.jobCategories,
                 subject: this.jobAdsModalSubject,
             },
             JobadAdminModalComponent);

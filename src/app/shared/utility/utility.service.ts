@@ -5,42 +5,109 @@ import { AppConfigService } from '../../app-config.service';
 @Injectable()
 export class UtilityService {
 
-    authConfig: {[key: string]: string}
+    private errors: { [key: string]: string };
+
     constructor(private configService: AppConfigService) {
-        this.authConfig = configService.get('auth');
+        this.errors = configService.get('errors');
     }
 
-    getEmailErrorMessages(email: AbstractControl) {
+    public getEmailErrorMessages(email: AbstractControl): string {
         if (email.hasError('required')) {
-            return this.authConfig.emailRequiredError;
+            return this.errors.emailRequiredError;
         }
         if (email.hasError('email')) {
-            return this.authConfig.emailNotValidError;
+            return this.errors.emailNotValidError;
         }
         if (email.hasError('maxlength')) {
-            return this.authConfig.emailMaxLengthError;
+            return this.errors.emailMaxLengthError;
         }
     }
 
-
-    getPasswordErrorMessages(password: AbstractControl) {
+    public getPasswordErrorMessages(password: AbstractControl): string {
         if (password.hasError('required')) {
-            return this.authConfig.passwordRequiredError;
-        }
-        if (password.hasError('validatePassword')) {
-            return this.authConfig.passwordNotValidError;
-        }
-        if (password.hasError('maxlength')) {
-            return this.authConfig.passwordMaxLengthError;
+            return this.errors.passwordMaxLengthError;
         }
     }
 
-    getConfirmPasswordErrorMessages(confirmPassword: AbstractControl) {
+    public getConfirmPasswordErrorMessages(confirmPassword: AbstractControl): string {
         if (confirmPassword.hasError('required')) {
-            return this.authConfig.confirmPasswordRequiredError;
-        }
-        if (confirmPassword.hasError('mismatch')) {
-            return this.authConfig.passwordsMismatchError;
+            return this.errors.passwordsMismatchError;
         }
     }
+
+
+    public getLinkNameErrorMessages(name: AbstractControl): string {
+        if (name.hasError('required')) {
+            return this.errors.fieldRequiredError;
+        }
+        if (name.hasError('minlength')) {
+            return this.errors.linkNameMinLengthError;
+        }
+        if (name.hasError('maxlength')) {
+            return this.errors.linkNameMaxLengthError;
+        }
+    }
+
+    public getJobTitleErrorMessages(title: AbstractControl): string {
+        if (title.hasError('required')) {
+            return this.errors.fieldRequiredError;
+        }
+        if (title.hasError('minlength')) {
+            return this.errors.jobTitleMinLengthError;
+        }
+        if (title.hasError('maxlength')) {
+            return this.errors.jobTitleMaxLengthError;
+        }
+    }
+
+
+    public getJobDescErrorMessages(desc: AbstractControl): string {
+        if (desc.hasError('required')) {
+            return this.errors.fieldRequiredError;
+        }
+        if (desc.hasError('minlength')) {
+            return this.errors.jobDescMinLengthError;
+        }
+        if (desc.hasError('maxlength')) {
+            return this.errors.jobDescMaxLengthError;
+        }
+    }
+
+
+    public getLinkTargetErrorMessages(target: AbstractControl): string {
+        if (target.hasError('required')) {
+            return this.errors.fieldRequiredError;
+        }
+        if (target.hasError('validateUrl')) {
+            return this.errors.invalidUrlError;
+        }
+    }
+
+    public getContactNameErrorMessages(name: AbstractControl): string {
+        if (name.hasError('required')) {
+            return this.errors.fieldRequiredError;
+        }
+        if (name.hasError('minlength')) {
+            return this.errors.contactNameMinLengthError;
+        }
+        if (name.hasError('maxlength')) {
+            return this.errors.contactNameMaxLengthError;
+        }
+    }
+    public getContactValueErrorMessages(value: AbstractControl): string {
+        if (value.hasError('required')) {
+            return this.errors.fieldRequiredError;
+        }
+        if (value.hasError('minlength')) {
+            return this.errors.contactValueMinLengthError;
+        }
+        if (value.hasError('maxlength')) {
+            return this.errors.contactValueMaxLengthError;
+        }
+    }
+
+    public getFieldIsRequiredErrorMessage(control: AbstractControl): string {
+        return control.hasError('required') ? this.errors.fieldRequiredError : '';
+    }
+
 }

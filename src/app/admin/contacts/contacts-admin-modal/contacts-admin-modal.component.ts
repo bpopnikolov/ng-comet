@@ -4,9 +4,9 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { FormErrorStateMatcher, UtilityService, ValidationService } from '../../../shared/utility';
 
 @Component({
-  selector: 'app-contacts-admin-modal',
-  templateUrl: './contacts-admin-modal.component.html',
-  styleUrls: ['./contacts-admin-modal.component.scss'],
+    selector: 'app-contacts-admin-modal',
+    templateUrl: './contacts-admin-modal.component.html',
+    styleUrls: ['./contacts-admin-modal.component.scss'],
 })
 
 export class ContactsAdminModalComponent implements OnInit {
@@ -35,14 +35,14 @@ export class ContactsAdminModalComponent implements OnInit {
     }
 
     public onActionClick(): void {
-        this.data.subject.next({action: this.modalActionButton, formValue: this.modalForm.value, modalData: this.data });
+        this.data.subject.next({ action: this.modalActionButton, formValue: this.modalForm.value, modalData: this.data });
     }
 
     public onCancelClick(): void {
         this.dialogRef.close();
     }
 
-    private initModalForm(): void {
+    public initModalForm(): void {
         const contact = this.data.contact;
         this.modalForm = this.fb.group({
             name: [contact ? contact.name : '', [Validators.required, Validators.maxLength(128), Validators.minLength(2)]],
@@ -55,6 +55,14 @@ export class ContactsAdminModalComponent implements OnInit {
         this.name = this.modalForm.controls.name;
         this.value = this.modalForm.controls.value;
         this.isPrimary = this.modalForm.controls.isPrimary;
+    }
+
+    public getContactNameErrorMsg(): string {
+        return this.utilityService.getContactNameErrorMessages(this.name);
+    }
+
+    public getContactValueErrorMsg(): string {
+        return this.utilityService.getContactValueErrorMessages(this.value);
     }
 
 }

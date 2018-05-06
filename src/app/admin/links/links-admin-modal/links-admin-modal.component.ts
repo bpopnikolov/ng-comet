@@ -52,11 +52,11 @@ import { FormErrorStateMatcher, UtilityService, ValidationService } from '../../
         this.dialogRef.close();
     }
 
-    private initModalForm(): void {
+    public initModalForm(): void {
         const link = this.data.link;
         this.modalForm = this.fb.group({
             name: [link ? link.name : '', [Validators.required, Validators.maxLength(128), Validators.minLength(3)]],
-            target: [link ? link.target : '', [Validators.required]],
+            target: [link ? link.target : '', [Validators.required, this.validationService.isUrl]],
             icon: [link ? link.icon : '', [Validators.required]],
             type: [link ? link.type : '', [Validators.required]],
             isHidden: [link ? link.isHidden : false],
@@ -69,5 +69,17 @@ import { FormErrorStateMatcher, UtilityService, ValidationService } from '../../
         this.icon = this.modalForm.controls.icon;
         this.type = this.modalForm.controls.type;
         this.isHidden = this.modalForm.controls.isHidden;
+    }
+
+    public getLinkNameErrorMsg(): string {
+        return this.utilityService.getLinkNameErrorMessages(this.name);
+    }
+
+    public getLinkTargetErrorMsg(): string {
+        return this.utilityService.getLinkTargetErrorMessages(this.target);
+    }
+
+    public getRequiredFieldErrorMsg(control: AbstractControl): string {
+        return this.utilityService.getFieldIsRequiredErrorMessage(control);
     }
 }
