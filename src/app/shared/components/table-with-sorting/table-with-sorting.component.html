@@ -1,11 +1,15 @@
 <div class="mat-elevation-z8" [ngClass.xs]="{'sorted-table': true}">
+    <div class="sorted-table-header" *ngIf="filterField">
+        <mat-form-field class="sorted-table-filter">
+            <input matInput placeholder="Filter" [(ngModel)]="filterBy" (keyup)="applyFilter($event.target.value)">
+        </mat-form-field>
+    </div>
     <mat-table #table [dataSource]="dataSource" matSort>
 
         <ng-container *ngFor="let column of displayedColumns" matColumnDef="{{column}}">
             <mat-header-cell *matHeaderCellDef mat-sort-header> {{column}} </mat-header-cell>
             <mat-cell *matCellDef="let el" [matTooltip]="isDateCol(column)? (el[column] | date: 'short') : el[column] ">
-                {{ truncCols.has(column)? (el[column] | trunc:[5, '...']) :
-                  (isDateCol(column))? (el[column] | date: 'short') : (el[column])}} </mat-cell>
+                {{ truncCols.has(column)? (el[column] | trunc:[5, '...']) : (isDateCol(column))? (el[column] | date: 'short') : (el[column])}} </mat-cell>
         </ng-container>
 
         <ng-container *ngFor="let column of buttonColumns; let i = index" matColumnDef="{{column}}">

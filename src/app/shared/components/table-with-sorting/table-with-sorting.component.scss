@@ -1,3 +1,11 @@
 .sorted-table {
     min-width: 980px !important;
 }
+
+.sorted-table-header {
+    padding-top: 8px;
+    text-align: center;
+    .sorted-table-filter {
+        width: 80%
+    }
+}

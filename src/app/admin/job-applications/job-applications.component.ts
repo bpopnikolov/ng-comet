@@ -29,7 +29,7 @@ export class JobApplicationsComponent implements OnInit {
             color: 'warn',
         }];
     public jobApplications;
-
+    public filterApplicationsBy: string = '';
     public contactsModalSubject = new Subject();
 
     constructor(
@@ -45,7 +45,7 @@ export class JobApplicationsComponent implements OnInit {
                 console.log(data.jobApplications);
                 this.jobApplications = new MatTableDataSource(data.jobApplications);
             });
-
+        this.filterApplicationsBy = this.route.snapshot.queryParamMap.get('filter');
     }
 
     public onAction(event: any): void {

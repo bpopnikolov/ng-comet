@@ -9,20 +9,24 @@ import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 
 export class TableWithSortingComponent implements OnInit {
 
-    @Input() public  data;
-    @Input() public  displayedColumns = [];
-    @Input() public  buttonColumns = [];
+    @Input() public data;
+    @Input() public displayedColumns = [];
+    @Input() public buttonColumns = [];
     @Input() public buttonDef = [];
     @Input() public truncCols = new Set([]);
-    @ViewChild(MatSort) public  sort: MatSort;
+    @Input() public filterField: boolean = false;
+    @Input() public filterBy: string = '';
+    @ViewChild(MatSort) public sort: MatSort;
     @ViewChild(MatPaginator) public paginator: MatPaginator;
-    @Output() public  actionButtonClicked = new EventEmitter();
-    public dataSource: MatTableDataSource<any>;
+    @Output() public actionButtonClicked = new EventEmitter();
+    public dataSource: MatTableDataSource<any> = new MatTableDataSource([]);
     public allColumns = [];
 
     public ngOnInit(): void {
         this.allColumns = [...this.displayedColumns, ...this.buttonColumns];
         this.dataSource = this.data;
+        this.dataSource.filter = this.filterBy;
+        console.log(this.dataSource.data);
     }
 
     /**
@@ -44,5 +48,10 @@ export class TableWithSortingComponent implements OnInit {
 
     public onActionButtonClick(action: any, id: string): void {
         this.actionButtonClicked.emit({ action, id });
-  }
+    }
+
+    public applyFilter(filterValue: string): void {
+        const filter = filterValue.trim().toLowerCase();
+        this.dataSource.filter = filter;
+    }
 }
