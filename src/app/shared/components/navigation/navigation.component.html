@@ -9,7 +9,6 @@
         </div>
         <div class="nav-buttons" fxFlex="100%" fxHide.xs fxHide.sm>
             <a mat-button [routerLink]="['home']" [routerLinkActive]="'active'">Home</a>
-            <a mat-button>Careers</a>
             <a mat-button [routerLink]="['careers']" [routerLinkActive]="'active'">Careers</a>
             <a mat-button [routerLink]="['contacts']" [routerLinkActive]="'active'">Contacts</a>
             <a mat-button *ngIf="isAdmin" [matMenuTriggerFor]="adminMenu">
@@ -32,30 +31,30 @@
     </mat-toolbar>
 
     <mat-menu #adminMenu="matMenu">
-        <a mat-menu-item [routerLink]="['admin', 'users']">Users</a>
-        <a mat-menu-item [routerLink]="['admin', 'jobads']">Job Ads</a>
-        <a mat-menu-item [routerLink]="['admin', 'jobapps']">Job Applications</a>
-        <a mat-menu-item [routerLink]="['admin', 'links']">Links</a>
-        <a mat-menu-item [routerLink]="['admin', 'contacts']">Contact Details</a>
+        <a mat-menu-item [routerLink]="['admin', 'users']" [routerLinkActive]="'active'">Users</a>
+        <a mat-menu-item [routerLink]="['admin', 'jobads']" [routerLinkActive]="'active'">Job Ads</a>
+        <a mat-menu-item [routerLink]="['admin', 'jobapps']" [routerLinkActive]="'active'">Job Applications</a>
+        <a mat-menu-item [routerLink]="['admin', 'links']" [routerLinkActive]="'active'">Links</a>
+        <a mat-menu-item [routerLink]="['admin', 'contacts']" [routerLinkActive]="'active'">Contact Details</a>
     </mat-menu>
 
     <mat-sidenav-container fxFlex="100%" class="sidenav-container">
         <mat-sidenav #snav class="sidenav-list" [mode]="over" fixedTopGap="56">
             <mat-nav-list>
-                <a mat-list-item routerLink="/home" routerLinkActive="active" active>Home</a>
-                <a mat-list-item routerLink="/careers" routerLinkActive="active">Careers</a>
-                <a mat-list-item routerLink=".">Contacts</a>
+                <a mat-list-item [routerLink]="['home']" [routerLinkActive]="['active']" active>Home</a>
+                <a mat-list-item [routerLink]="['careers']" [routerLinkActive]="['active']">Careers</a>
+                <a mat-list-item [routerLink]="['contacts']" [routerLinkActive]="['active']">Contacts</a>
                 <mat-expansion-panel *ngIf="isAdmin" class="admin-expansion-panel">
                     <mat-expansion-panel-header>
                         <mat-panel-title>
                             Admin
                         </mat-panel-title>
                     </mat-expansion-panel-header>
-                    <a mat-list-item [routerLink]="['admin', 'users']">Users</a>
-                    <a mat-list-item [routerLink]="['admin','jobads']">Job Ads</a>
-                    <a mat-list-item [routerLink]="['admin', 'jobapps']">Job Applications</a>
-                    <a mat-list-item [routerLink]="['admin', 'links']">Links</a>
-                    <a mat-list-item [routerLink]="['admin', 'contacts']">Contact Details</a>
+                    <a mat-list-item [routerLink]="['admin', 'users']" [routerLinkActive]="['active']">Users</a>
+                    <a mat-list-item [routerLink]="['admin','jobads']" [routerLinkActive]="['active']">Job Ads</a>
+                    <a mat-list-item [routerLink]="['admin', 'jobapps']" [routerLinkActive]="['active']">Job Applications</a>
+                    <a mat-list-item [routerLink]="['admin', 'links']" [routerLinkActive]="['active']">Links</a>
+                    <a mat-list-item [routerLink]="['admin', 'contacts']" [routerLinkActive]="['active']">Contact Details</a>
                 </mat-expansion-panel>
                 <mat-divider></mat-divider>
                 <a mat-list-item *ngIf="user" (click)="onSignout()">

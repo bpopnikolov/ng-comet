@@ -7,6 +7,11 @@
     }
 }
 
+.active.mat-menu-item {
+    background-color: #00796B !important;
+    color: white !important;
+}
+
 ::ng-deep.nav-buttons {
     .mat-button,
     .mat-icon-button {
@@ -40,8 +45,7 @@
 }
 
 .nav-container .mat-toolbar {
-    z-index: 6;
-    //   justify-content: center !important;
+    z-index: 6; //   justify-content: center !important;
 }
 
 .toolbar-mobile {
