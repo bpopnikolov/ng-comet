@@ -1,3 +1,4 @@
+import { Category } from './../../shared/models/category.model';
 export class SearchForm {
     public search: string;
     public category: string;

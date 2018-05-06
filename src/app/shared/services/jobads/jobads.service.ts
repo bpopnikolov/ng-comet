@@ -66,4 +66,15 @@ export class JobadsService {
             headers,
         }).pipe(catchError((res: ResponseError) => Observable.throw(res)));
     }
+
+    public getById(id: string): Observable<JobAd> {
+        const headers = new HttpHeaders({
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+        });
+
+        return this.httpClient.get<JobAd>(this.appApi.baseUrl + 'jobads/' + id, {
+            headers,
+        }).pipe(catchError((res: ResponseError) => Observable.throw(res)));
+    }
 }

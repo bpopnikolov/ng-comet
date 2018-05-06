@@ -10,7 +10,7 @@ import { JobAd } from '../../shared/models/jobad.model';
 export class JobsListComponent implements OnInit {
 
   @Input() public listings: JobAd[];
-  public length: number;
+  @Input() public length: number;
   public pageSize: number = 10;
   public pageSizeOptions;
 
@@ -19,11 +19,7 @@ export class JobsListComponent implements OnInit {
   constructor() {}
 
   public ngOnInit(): void {
-    this.length = this.listings.length;
-    // setTimeout(() => {
-    this.filteredListings = this.listings.slice(0, this.pageSize);
-    // }, 1000);
-    // Route resolver as solution if they are still not received
+    this.filteredListings = this.listings.slice(0, this.pageSize)
   }
 
   public onChangePage(event: PageEvent): void {

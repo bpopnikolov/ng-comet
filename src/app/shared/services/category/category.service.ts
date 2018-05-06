@@ -9,13 +9,14 @@ import { Category, ResponseError } from '../../models/';
 @Injectable()
 export class CategoryService {
 
+
   appApi: { [key: string]: any };
 
   constructor(
     private httpClient: HttpClient,
     private configService: AppConfigService,
   ) {
-    this.appApi = configService.get('api');
+    this.appApi = this.configService.get('api');
   }
 
   public getCategories(): Observable<Category[]> {
@@ -28,4 +29,6 @@ export class CategoryService {
       headers,
     }).pipe(catchError((res: ResponseError) => Observable.throw(res)));
   }
+
+
 }

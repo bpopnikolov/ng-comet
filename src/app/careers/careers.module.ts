@@ -1,3 +1,4 @@
+import { CategoryService } from './../shared/services/category/category.service';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -20,6 +21,6 @@ import { SearchBoxComponent } from './search-box/search-box.component';
     FlexLayoutModule,
   ],
   declarations: [CareersComponent, SearchBoxComponent, JobsListComponent, JobViewComponent],
-  providers: [JobadsService],
+  providers: [JobadsService, CategoryService],
 })
 export class CareersModule { }

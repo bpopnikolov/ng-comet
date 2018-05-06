@@ -14,58 +14,35 @@ export class CareersComponent implements OnInit {
   public categories: Category[];
   public listings: JobAd[];
   public allJobs: JobAd[];
+  public length: number;
 
   constructor(
     private jobadsService: JobadsService,
+    private categoryService: CategoryService,
   ) { }
 
   public ngOnInit(): void {
-    // this.categoryService.getCategories().subscribe((categories) => {
-    //   console.log(categories);
-    //   this.categories = categories;
-    // });
-
-    this.categories = [
-      {
-        _id: '23411aedfsa',
-        name: 'IT',
-      },
-      {
-        _id: '23411aedfsa',
-        name: 'Marketing',
-
-      },
-      {
-        _id: '23411aedfsa',
-        name: 'Sales',
-
-      },
-      {
-        _id: '23411aedfsa',
-        name: 'Operations',
-      },
-      {
-        _id: '23411aedfsa',
-        name: 'Other',
-      }];
-
-    console.log(this.categories);
-    this.jobadsService.getJobAds().subscribe((jobs) => {
-      this.allJobs = jobs;
-      console.log(this.allJobs)
+    this.categoryService.getCategories().subscribe((categories) => {
+      this.categories = categories;
     });
 
-    this.listings = this.allJobs;
+    this.jobadsService.getJobAds().subscribe((jobs) => {
+      this.allJobs = jobs;
+      this.length = jobs.length;
+      this.listings = this.allJobs;
+    });
   }
 
   public onSearchFormSubmit(form: SearchForm): void {
     console.log(form);
     this.listings = this.search(form, this.allJobs);
+    this.length = this.listings.length;
   }
 
   public onSearchFormReset(form: SearchForm): void {
     console.log(form);
     this.listings = this.allJobs;
+    this.length = this.listings.length;
   }
 
   public search(form: SearchForm, list: JobAd[]): JobAd[] {
@@ -78,7 +55,7 @@ export class CareersComponent implements OnInit {
         listing.desc.toLocaleLowerCase().includes(form.search.toLocaleLowerCase().trim()));
     }
     if (form.category) {
-      filteredList = filteredList.filter((listing) => listing.category === form.category);
+      filteredList = filteredList.filter((listing: JobAd) => listing.category.name === form.category);
     }
 
     if (form.date) {
