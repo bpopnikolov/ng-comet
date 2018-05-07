@@ -10,6 +10,15 @@
             <input matInput placeholder="Value" type="text" required formControlName="value">
             <mat-error *ngIf="value.invalid">{{ getContactValueErrorMsg() }}</mat-error>
         </mat-form-field>
+
+        <mat-form-field>
+            <input matInput placeholder="Email" type="text" formControlName="email">
+            <mat-error *ngIf="email.invalid">{{ getContactEmailErrorMsg() }}</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput placeholder="Address" type="text" formControlName="address">
+            <!-- <mat-error *ngIf="address.invalid"></mat-error> -->
+        </mat-form-field>
         <div fxFlex>
             <mat-checkbox formControlName="isPrimary">Is primary address?</mat-checkbox>
         </div>

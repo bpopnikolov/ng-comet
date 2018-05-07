@@ -13,6 +13,8 @@ export class ContactsAdminModalComponent implements OnInit {
 
     public name: AbstractControl;
     public value: AbstractControl;
+    public email: AbstractControl;
+    public address: AbstractControl;
     public isPrimary: AbstractControl;
     public modalTitle: string;
     public modalActionButton: string;
@@ -47,6 +49,8 @@ export class ContactsAdminModalComponent implements OnInit {
         this.modalForm = this.fb.group({
             name: [contact ? contact.name : '', [Validators.required, Validators.maxLength(128), Validators.minLength(2)]],
             value: [contact ? contact.value : '', [Validators.required, Validators.maxLength(1024), Validators.minLength(2)]],
+            email: [contact ? contact.email : '', []],
+            address: [contact ? contact.address : '', []],
             isPrimary: [contact ? contact.isPrimary : false],
         });
 
@@ -54,6 +58,8 @@ export class ContactsAdminModalComponent implements OnInit {
 
         this.name = this.modalForm.controls.name;
         this.value = this.modalForm.controls.value;
+        this.email = this.modalForm.controls.email;
+        this.address = this.modalForm.controls.address;
         this.isPrimary = this.modalForm.controls.isPrimary;
     }
 
@@ -63,6 +69,10 @@ export class ContactsAdminModalComponent implements OnInit {
 
     public getContactValueErrorMsg(): string {
         return this.utilityService.getContactValueErrorMessages(this.value);
+    }
+
+    public getContactEmailErrorMsg(): string {
+        return this.utilityService.getEmailErrorMessages(this.email);
     }
 
 }

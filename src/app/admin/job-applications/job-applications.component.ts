@@ -14,7 +14,7 @@ import { JobApplicationsService } from '../../shared/services/job-applications';
 
 export class JobApplicationsComponent implements OnInit {
     public displayedColumns = ['_id', 'firstname', 'lastname', 'comment', 'jobAd', 'createdAt'];
-    public buttonColumns = ['cv', 'cl', 'delete'];
+    public buttonColumns = ['cv', 'cl'];
     public truncCols = new Set(['_id', 'comment']);
     public buttonDef = [
         {
@@ -47,7 +47,6 @@ export class JobApplicationsComponent implements OnInit {
                 data.jobApplications.forEach((application) => {
                     application.jobAd = application.jobAd.title;
                 });
-                console.log(data.jobApplications);
 
                 this.jobApplications = new MatTableDataSource(data.jobApplications);
             });
@@ -55,7 +54,7 @@ export class JobApplicationsComponent implements OnInit {
     }
 
     public onAction(event: any): void {
-        const jobApplication = this.jobApplications.data.find((x) => x._id === event.id);
+        const jobApplication = this.jobApplications.data.find((x) => x._id === event._id);
 
         if (event.action === 'download_cv') {
             this.downloadService.downloadFile(jobApplication.cv).subscribe((data) => {

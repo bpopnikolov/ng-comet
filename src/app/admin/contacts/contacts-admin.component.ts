@@ -14,9 +14,9 @@ import { ContactsAdminModalComponent } from './contacts-admin-modal/contacts-adm
     styleUrls: ['./contacts-admin.component.scss'],
 })
 export class ContactsAdminComponent implements OnInit, OnDestroy {
-    public displayedColumns = ['_id', 'name', 'value', 'email', 'phone', 'createdAt'];
+    public displayedColumns = ['_id', 'name', 'value', 'isPrimary', 'email', 'phone', 'createdAt'];
     public buttonColumns = ['view', 'edit', 'delete'];
-    public truncCols = new Set(['_id', 'value']);
+    public truncCols = new Set(['_id', 'value', 'phone', 'email']);
     public buttonDef = [
         {
             action: 'view',
@@ -81,7 +81,7 @@ export class ContactsAdminComponent implements OnInit, OnDestroy {
     }
 
     public onAction(event: any): void {
-        const contact = this.contacts.data.find((x) => x._id === event.id);
+        const contact = this.contacts.data.find((x) => x._id === event._id);
 
         if (event.action === 'view') {
             this.openModal(

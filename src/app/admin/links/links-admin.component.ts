@@ -80,7 +80,7 @@ export class LinksAdminComponent implements OnInit, OnDestroy {
     }
 
     public onAction(event: any): void {
-        const link = this.links.data.find((x) => x._id === event.id);
+        const link = this.links.data.find((x) => x._id === event._id);
 
         if (event.action === 'view') {
             this.openModal(

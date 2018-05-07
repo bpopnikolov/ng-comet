@@ -34,12 +34,16 @@ export class JobApplicationsService {
     public createJobApplication(application: any): Observable<JobApplication> {
 
         const formData = new FormData();
-        console.log(application.jobAd);
+
         formData.append('firstname', application.firstname);
         formData.append('lastname', application.lastname);
         formData.append('comment', application.comment);
-        formData.append('cv', application.cv.files[0]);
-        formData.append('cl', application.cl.files[0]);
+        if (application.cv) {
+            formData.append('cv', application.cv.files[0]);
+        }
+        if (application.cl) {
+            formData.append('cl', application.cl.files[0]);
+        }
         formData.append('jobAd', application.jobAd._id);
 
         const body = formData;

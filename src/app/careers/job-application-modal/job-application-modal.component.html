@@ -10,7 +10,7 @@
             <mat-error *ngIf="lastname.invalid">{{ getNameFieldErrorMsg (lastname)}}</mat-error>
         </mat-form-field>
         <mat-form-field>
-            <textarea [froalaEditor]="editorOptions" matInput placeholder="Comment" type="text" matTextareaAutosize required formControlName="comment">
+            <textarea matInput placeholder="Comment" type="text" matTextareaAutosize required formControlName="comment">
                         </textarea>
             <mat-error *ngIf="comment.invalid"> comment error </mat-error>
         </mat-form-field>
@@ -27,7 +27,7 @@
         </mat-form-field>
 
         <mat-form-field class="file-input">
-            <ngx-mat-file-input formControlName="cl" placeholder="Upload Cover Letter" valuePlaceholder="No file selected" required></ngx-mat-file-input>
+            <ngx-mat-file-input formControlName="cl" placeholder="Upload Cover Letter" valuePlaceholder="No file selected"></ngx-mat-file-input>
             <mat-icon matSuffix>folder</mat-icon>
             <mat-error *ngIf="cl.hasError('required')">
                 Please select a file

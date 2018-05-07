@@ -38,6 +38,7 @@ import { FormErrorStateMatcher, UtilityService, ValidationService } from '../../
         this.modalTitle = this.data.modalTitle;
         this.modalActionButton = this.data.modalActionButton;
         this.initModalForm();
+        console.log(this.data);
     }
 
     public onActionClick(): void {

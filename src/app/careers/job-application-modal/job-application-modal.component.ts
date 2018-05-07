@@ -4,8 +4,6 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { FileValidator } from 'ngx-material-file-input';
 import { FormErrorStateMatcher, UtilityService, ValidationService } from '../../shared/utility';
 
-const options = ['bold', 'italic', 'underline', 'fontSize', 'color', 'align', 'insertLink', 'paragraphFormat', 'alert'];
-
 @Component({
     selector: 'app-job-application-modal',
     templateUrl: './job-application-modal.component.html',
@@ -21,14 +19,7 @@ export class JobApplicationModalComponent implements OnInit {
     public comment: AbstractControl;
     public cv: AbstractControl;
     public cl: AbstractControl;
-    public editorOptions: { [key: string]: any } = {
-        placeholderText: 'Comment',
-        charCounterCount: true,
-        toolbarButtons: options,
-        toolbarButtonsXS: options,
-        toolbarButtonsSM: options,
-        toolbarButtonsMD: options,
-    };
+
     public readonly maxFileSize = 16777216;
 
     constructor(
@@ -56,7 +47,6 @@ export class JobApplicationModalComponent implements OnInit {
                 this.validationService.validateApplicationFileFormat,
                 FileValidator.maxContentSize(this.maxFileSize)]],
             cl: [null, [
-                Validators.required,
                 this.validationService.validateApplicationFileFormat,
                 FileValidator.maxContentSize(this.maxFileSize)]],
         });

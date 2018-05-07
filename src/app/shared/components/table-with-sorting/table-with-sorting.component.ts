@@ -49,8 +49,19 @@ export class TableWithSortingComponent implements OnInit {
         this.dataSource.paginator = this.paginator;
     }
 
-    public onActionButtonClick(action: any, id: string): void {
-        this.actionButtonClicked.emit({ action, id });
+    public onActionButtonClick(action: any, _id: string): void {
+        this.actionButtonClicked.emit({ action, _id });
+    }
+
+    public disableIfNoDonwloadFile(column: any, element: any): boolean {
+        if (column === 'cl' && !element.cl) {
+            return true;
+        }
+
+        if (column === 'cv' && !element.cv) {
+            return true;
+        }
+        return false;
     }
 
     public applyFilter(filterValue: string): void {

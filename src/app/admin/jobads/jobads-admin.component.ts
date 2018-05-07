@@ -88,7 +88,7 @@ export class JobadsAdminComponent implements OnInit, OnDestroy {
     }
 
     public onAction(event: any): void {
-        const jobAd = this.jobAds.data.find((x) => x._id === event.id);
+        const jobAd = this.jobAds.data.find((x) => x._id === event._id);
 
         if (event.action === 'view') {
             // this.openModal(

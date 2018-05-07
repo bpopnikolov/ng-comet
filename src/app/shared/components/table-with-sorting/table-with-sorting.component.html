@@ -15,7 +15,7 @@
         <ng-container *ngFor="let column of buttonColumns; let i = index" matColumnDef="{{column}}">
             <mat-header-cell *matHeaderCellDef mat-sort-header> {{column}} </mat-header-cell>
             <mat-cell *matCellDef="let element">
-                <a mat-raised-button [color]="buttonDef[i].color" (click)="onActionButtonClick(buttonDef[i].action, element._id)">{{buttonDef[i].action}}</a> </mat-cell>
+                <button mat-raised-button [disabled]="disableIfNoDonwloadFile(column, element)" [color]="buttonDef[i].color" (click)="onActionButtonClick(buttonDef[i].action, element._id)">{{buttonDef[i].action}}</button> </mat-cell>
         </ng-container>
 
         <mat-header-row *matHeaderRowDef="allColumns"></mat-header-row>
