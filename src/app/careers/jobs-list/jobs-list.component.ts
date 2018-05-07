@@ -101,7 +101,7 @@ export class JobsListComponent implements OnInit {
 
             filteredJobs = filteredJobs.filter((x) => {
                 const jobDate = new Date(x.createdAt).setHours(0, 0, 0, 0);
-                return jobDate === filterDate;
+                return jobDate > filterDate;
             });
         }
 

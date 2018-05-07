@@ -33,7 +33,7 @@ export class LayoutContainer implements OnInit {
 
     public getFooterLinks(): void {
         this.linkService.getLinks().subscribe((links) => {
-            this.socialLinks = links.filter((link) => link.type === 'social');
+            this.socialLinks = links.filter((link) => link.type === 'social' && !link.isHidden);
         });
     }
 

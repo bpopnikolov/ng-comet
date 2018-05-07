@@ -23,7 +23,7 @@ export class HomeComponent implements OnInit {
         this.route.data.subscribe(
             (data: { links: ActionLink[] }) => {
                 // console.log(data);
-                this.actionLinks = data.links.filter((link) => link.type === 'action');
+                this.actionLinks = data.links.filter((link) => link.type === 'action' && !link.isHidden);
             });
     }
 }
