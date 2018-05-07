@@ -12,8 +12,8 @@ import { JobApplicationsService } from '../../shared/services/job-applications';
 })
 
 export class JobApplicationsComponent implements OnInit {
-    public displayedColumns = ['_id', 'firstname', 'lastname', 'comment', 'createdAt'];
-    public buttonColumns = ['cv', 'cl'];
+    public displayedColumns = ['_id', 'firstname', 'lastname', 'comment', 'jobAd', 'createdAt'];
+    public buttonColumns = ['cv', 'cl', 'delete'];
     public truncCols = new Set(['_id', 'comment']);
     public buttonDef = [
         {
@@ -42,7 +42,11 @@ export class JobApplicationsComponent implements OnInit {
             (data: {
                 jobApplications: JobApplication[];
             }) => {
+                data.jobApplications.forEach((application) => {
+                    application.jobAd = application.jobAd.title;
+                });
                 console.log(data.jobApplications);
+
                 this.jobApplications = new MatTableDataSource(data.jobApplications);
             });
         this.filterApplicationsBy = this.route.snapshot.queryParamMap.get('filter');

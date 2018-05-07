@@ -44,7 +44,7 @@ export class JobadsAdminComponent implements OnInit, OnDestroy {
         private jobadsService: JobadsService,
         private categoryService: CategoryService,
         private route: ActivatedRoute,
-        public modalService: MatDialog,
+        private modalService: MatDialog,
     ) { }
 
     public ngOnInit(): void {

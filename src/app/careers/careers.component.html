@@ -1,7 +1,3 @@
-<div class="careers-container" fxLayout="row" fxLayoutAlign="space-around center" >
-    <app-jobs-list  fxFlex="45%" [listings]="listings" [length]="length" [pageIndex]="pageIndex" (pageChange)="onPageChange($event)">
-    </app-jobs-list>
-    <app-search-box (searchSubmit)="onSearchFormSubmit($event)" (searchReset)="onSearchFormReset($event)"
-    fxFlex="30%" [categories]="categories">
-    </app-search-box>
+<div class="careers-container container" fxFlex="100%" fxLayout="row">
+    <router-outlet></router-outlet>
 </div>

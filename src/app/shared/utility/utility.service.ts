@@ -106,6 +106,23 @@ export class UtilityService {
         }
     }
 
+    public getApplicationNameErrorMessages(name: AbstractControl): string {
+        if (name.hasError('required')) {
+            return this.errors.fieldRequiredError;
+        }
+        if (name.hasError('minlength')) {
+            return this.errors.applicationNameMinLengthError;
+        }
+        if (name.hasError('maxlength')) {
+            return this.errors.applicationNameMaxLengthError;
+        }
+    }
+
+    public getApplicationFileFormatError(control: AbstractControl): string {
+        if (control.hasError('fileFormat')) {
+            return this.errors.applicationFileFormatError;
+        }
+    }
     public getFieldIsRequiredErrorMessage(control: AbstractControl): string {
         return control.hasError('required') ? this.errors.fieldRequiredError : '';
     }

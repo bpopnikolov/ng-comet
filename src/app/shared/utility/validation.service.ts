@@ -24,4 +24,11 @@ export class ValidationService {
             }
         };
     }
+
+    public validateApplicationFileFormat(formControl: FormControl): { [error: string]: any } {
+        if (formControl.value) {
+            const allowedExtensions = /(pdf|docx|doc|vnd.openxmlformats-officedocument.wordprocessingml.document|msword)$/i;
+            return allowedExtensions.test(formControl.value.files[0].type) ? null : { fileFormat: { valid: false } };
+        }
+    }
 }

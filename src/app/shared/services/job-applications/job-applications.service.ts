@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Http } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { catchError } from 'rxjs/operators';
 import { AppConfigService } from '../../../app-config.service';
@@ -13,6 +14,7 @@ export class JobApplicationsService {
 
     constructor(
         private httpClient: HttpClient,
+        private http: Http,
         private configService: AppConfigService,
     ) {
         this.appApi = this.configService.get('api');
@@ -29,17 +31,21 @@ export class JobApplicationsService {
         }).pipe(catchError((res: ResponseError) => Observable.throw(res)));
     }
 
-    public createJobApplication(application: JobApplication): Observable<JobApplication> {
-        const headers = new HttpHeaders({
-            Accept: 'application/json',
-            'Content-Type': 'application/json',
-        });
+    public createJobApplication(application: any): Observable<JobApplication> {
 
-        const body = application;
+        const formData = new FormData();
+        console.log(application.jobAd);
+        formData.append('firstname', application.firstname);
+        formData.append('lastname', application.lastname);
+        formData.append('comment', application.comment);
+        formData.append('cv', application.cv.files[0]);
+        formData.append('cl', application.cl.files[0]);
+        formData.append('jobAd', application.jobAd._id);
 
-        return this.httpClient.post<JobApplication>(`${this.appApi.baseUrl}application`, body, {
-            headers,
-        }).pipe(catchError((res: ResponseError) => Observable.throw(res)));
+        const body = formData;
+
+        return this.httpClient.post(`${this.appApi.baseUrl}applications`, body)
+            .pipe(catchError((res: ResponseError) => Observable.throw(res)));
     }
 
     public deleteJobApplication(id: string): Observable<boolean> {
@@ -48,7 +54,7 @@ export class JobApplicationsService {
             'Content-Type': 'application/json',
         });
 
-        return this.httpClient.delete<Observable<boolean>>(`${this.appApi.baseUrl}application/delete/${id}`, {
+        return this.httpClient.delete<Observable<boolean>>(`${this.appApi.baseUrl}applications/delete/${id}`, {
             headers,
         }).pipe(catchError((res: ResponseError) => Observable.throw(res)));
     }
