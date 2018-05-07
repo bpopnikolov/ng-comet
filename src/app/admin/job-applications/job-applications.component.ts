@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material';
 import { ActivatedRoute } from '@angular/router';
+import * as FileSaver from 'file-saver';
 import { Subject } from 'rxjs/Subject';
 import { JobApplication } from '../../shared/models';
+import { DownloadService } from '../../shared/services/download/download.service';
 import { JobApplicationsService } from '../../shared/services/job-applications';
-
 @Component({
     selector: 'app-job-applications',
     templateUrl: './job-applications.component.html',
@@ -17,11 +18,11 @@ export class JobApplicationsComponent implements OnInit {
     public truncCols = new Set(['_id', 'comment']);
     public buttonDef = [
         {
-            action: 'Download CV',
+            action: 'download_cv',
             color: 'primary',
         },
         {
-            action: 'Download CL',
+            action: 'download_cl',
             color: 'primary',
         },
         {
@@ -35,6 +36,7 @@ export class JobApplicationsComponent implements OnInit {
     constructor(
         private jobApplicationsService: JobApplicationsService,
         private route: ActivatedRoute,
+        private downloadService: DownloadService,
     ) { }
 
     public ngOnInit(): void {
@@ -56,11 +58,16 @@ export class JobApplicationsComponent implements OnInit {
         const jobApplication = this.jobApplications.data.find((x) => x._id === event.id);
 
         if (event.action === 'download_cv') {
-            console.log('download CV');
+            this.downloadService.downloadFile(jobApplication.cv).subscribe((data) => {
+                FileSaver.saveAs(data, `${jobApplication.firstname}_cv`);
+            });
         }
-        if (event.action === 'download_cw') {
-            console.log('download Cw');
+        if (event.action === 'download_cl') {
+            this.downloadService.downloadFile(jobApplication.cl).subscribe((data) => {
+                FileSaver.saveAs(data, `${jobApplication.firstname}_cl`);
+            });
         }
+
         if (event.action === 'delete') {
             // this.onDelete(jobApplication);
         }

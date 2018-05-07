@@ -10,11 +10,11 @@ import { AppConfigService } from './app-config.service';
 import { AppMaterialModule } from './app-material';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { CareersModule } from './careers/careers.module';
 import { HomeModule } from './home';
 import { ContainersModule } from './shared/containers';
 import { AuthModule } from './shared/services/auth/auth.module';
 import { ContactsResolver, ContactsService } from './shared/services/contacts';
+import { DownloadModule } from './shared/services/download/';
 import { JobApplicationsModule } from './shared/services/job-applications';
 import { JobAdsResolver } from './shared/services/jobads/jobads.resolver';
 import { JobadsService } from './shared/services/jobads/jobads.service';
@@ -50,13 +50,13 @@ export const tokenGetter = () => {
         FlexLayoutModule,
         AppMaterialModule,
         ContainersModule,
+        DownloadModule,
         JobApplicationsModule,
         AuthModule,
         LinkModule,
         UserModule,
         HomeModule,
         AppRoutingModule,
-        CareersModule,
     ],
     providers: [
         AppConfigService,
