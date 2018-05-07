@@ -1,20 +1,10 @@
-import {
-    NgModule
-} from '@angular/core';
-import {
-    CommonModule
-} from '@angular/common';
-import {
-    HomeComponent
-} from './home.component';
-import {
-    HomeRoutingModule
-} from './home-routing.module';
-import { ComponentsModule } from '../shared/components';
+import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { AppMaterialModule } from '../app-material/app-material.module';
-
-
+import { ComponentsModule } from '../shared/components';
+import { HomeRoutingModule } from './home-routing.module';
+import { HomeComponent } from './home.component';
 
 @NgModule({
     imports: [
@@ -22,11 +12,11 @@ import { AppMaterialModule } from '../app-material/app-material.module';
         HomeRoutingModule,
         FlexLayoutModule,
         AppMaterialModule,
-        ComponentsModule
+        ComponentsModule,
     ],
     declarations: [
         HomeComponent,
     ],
-    providers: []
+    providers: [],
 })
 export class HomeModule { }

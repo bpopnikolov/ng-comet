@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ActionLink } from '../../services/link/link.model';
 
 @Component({
@@ -8,7 +8,7 @@ import { ActionLink } from '../../services/link/link.model';
 })
 export class FooterComponent implements OnInit {
 
-    @Input() socialLinks: ActionLink[] = [];
+    @Input() public socialLinks: ActionLink[] = [];
 
     constructor() { }
 

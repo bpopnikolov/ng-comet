@@ -47,7 +47,7 @@ export class JobApplicationsService {
         formData.append('jobAd', application.jobAd._id);
 
         const body = formData;
-
+        console.log(application);
         return this.httpClient.post(`${this.appApi.baseUrl}applications`, body)
             .pipe(catchError((res: ResponseError) => Observable.throw(res)));
     }

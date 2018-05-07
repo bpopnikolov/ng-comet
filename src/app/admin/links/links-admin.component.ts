@@ -150,7 +150,7 @@ export class LinksAdminComponent implements OnInit, OnDestroy {
     public onEdit(link: any, updatedInfo: any): void {
         // deep copy current jobAd
         // Object.assign({}, link);
-        const newLink = { ...link };
+        let newLink = { ...link };
 
         // mutate the new jobAd
         Object.keys(updatedInfo).forEach((key) => {
