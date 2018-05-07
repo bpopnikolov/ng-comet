@@ -28,7 +28,7 @@ export class UserComponent implements OnInit {
     public onSignupFormSubmit(form: SignupForm): void {
         this.userService.signup(form).subscribe(
             (res) => {
-                this.router.navigate(['/signin']);
+                this.router.navigate(['/']);
             },
             (res) => {
                 console.log(res);

@@ -27,11 +27,20 @@ export class UtilityService {
         if (password.hasError('required')) {
             return this.errors.passwordMaxLengthError;
         }
+        if (password.hasError('validatePassword')) {
+            return this.errors.passwordNotValidError;
+        }
     }
 
     public getConfirmPasswordErrorMessages(confirmPassword: AbstractControl): string {
         if (confirmPassword.hasError('required')) {
             return this.errors.passwordsMismatchError;
+        }
+        if (confirmPassword.hasError('mismatch')) {
+            return this.errors.passwordsMismatchError;
+        }
+        if (confirmPassword.hasError('validatePassword')) {
+            return this.errors.passwordNotValidError;
         }
     }
 
