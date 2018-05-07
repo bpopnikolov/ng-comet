@@ -12,6 +12,10 @@
 .job-list-container {
     min-height: 100%;
     margin-top: 5%;
+    .mat-card-subtitle {
+        margin-top: 0px !important;
+        margin-bottom: 8px !important;
+    }
 }
 
 .search-box-container {
@@ -43,7 +47,7 @@
         cursor: pointer;
         border: solid 2px transparent;
         text-align: left;
-        padding: 12px 12px 0px 12px !important;
+        padding: 8px 12px 0px 12px !important;
     }
     .job-card:hover {
         border: solid 2px #009688;

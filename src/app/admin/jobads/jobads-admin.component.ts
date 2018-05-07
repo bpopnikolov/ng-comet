@@ -1,10 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog, MatDialogRef, MatTableDataSource } from '@angular/material';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subject } from 'rxjs/Subject';
 import { Subscription } from 'rxjs/Subscription';
 import { ConfirmActionModalComponent } from '../../shared/components/';
-import { JobAd, Category } from '../../shared/models';
+import { Category, JobAd } from '../../shared/models';
 import { CategoryService } from '../../shared/services/category/category.service';
 import { JobadsService } from '../../shared/services/jobads';
 import { JobadAdminModalComponent } from './jobad-admin-modal';
@@ -45,6 +45,7 @@ export class JobadsAdminComponent implements OnInit, OnDestroy {
         private categoryService: CategoryService,
         private route: ActivatedRoute,
         private modalService: MatDialog,
+        private router: Router,
     ) { }
 
     public ngOnInit(): void {
@@ -90,15 +91,16 @@ export class JobadsAdminComponent implements OnInit, OnDestroy {
         const jobAd = this.jobAds.data.find((x) => x._id === event.id);
 
         if (event.action === 'view') {
-            this.openModal(
-                {
-                    jobAd,
-                    modalTitle: 'Preview JobAd',
-                    modalActionButton: 'Preview',
-                    jobCategories: this.jobCategories,
-                    subject: this.jobAdsModalSubject,
-                },
-                JobadAdminModalComponent);
+            // this.openModal(
+            // {
+            //     jobAd,
+            //     modalTitle: 'Preview JobAd',
+            //     modalActionButton: 'Preview',
+            //     jobCategories: this.jobCategories,
+            //     subject: this.jobAdsModalSubject,
+            // },
+            // JobadAdminModalComponent);
+            this.router.navigate(['careers', jobAd._id]);
         }
         if (event.action === 'edit') {
             this.openModal(

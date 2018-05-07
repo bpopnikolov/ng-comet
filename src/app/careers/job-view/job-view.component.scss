@@ -8,6 +8,13 @@
     padding: 16px 0;
 }
 
+.job-details-card {
+    width: 100%;
+    .mat-card-subtitle {
+        margin-top: 0px !important;
+    }
+}
+
 .job-details-container {
     min-height: 100%;
     margin: 5%;

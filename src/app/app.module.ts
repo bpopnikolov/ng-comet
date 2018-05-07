@@ -12,6 +12,7 @@ import { AppComponent } from './app.component';
 import { HomeModule } from './home';
 import { ContainersModule } from './shared/containers';
 import { AuthModule } from './shared/services/auth/auth.module';
+import { CategoryService } from './shared/services/category/category.service';
 import { ContactsResolver, ContactsService } from './shared/services/contacts';
 import { DownloadModule } from './shared/services/download/';
 import { JobApplicationsModule } from './shared/services/job-applications';
@@ -61,6 +62,7 @@ export const tokenGetter = () => {
         ContactsService,
         ContactsResolver,
         JobadsService,
+        CategoryService,
         JobAdsResolver,
         {
             provide: APP_INITIALIZER,

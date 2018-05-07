@@ -2,6 +2,6 @@
 <div class="contacts-container" fxLayout="column">
 
     <div class="contacts-list" fxFlex="55%" fxLayout="row" fxLayoutAlign="center center">
-        <app-contacts-list fxFlex="60%" fxFlex.sm="60%" fxFlex.xs="90%" fxLayout.xs="column"   fxLayout.sm="column" fxLayout="row wrap" [contacts]="contacts" (contactSelected)="updateMapContact($event)" ></app-contacts-list>
+        <app-contacts-list fxFlex="60%" fxFlex.sm="60%" fxFlex.xs="90%" fxLayout.xs="column" fxLayout.sm="column" fxLayout="row wrap" [contacts]="contacts" (contactSelected)="updateMapContact($event)" [selectedContact]="selectedContact"></app-contacts-list>
     </div>
 </div>

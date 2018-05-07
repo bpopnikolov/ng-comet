@@ -1,4 +1,4 @@
-import { CommonModule, SlicePipe } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -31,9 +31,6 @@ import { JobsListComponent } from './jobs-list/jobs-list.component';
         JobApplicationModalComponent,
     ],
     providers: [
-        JobadsService,
-        CategoryService,
-        SlicePipe,
     ],
 })
 export class CareersModule { }

@@ -22,7 +22,7 @@ export class JobsListComponent implements OnInit {
     public start: number = 0;
     public end: number = 10;
 
-    public pageSize: number = 5;
+    public pageSize: number = 10;
     public filteredJobs: JobAd[];
     public isFiltered: boolean = false;
 
@@ -83,7 +83,9 @@ export class JobsListComponent implements OnInit {
 
         if (this.searchFilter) {
             filteredJobs = filteredJobs.filter((x) => {
-                return x.title.toLocaleLowerCase().includes(this.searchFilter) || x.status === this.searchFilter;
+                return x.title.toLocaleLowerCase().includes(this.searchFilter.toLocaleLowerCase()) ||
+                    x.status === this.searchFilter ||
+                    x.desc.toLocaleLowerCase().includes(this.searchFilter.toLocaleLowerCase());
             });
         }
 

@@ -6,29 +6,33 @@ import { Contact } from './shared';
 @Component({
     selector: 'app-contacts',
     templateUrl: './contacts.component.html',
-    styleUrls: ['./contacts.component.scss']
+    styleUrls: ['./contacts.component.scss'],
 })
 export class ContactsComponent implements OnInit {
 
-    contacts: Contact[] = [];
+    public contacts: Contact[] = [];
 
-    latitude: number = 0;
+    public latitude: number = 0;
 
-    longitude: number = 0;
+    public longitude: number = 0;
 
-    primaryContact: Contact = null;
+    public primaryContact: Contact = null;
+    public selectedContact: number = 0;
 
     constructor(
         private contactsService: ContactsService,
-        private googleMapsService: GoogleMapsService
+        private googleMapsService: GoogleMapsService,
     ) { }
 
-    ngOnInit(): void {
+    public ngOnInit(): void {
         this.contactsService.getContacts().subscribe((contacts) => {
-            console.log(contacts);
             this.contacts = contacts;
-
-            this.primaryContact = this.contacts.find(contact => contact.isPrimary === true);
+            this.primaryContact = this.contacts.find((contact, i) => {
+                if (contact.isPrimary === true) {
+                    this.selectedContact = i;
+                    return true;
+                }
+            });
 
             this.initGoogleMap();
 
@@ -37,27 +41,27 @@ export class ContactsComponent implements OnInit {
 
     }
 
-    initGoogleMap() {
+    public initGoogleMap(): void {
         if (this.primaryContact) {
             this.googleMapsService.getGeocoding(this.primaryContact.value)
                 .subscribe((coordinates) => {
-                    this.latitude = coordinates.lat()
-                    this.longitude = coordinates.lng()
+                    this.latitude = coordinates.lat();
+                    this.longitude = coordinates.lng();
                 });
         } else if (this.contacts.length > 0) {
             this.googleMapsService.getGeocoding(this.contacts[0].value)
                 .subscribe((coordinates) => {
-                    this.latitude = coordinates.lat()
-                    this.longitude = coordinates.lng()
+                    this.latitude = coordinates.lat();
+                    this.longitude = coordinates.lng();
                 });
         }
     }
 
-    updateMapContact(contact) {
+    public updateMapContact(contact: Contact): void {
         this.googleMapsService.getGeocoding(contact.value)
-        .subscribe((coordinates) => {
-            this.latitude = coordinates.lat()
-            this.longitude = coordinates.lng()
-        });
+            .subscribe((coordinates) => {
+                this.latitude = coordinates.lat();
+                this.longitude = coordinates.lng();
+            });
     }
 }

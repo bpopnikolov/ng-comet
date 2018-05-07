@@ -8,19 +8,18 @@ import { User } from '../../../user/shared';
 })
 export class NavigationComponent implements OnInit {
 
-    @Input() user: User = null;
-    @Input() isAdmin: boolean = false;
-    @Input() isAuthenticated: boolean = false;
-    @Output() signedOut = new EventEmitter();
+    @Input() public user: User = null;
+    @Input() public isAdmin: boolean = false;
+    @Input() public isAuthenticated: boolean = false;
+    @Output() public signedOut = new EventEmitter();
 
 
     constructor() { }
 
-    ngOnInit() {
+    public ngOnInit(): void {
     }
 
-    onSignout() {
-        console.log('object');
+    public onSignout(): void {
         this.signedOut.emit();
     }
 

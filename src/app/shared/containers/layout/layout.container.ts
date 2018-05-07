@@ -1,44 +1,45 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../../services/auth/auth.service';
+import { Router } from '@angular/router';
 import { User } from '../../../user/shared';
+import { AuthService } from '../../services/auth/auth.service';
 import { ActionLink } from '../../services/link';
 import { LinkService } from '../../services/link/link.service';
 
 @Component({
-  selector: 'app-layout',
-  templateUrl: './layout.container.html',
-  styleUrls: ['./layout.container.scss']
+    selector: 'app-layout',
+    templateUrl: './layout.container.html',
+    styleUrls: ['./layout.container.scss'],
 })
 export class LayoutContainer implements OnInit {
 
-    user: User = null;
-    isAuthenticated: boolean = false;
-    isAdmin: boolean = false;
-    socialLinks: ActionLink[] = [];
+    public user: User = null;
+    public isAuthenticated: boolean = false;
+    public isAdmin: boolean = false;
+    public socialLinks: ActionLink[] = [];
 
-  constructor(private authService: AuthService, private linkService: LinkService ) { }
+    constructor(
+        private authService: AuthService,
+        private linkService: LinkService,
+        private router: Router) { }
 
-    ngOnInit() {
+    public ngOnInit(): void {
         this.authService.isAuthenticated.subscribe((data) => {
-            console.log(data, 'is logged in');
             this.isAuthenticated = data;
             this.isAdmin = this.authService.isCurrentUserAdmin();
-            console.log(this.isAdmin);
             this.user = this.authService.getCurrentUser();
-            console.log(this.user);
         });
         this.getFooterLinks();
     }
 
-    getFooterLinks() {
+    public getFooterLinks(): void {
         this.linkService.getLinks().subscribe((links) => {
             this.socialLinks = links.filter((link) => link.type === 'social');
-            console.log(this.socialLinks);
         });
     }
 
-    onSignout() {
+    public onSignout(): void {
         this.authService.purgeAuth();
+        this.router.navigate(['/home']);
     }
 
 }

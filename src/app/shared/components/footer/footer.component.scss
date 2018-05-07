@@ -1,5 +1,12 @@
 .footer {
-    background-color: black;
+    background-image: url('/assets/home-parallax.jpg');
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+    min-height: 50%;
+    padding: 10px 0px;
     min-height: 20%;
     text-align: center;
 }

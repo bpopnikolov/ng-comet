@@ -41,6 +41,10 @@ export class TableWithSortingComponent implements OnInit {
         return column === '_id' ? true : false;
     }
 
+    public isJobsAppliedCol(column: string): boolean {
+        return column === 'jobsApplied' ? true : false;
+    }
+
     public ngAfterViewInit(): void {
         this.dataSource.sort = this.sort;
         this.dataSource.paginator = this.paginator;

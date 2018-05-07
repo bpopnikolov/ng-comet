@@ -32,7 +32,7 @@ export class UsersAdminComponent implements OnInit {
                         return x ? x.jobAd.title : null;
                         // return x.JobAd.title;
                     });
-                    user.jobsApplied = user.jobsApplied.join(', ');
+                    // user.jobsApplied = user.jobsApplied.join(', ');
                 });
                 this.users = new MatTableDataSource(data.users);
             });
