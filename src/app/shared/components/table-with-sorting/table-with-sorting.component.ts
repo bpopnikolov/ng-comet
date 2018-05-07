@@ -26,7 +26,6 @@ export class TableWithSortingComponent implements OnInit {
         this.allColumns = [...this.displayedColumns, ...this.buttonColumns];
         this.dataSource = this.data;
         this.dataSource.filter = this.filterBy;
-        console.log(this.dataSource.data);
     }
 
     /**

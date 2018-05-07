@@ -4,7 +4,7 @@
     </div>
 </div>
 <div fxFlex="100%" fxLayout="row" fxLayoutAlign="center center">
-    <div fxFlex="95%" class="sorted-table-container">
+    <div fxFlex="95%" [ngClass.xs]="{'sorted-table-container': true}" [ngClass.sm]="{'sorted-table-container': true}">
         <app-table-with-sorting class="sorted-table" [data]="users" [displayedColumns]="displayedColumns" [truncCols]="truncCols"></app-table-with-sorting>
     </div>
 </div>

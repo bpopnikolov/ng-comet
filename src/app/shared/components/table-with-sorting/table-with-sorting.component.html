@@ -1,4 +1,4 @@
-<div class="mat-elevation-z8" [ngClass.xs]="{'sorted-table': true}">
+<div class="mat-elevation-z8" [ngClass.xs]="{'sorted-table': true}" [ngClass.sm]="{'sorted-table': true}">
     <div class="sorted-table-header" *ngIf="filterField">
         <mat-form-field class="sorted-table-filter">
             <input matInput placeholder="Filter" [(ngModel)]="filterBy" (keyup)="applyFilter($event.target.value)">

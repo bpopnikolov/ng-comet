@@ -1,12 +1,12 @@
 <!-- <router-outlet></router-outlet> -->
 <div class="admin-panel-title" fxFlex="100%" fxLayout="row" fxLayoutAlign="center center">
-        <div fxFlex="90%">
-            <h1>Contacts Admin Panel</h1>
-            <a mat-raised-button color="primary" (click)="onOpenCreate()"> Create </a>
-        </div>
+    <div fxFlex="90%">
+        <h1>Contacts Admin Panel</h1>
+        <a mat-raised-button color="primary" (click)="onOpenCreate()"> Create </a>
     </div>
-    <div fxFlex="100%" fxLayout="row" fxLayoutAlign="center center">
-        <div fxFlex="95%" [ngClass.xs]="{'sorted-table-container': true}">
-            <app-table-with-sorting class="admin-sorted-table" [data]="contacts" [displayedColumns]="displayedColumns" [buttonColumns]="buttonColumns" [buttonDef]="buttonDef" [truncCols]="truncCols" (actionButtonClicked)="onAction($event)"></app-table-with-sorting>
-        </div>
+</div>
+<div fxFlex="100%" fxLayout="row" fxLayoutAlign="center center">
+    <div fxFlex="95%" [ngClass.xs]="{'sorted-table-container': true}" [ngClass.sm]="{'sorted-table-container': true}">
+        <app-table-with-sorting class="admin-sorted-table" [data]="contacts" [displayedColumns]="displayedColumns" [buttonColumns]="buttonColumns" [buttonDef]="buttonDef" [truncCols]="truncCols" (actionButtonClicked)="onAction($event)"></app-table-with-sorting>
     </div>
+</div>
