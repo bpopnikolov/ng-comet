@@ -1,14 +1,42 @@
-<mat-card-header>
-    <h2>Open Positions</h2>
-</mat-card-header>
-<mat-card *ngIf="!length">
-    <mat-card-header>
-        <h2>There are no open positions - please try later.</h2>
-    </mat-card-header>
-</mat-card>
-<mat-card class="listing-container" *ngFor="let listing of listings">
-    <mat-card-content>
-        <a [routerLink]="['/careers', listing?._id]">{{listing?.title}}</a>
-    </mat-card-content>
-</mat-card>
-<mat-paginator *ngIf="length" class="mat-elevation-z8" (page)="onChangePage($event)" [length]="length" [pageIndex]="pageIndex" [pageSize]="pageSize" [pageSizeOptions]="[10]"></mat-paginator>
+<div class="job-list-container" fxLayout="column" fxFlexAlign="center" fxLayoutAlign="start stretch">
+    <div class="search-box-container">
+        <mat-form-field class="search-input">
+            <input matInput (keyup)="onSearchFilterChange($event.target.value)" placeholder="Search">
+        </mat-form-field>
+        <div class="filters-container" fxLayout="row" fxLayout.xs="column">
+            <mat-form-field class="filter-field">
+                <mat-select placeholder="Filter by category" (selectionChange)="onCategoryFilterChange($event)">
+                    <mat-option>--</mat-option>
+                    <mat-option *ngFor="let cat of categories" [value]="cat.name">
+                        {{cat?.name}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput [matDatepicker]="picker" placeholder="Filter by date" (dateChange)="onDateFilterChange($event)">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+        </div>
+    </div>
+    <div fxFlex="100%" class="jobads-list" fxLayout="column" fxLayoutAlign="start center">
+        <mat-card class="job-card" [routerLink]="['/careers', job._id]" *ngFor="let job of currPageJobs; let i = index;">
+            <mat-card-header fxLayout="column" fxLayoutAlign="start stretch">
+                <mat-card-title>
+                    <h3> {{ job?.title }}</h3>
+                </mat-card-title>
+                <mat-card-subtitle fxFlex="100%" fxLayout="row" fxLayout.xs="column">
+                    <div fxLayoyt="column">
+                        <mat-card-subtitle> Category: {{ job?.category.name }}</mat-card-subtitle>
+                        <mat-card-subtitle> Created at: {{ job?.createdAt | date:full }}</mat-card-subtitle>
+                    </div>
+                    <div class="spacer"></div>
+                    <mat-card-subtitle> {{ job?.status }}</mat-card-subtitle>
+                </mat-card-subtitle>
+            </mat-card-header>
+            <!-- <mat-card-content>
+            </mat-card-content> -->
+        </mat-card>
+        <mat-paginator *ngIf="length" class="job-list-paginator mat-elevation-z8" (page)="onChangePage($event)" [length]="length" [pageSize]="pageSize" [pageSizeOptions]="[5, 10, 20]"></mat-paginator>
+    </div>
+</div>

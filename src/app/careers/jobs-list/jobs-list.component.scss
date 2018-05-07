@@ -1,8 +1,59 @@
-a {
-    text-decoration: none;
-    color: black;
+@import '../../mixins.scss';
+:host {
+    flex: 1 1 100%;
+    flex-direction: row;
+    max-width: 100%;
 }
 
-a:hover {
-    text-decoration: underline;
+.job-title {
+    padding: 16px 0;
+}
+
+.job-list-container {
+    min-height: 100%;
+    margin-top: 5%;
+}
+
+.search-box-container {
+    padding-top: 8px;
+    text-align: center;
+    .search-input {
+        width: 80%
+    }
+}
+
+.filters-container {
+    padding: 0 10%;
+    .filter-field {
+        margin-right: 20px;
+        @include mobile {
+            margin-right: 0px;
+        }
+    }
+}
+
+.jobads-list {
+    text-align: center;
+    .job-card {
+        h3 {
+            margin: 0px;
+        }
+        width: 80%;
+        margin: 3px 0px;
+        cursor: pointer;
+        border: solid 2px transparent;
+        text-align: left;
+        padding: 12px 12px 0px 12px !important;
+    }
+    .job-card:hover {
+        border: solid 2px #009688;
+    }
+}
+
+.job-list-paginator {
+    width: 84%;
+    margin: 24px 0;
+    @include mobile {
+        width: 90%;
+    }
 }

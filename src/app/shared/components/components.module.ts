@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { FacebookModule } from 'ngx-facebook';
 import { AppMaterialModule } from '../../app-material';
 import { BackgroundImageDirective } from '../directives/background-image.directive';
 import { Parallax } from '../directives/parallax.directive';
@@ -34,7 +33,6 @@ export const COMPONENTS = [
     imports: [
         CommonModule,
         FormsModule,
-        FacebookModule,
         ReactiveFormsModule,
         FlexLayoutModule,
         AppMaterialModule,

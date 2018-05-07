@@ -5,7 +5,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { JwtModule } from '@auth0/angular-jwt';
 import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
-import { FacebookModule } from 'ngx-facebook';
 import { AppConfigService } from './app-config.service';
 import { AppMaterialModule } from './app-material';
 import { AppRoutingModule } from './app-routing.module';
@@ -44,7 +43,6 @@ export const tokenGetter = () => {
             },
         }),
         UtilityModule.forRoot(),
-        FacebookModule.forRoot(),
         FroalaEditorModule.forRoot(),
         FroalaViewModule.forRoot(),
         FlexLayoutModule,

@@ -11,8 +11,6 @@ import { CareersComponent } from './careers.component';
 import { JobApplicationModalComponent } from './job-application-modal/job-application-modal.component';
 import { JobViewComponent } from './job-view/job-view.component';
 import { JobsListComponent } from './jobs-list/jobs-list.component';
-import { SearchBoxComponent } from './search-box/search-box.component';
-
 @NgModule({
     imports: [
         CommonModule,
@@ -25,7 +23,6 @@ import { SearchBoxComponent } from './search-box/search-box.component';
     ],
     declarations: [
         CareersComponent,
-        SearchBoxComponent,
         JobsListComponent,
         JobViewComponent,
         JobApplicationModalComponent,
