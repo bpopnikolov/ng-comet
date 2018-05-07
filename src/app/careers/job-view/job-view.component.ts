@@ -54,7 +54,10 @@ export class JobViewComponent implements OnInit {
     }
 
     public onApplyClick(): void {
-
+        if (!this.isAuthenticated) {
+            this.router.navigate(['/signin']);
+            return;
+        }
         this.modalService.open(JobApplicationModalComponent, {
             minWidth: '300px',
             width: '30%',

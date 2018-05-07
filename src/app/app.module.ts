@@ -19,6 +19,7 @@ import { JobApplicationsModule } from './shared/services/job-applications';
 import { JobAdsResolver } from './shared/services/jobads/jobads.resolver';
 import { JobadsService } from './shared/services/jobads/jobads.service';
 import { LinkModule } from './shared/services/link';
+import { RouterExtModule } from './shared/services/router-ext/router-ext.module';
 import { UtilityModule } from './shared/utility';
 import { UserModule } from './user/user.module';
 
@@ -46,6 +47,7 @@ export const tokenGetter = () => {
         UtilityModule.forRoot(),
         FroalaEditorModule.forRoot(),
         FroalaViewModule.forRoot(),
+        RouterExtModule.forRoot(),
         FlexLayoutModule,
         AppMaterialModule,
         ContainersModule,

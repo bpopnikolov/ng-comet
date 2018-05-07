@@ -19,7 +19,7 @@
             </p>
         </mat-card-content>
         <mat-card-actions fxLayoutAlign="end end">
-            <button mat-raised-button [disabled]="!isAuthenticated" color="primary" (click)="onApplyClick()">Apply</button>
+            <button mat-raised-button color="primary" (click)="onApplyClick()">Apply</button>
             <button mat-raised-button *ngIf="isAdmin" color="accent" (click)="onApplicationsClick()">Applications</button>
         </mat-card-actions>
     </mat-card>

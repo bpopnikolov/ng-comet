@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { RouterExtService } from '../shared/services/router-ext/router-ext.service';
 import { SigninForm, SignupForm, UserService } from './shared';
 
 @Component({
@@ -10,11 +11,13 @@ import { SigninForm, SignupForm, UserService } from './shared';
 export class UserComponent implements OnInit {
 
     public authType: string;
+    public prevRoute: string = null;
 
     constructor(
         private router: Router,
         private route: ActivatedRoute,
         private userService: UserService,
+        private routerExtService: RouterExtService,
     ) {
 
     }
@@ -38,7 +41,11 @@ export class UserComponent implements OnInit {
     public onSigninFormSubmit(form: SigninForm): void {
         this.userService.signin(form).subscribe(
             (res: any) => {
-                this.router.navigate(['/']);
+                if (this.prevRoute !== '/signin') {
+                    this.router.navigateByUrl(this.prevRoute);
+                    return;
+                }
+                this.router.navigate(['/home']);
             },
             (res) => {
                 console.log(res);
