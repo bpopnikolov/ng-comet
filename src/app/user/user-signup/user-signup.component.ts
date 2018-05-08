@@ -2,6 +2,7 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FormErrorStateMatcher, UtilityService, ValidationService } from '../../shared/utility';
 import { SignupForm } from '../shared';
+import { MatSnackBar } from '@angular/material';
 
 
 @Component({
@@ -23,6 +24,7 @@ export class UserSignupComponent implements OnInit {
         private fm: FormErrorStateMatcher,
         private validationService: ValidationService,
         private utilityService: UtilityService,
+        private snackBar: MatSnackBar,
     ) {
     }
 

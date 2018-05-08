@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { MatDialog, MatDialogRef, MatTableDataSource } from '@angular/material';
+import { MatDialog, MatDialogRef, MatTableDataSource, MatSnackBar } from '@angular/material';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subject } from 'rxjs/Subject';
 import { Subscription } from 'rxjs/Subscription';
@@ -46,6 +46,7 @@ export class JobadsAdminComponent implements OnInit, OnDestroy {
         private route: ActivatedRoute,
         private modalService: MatDialog,
         private router: Router,
+        private snackBar: MatSnackBar,
     ) { }
 
     public ngOnInit(): void {
@@ -152,9 +153,10 @@ export class JobadsAdminComponent implements OnInit, OnDestroy {
             (data) => {
                 this.jobAds.data = [...this.jobAds.data, data];
                 this.modalService.closeAll();
+                this.snackBar.open('JobAd was created', '', { duration: 2500, panelClass: 'success-snackbar' });
             },
-            (err) => {
-                alert(err);
+            (res) => {
+                this.snackBar.open(res.error, '', { duration: 2500, panelClass: 'error-snackbar' });
             });
     }
 
@@ -174,18 +176,24 @@ export class JobadsAdminComponent implements OnInit, OnDestroy {
                 Object.keys(data).forEach((key) => {
                     jobAd[key] = data[key];
                     this.modalService.closeAll();
+                    this.snackBar.open('JobAd was updated', '', { duration: 2500, panelClass: 'success-snackbar' });
                 });
             },
-            (err) => {
-                alert(err);
+            (res) => {
+                this.snackBar.open(res.error, '', { duration: 2500, panelClass: 'error-snackbar' });
             });
     }
 
     public onDelete(jobAd: JobAd): void {
-        this.jobadsService.deleteJobAd(jobAd._id).subscribe((res) => {
-            this.jobAds.data = this.jobAds.data.filter((x) => x._id !== jobAd._id);
-            this.modalService.closeAll();
-        });
+        this.jobadsService.deleteJobAd(jobAd._id).subscribe(
+            (res) => {
+                this.jobAds.data = this.jobAds.data.filter((x) => x._id !== jobAd._id);
+                this.modalService.closeAll();
+                this.snackBar.open('JobAd was deleted', '', { duration: 2500, panelClass: 'success-snackbar' });
+            },
+            (res) => {
+                this.snackBar.open(res.error, '', { duration: 2500, panelClass: 'error-snackbar' });
+            });
     }
 
     public ngOnDestroy(): void {

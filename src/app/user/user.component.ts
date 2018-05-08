@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MatSnackBar } from '@angular/material';
 import { ActivatedRoute, Router } from '@angular/router';
 import { RouterExtService } from '../shared/services/router-ext/router-ext.service';
 import { SigninForm, SignupForm, UserService } from './shared';
@@ -18,6 +19,7 @@ export class UserComponent implements OnInit {
         private route: ActivatedRoute,
         private userService: UserService,
         private routerExtService: RouterExtService,
+        private snackBar: MatSnackBar,
     ) {
 
     }
@@ -31,10 +33,11 @@ export class UserComponent implements OnInit {
     public onSignupFormSubmit(form: SignupForm): void {
         this.userService.signup(form).subscribe(
             (res) => {
+                this.snackBar.open('Welcome to Comet!', '', { duration: 2500, panelClass: 'success-snackbar' });
                 this.router.navigate(['/']);
             },
             (res) => {
-                console.log(res);
+                this.snackBar.open(res.error, '', { duration: 2500, panelClass: 'error-snackbar' });
             });
     }
 
@@ -45,10 +48,11 @@ export class UserComponent implements OnInit {
                     this.router.navigateByUrl(this.prevRoute);
                     return;
                 }
+                this.snackBar.open('Welcome to Comet!', '', { duration: 2500, panelClass: 'success-snackbar' });
                 this.router.navigate(['/home']);
             },
             (res) => {
-                console.log(res);
+                this.snackBar.open(res.error, '', { duration: 2500, panelClass: 'error-snackbar' });
             });
     }
 }

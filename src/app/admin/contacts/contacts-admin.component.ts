@@ -140,9 +140,10 @@ export class ContactsAdminComponent implements OnInit, OnDestroy {
             (data) => {
                 this.contacts.data = [...this.contacts.data, data];
                 this.modalService.closeAll();
+                this.snackBar.open('Contact was created', '', { duration: 2500, panelClass: 'success-snackbar' });
             },
-            (err) => {
-                alert(err);
+            (res) => {
+                this.snackBar.open(res.error, '', { duration: 2500, panelClass: 'error-snackbar' });
             });
     }
 
@@ -162,17 +163,22 @@ export class ContactsAdminComponent implements OnInit, OnDestroy {
                     contact[key] = data[key];
                 });
                 this.modalService.closeAll();
+                this.snackBar.open('Contact was updated', '', { duration: 2500, panelClass: 'success-snackbar' });
             },
-            (err) => {
-                alert(err);
+            (res) => {
+                this.snackBar.open(res.error, '', { duration: 2500, panelClass: 'error-snackbar' });
             });
     }
 
     public onDelete(contact: Contact): any {
-        this.contactsService.deleteContact(contact._id).subscribe((res) => {
-            this.contacts.data = this.contacts.data.filter((x) => x._id !== contact._id);
-            this.modalService.closeAll();
-        });
+        this.contactsService.deleteContact(contact._id).subscribe(
+            (res) => {
+                this.contacts.data = this.contacts.data.filter((x) => x._id !== contact._id);
+                this.modalService.closeAll();
+            },
+            (res) => {
+                this.snackBar.open(res.error, '', { duration: 2500, panelClass: 'error-snackbar' });
+            });
     }
 
     public ngOnDestroy(): void {

@@ -139,18 +139,17 @@ export class LinksAdminComponent implements OnInit, OnDestroy {
             (data) => {
                 this.links.data = [...this.links.data, data];
                 this.modalService.closeAll();
-                this.snackBar.open('Created', '', { duration: 2000, panelClass: 'success-snackbar' });
+                this.snackBar.open('Link was created', '', { duration: 2500, panelClass: 'success-snackbar' });
             },
             (res) => {
-                console.log(res.error);
-                this.snackBar.open(res.error, '', { duration: 2000, panelClass: 'error-snackbar' });
+                this.snackBar.open(res.error, '', { duration: 2500, panelClass: 'error-snackbar' });
             });
     }
 
     public onEdit(link: any, updatedInfo: any): void {
         // deep copy current jobAd
         // Object.assign({}, link);
-        let newLink = { ...link };
+        const newLink = { ...link };
 
         // mutate the new jobAd
         Object.keys(updatedInfo).forEach((key) => {
@@ -164,10 +163,11 @@ export class LinksAdminComponent implements OnInit, OnDestroy {
                     link[key] = data[key];
                 });
                 this.modalService.closeAll();
+                this.snackBar.open('Link was updated', '', { duration: 2500, panelClass: 'success-snackbar' });
 
             },
             (res) => {
-                console.log(res.error);
+                this.snackBar.open(res.error, '', { duration: 2500, panelClass: 'error-snackbar' });
             });
     }
 
@@ -176,9 +176,10 @@ export class LinksAdminComponent implements OnInit, OnDestroy {
             (res) => {
                 this.links.data = this.links.data.filter((x) => x._id !== link._id);
                 this.modalService.closeAll();
+                this.snackBar.open('Link was deleted', '', { duration: 2500, panelClass: 'success-snackbar' });
             },
             (res) => {
-                console.log(res.error);
+                this.snackBar.open(res.error, '', { duration: 2500, panelClass: 'error-snackbar' });
             },
         );
     }
