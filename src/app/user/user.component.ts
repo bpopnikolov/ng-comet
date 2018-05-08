@@ -41,7 +41,7 @@ export class UserComponent implements OnInit {
     public onSigninFormSubmit(form: SigninForm): void {
         this.userService.signin(form).subscribe(
             (res: any) => {
-                if (this.prevRoute !== '/signin') {
+                if (this.prevRoute && this.prevRoute !== '/signin') {
                     this.router.navigateByUrl(this.prevRoute);
                     return;
                 }

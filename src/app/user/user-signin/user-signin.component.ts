@@ -12,50 +12,53 @@ import { SigninForm } from '../shared';
 })
 export class UserSigninComponent implements OnInit {
 
-    @Output() signinSubmited = new EventEmitter<SigninForm>();
+    @Output() public signinSubmited = new EventEmitter<SigninForm>();
 
-    signinForm: FormGroup;
+    public signinForm: FormGroup;
     public email: AbstractControl;
     public password: AbstractControl;
+    public rememberMe: AbstractControl;
 
     constructor(
         private fb: FormBuilder,
         private fm: FormErrorStateMatcher,
         private validationService: ValidationService,
-        private utilityService: UtilityService
+        private utilityService: UtilityService,
     ) {
 
     }
 
-    ngOnInit() {
+    public ngOnInit(): void {
         this.initSigninForm();
     }
 
-    initSigninForm() {
+    public initSigninForm(): void {
         this.signinForm = this.fb.group({
-            'email': ['', [Validators.required, Validators.maxLength(1024), Validators.email]],
-            'password': ['', [Validators.required, Validators.maxLength(256), this.validationService.validatePassword]]
+            email: ['', [Validators.required, Validators.maxLength(1024), Validators.email]],
+            password: ['', [Validators.required, Validators.maxLength(256), this.validationService.validatePassword]],
+            rememberMe: [false, []],
         });
 
-        this.email = this.signinForm.controls['email'];
-        this.password = this.signinForm.controls['password'];
+        this.email = this.signinForm.controls.email;
+        this.password = this.signinForm.controls.password;
     }
 
-    getEmailErrorMessage() {
+    public getEmailErrorMessage(): string {
         return this.utilityService.getEmailErrorMessages(this.email);
     }
 
-    getPasswordErrorMessage() {
+    public getPasswordErrorMessage(): string {
         return this.utilityService.getPasswordErrorMessages(this.password);
     }
-    onSubmit() {
-        const form = {
-            email: this.email.value,
-            password: this.password.value,
-        };
+    public onSubmit(): void {
+        // const form = {
+        //     email: this.email.value,
+        //     password: this.password.value,
+        //     rememberMe: this.rememberMe
+        // };
 
         if (this.signinForm.valid) {
-            this.signinSubmited.emit(form);
+            this.signinSubmited.emit(this.signinForm.value);
         }
     }
 

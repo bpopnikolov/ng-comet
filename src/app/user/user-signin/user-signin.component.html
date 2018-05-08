@@ -10,6 +10,9 @@
                 <input matInput placeholder="Password" type="password" required formControlName="password">
                 <mat-error *ngIf="password.invalid"> {{ getPasswordErrorMessage() }}</mat-error>
             </mat-form-field>
+            <div>
+                <mat-checkbox formControlName="rememberMe">Remember me</mat-checkbox>
+            </div>
             <div class="form-action-buttons" fxLayout="row" fxFlexAlign="end">
                 <button mat-raised-button [disabled]="!signinForm.valid" color="primary" type="submit">Sign in</button>
             </div>

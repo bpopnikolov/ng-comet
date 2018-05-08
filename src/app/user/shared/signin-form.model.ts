@@ -1,9 +1,5 @@
 export class SigninForm {
-    public email: string;
-    public password: string;
+    constructor(public email: string, public password: string, rememberMe: boolean) {
 
-    constructor(loginForm: any) {
-        this.email = loginForm.email || '';
-        this.password = loginForm.password || '';
     }
 }

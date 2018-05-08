@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { MatSelectChange, PageEvent } from '@angular/material';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { MatSelect, MatSelectChange, PageEvent } from '@angular/material';
 import { MatDatepickerInputEvent } from '@angular/material/datepicker/typings';
 import { Category } from '../../shared/models';
 import { JobAd } from '../../shared/models/jobad.model';
@@ -29,6 +29,10 @@ export class JobsListComponent implements OnInit {
     public dateFilter: string;
     public categoryFilter: string;
     public searchFilter: string;
+
+    @ViewChild('searchInput') public searchInput: ElementRef;
+    @ViewChild('datePicker') public datePicker: ElementRef;
+    @ViewChild('categoriesInput') public categoriesInput: MatSelect;
 
     constructor(
         private jobadsService: JobadsService,
@@ -120,5 +124,17 @@ export class JobsListComponent implements OnInit {
         this.isFiltered ?
             this.currPageJobs = this.filteredJobs.slice(start, end) :
             this.currPageJobs = this.allJobs.slice(start, end);
+    }
+
+    public onResetClick(): void {
+
+        this.searchInput.nativeElement.value = '';
+        this.datePicker.nativeElement.value = '';
+        this.categoriesInput.value = '';
+
+        this.searchFilter = null;
+        this.dateFilter = null;
+        this.categoryFilter = null;
+        this.applyFilters();
     }
 }

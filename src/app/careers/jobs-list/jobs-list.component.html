@@ -1,11 +1,11 @@
 <div class="job-list-container" fxLayout="column" fxFlexAlign="center" fxLayoutAlign="start stretch">
     <div class="search-box-container">
         <mat-form-field class="search-input">
-            <input matInput (keyup)="onSearchFilterChange($event.target.value)" placeholder="Search">
+            <input matInput (keyup)="onSearchFilterChange($event.target.value)" #searchInput placeholder="Search">
         </mat-form-field>
         <div class="filters-container" fxLayout="row" fxLayout.xs="column">
             <mat-form-field class="filter-field">
-                <mat-select placeholder="Filter by category" (selectionChange)="onCategoryFilterChange($event)">
+                <mat-select placeholder="Filter by category" #categoriesInput (selectionChange)="onCategoryFilterChange($event)">
                     <mat-option>--</mat-option>
                     <mat-option *ngFor="let cat of categories" [value]="cat.name">
                         {{cat?.name}}
@@ -13,10 +13,14 @@
                 </mat-select>
             </mat-form-field>
             <mat-form-field>
-                <input matInput [matDatepicker]="picker" placeholder="Filter by date" (dateChange)="onDateFilterChange($event)">
+                <input matInput [matDatepicker]="picker" placeholder="Filter by date" #datePicker (dateChange)="onDateFilterChange($event)">
                 <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                 <mat-datepicker #picker></mat-datepicker>
             </mat-form-field>
+            <div class="spacer"></div>
+            <div>
+                <button mat-raised-button color="primary" (click)="onResetClick()">Reset</button>
+            </div>
         </div>
     </div>
     <div fxFlex="100%" class="jobads-list" fxLayout="column" fxLayoutAlign="start center">
