@@ -1,27 +1,60 @@
-# NgComet
+# Ng Comet
+The purpose of this project is educational - putting Angular, Node.js, MongoDB, Mongoose to practise, and is the final team assignment in Telerik Academy Alpha November 2017.
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.6.5.
+## Details
 
-## Development server
+This is a Single Page Web Application that can serve as a marketing site for a company. The website should contain the following functionality:
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+    A configurable landing page.
+    A section with job ads.
+    The ability for users to apply for a job ad.
+    An interface for managing all applications by the system administrators.
+    A configurable about/contacts page.
 
-## Code scaffolding
+For a detailed description of each functionality, please follow [this link](https://github.com/Teodor92/Project-Company-Life/tree/master/specification)
+![](header.png)
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Extra features
 
-## Build
+The following features have been added on top of the general requirements:
+* Contacts have been extended to include address, phone and e-mail values, for easier setup of different office locations
+* If you double-click on an address, it will be loaded on the map.
+* If 'Remember Me' is not ticked upon login, the token will expire in two hours.
+* In the Users Admin Page, if an admin hovers over the 'Jobs Applied' field, they will get a tooltip with the list of jobs applied.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
+## Installation
 
-## Running unit tests
+First, you need to run the [Server](https://github.com/bpopnikolov/comet-rest-api)
+Navigate to the Server folder and run the following commands: 
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+```sh
 
-## Running end-to-end tests
+Run npm install
+Run npm start
+```
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+Once this is done, you can navigate to the Application folder and run the following commands ([Angular CLI](https://github.com/angular/angular-cli) is required to run the application):
 
-## Further help
+```sh
+Run npm install
+Run ng serve -o  // This will automatically open your default web browser once the application is compiled
+```
+## Application Usage
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+To application functionality, you can use the following users:
+
+```sh
+Administrator:
+username: admin1@comet.com
+password: admin1@Comet
+
+User:
+username: user1@comet.com
+password: user1@Comet
+```
+
+
+## Authors & Contributors
+
+[Borislav Popnikolov](https://github.com/bpopnikolov/)
+[Deyan Atanasov](https://github.com/deyan-a/)
