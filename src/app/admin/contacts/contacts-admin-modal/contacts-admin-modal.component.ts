@@ -49,7 +49,7 @@ export class ContactsAdminModalComponent implements OnInit {
         this.modalForm = this.fb.group({
             name: [contact ? contact.name : '', [Validators.required, Validators.maxLength(128), Validators.minLength(2)]],
             value: [contact ? contact.value : '', [Validators.required, Validators.maxLength(1024), Validators.minLength(2)]],
-            email: [contact ? contact.email : '', []],
+            email: [contact ? contact.email : '', [Validators.email]],
             address: [contact ? contact.address : '', []],
             isPrimary: [contact ? contact.isPrimary : false],
         });

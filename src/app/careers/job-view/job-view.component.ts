@@ -1,7 +1,8 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog, MatSnackBar } from '@angular/material';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Subject } from 'rxjs/Subject';
+import { Subscription } from 'rxjs/Subscription';
 import { JobAd } from '../../shared/models/jobad.model';
 import { AuthService } from '../../shared/services/auth/auth.service';
 import { JobApplicationsService } from '../../shared/services/job-applications/job-applications.service';
@@ -13,12 +14,13 @@ import { JobApplicationModalComponent } from '../job-application-modal/job-appli
     templateUrl: './job-view.component.html',
     styleUrls: ['./job-view.component.scss'],
 })
-export class JobViewComponent implements OnInit {
+export class JobViewComponent implements OnInit, OnDestroy {
 
     @Input() public isAuthenticated: boolean = false;
     @Input() public isAdmin: boolean = false;
     public jobAd: JobAd;
     public jobApplicationModalSubject = new Subject();
+    public subscription: Subscription;
 
     constructor(
         private route: ActivatedRoute,
@@ -41,7 +43,7 @@ export class JobViewComponent implements OnInit {
             });
         });
 
-        this.jobApplicationModalSubject.subscribe((formData: any) => {
+        this.subscription = this.jobApplicationModalSubject.subscribe((formData: any) => {
             formData.jobAd = this.jobAd;
             this.jobApplicationsService.createJobApplication(formData).subscribe(
                 (res) => {
@@ -71,6 +73,10 @@ export class JobViewComponent implements OnInit {
 
     public onApplicationsClick(): void {
         this.router.navigate(['admin', 'jobapps'], { queryParams: { filter: this.jobAd.title } });
+    }
+
+    public ngOnDestroy(): void {
+        this.subscription.unsubscribe();
     }
 
 }
